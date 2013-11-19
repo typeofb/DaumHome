@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="DaumMng.selectBBS" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		SELECT TITLE FROM BBS_T WHERE POST_ID = #postId#
+	</select>
+	
+	<select id="DaumMng.selectAuth" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		SELECT USRGRD_NM FROM AUTHORITY_T WHERE USRGRD_CD = #usrgrdCd#
+	</select>
+	
+	<select id="DaumMng.selectUser" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT USRGRD_CD FROM USR_INFO_T WHERE USR_NM = #string#
+	</select>
+</sqlMap>
