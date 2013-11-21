@@ -3,20 +3,23 @@
 <c:choose>
 	<c:when test="${loginResult eq 'C'}">
 		<script>
-			var code = document.getElementById("userAuth").value;
-			if (code == "00") {
-				document.lForm.action = "<c:url value='main.do' />";
-			} else if (code == "10") {
-				document.lForm.action = "<c:url value='bams_mng/bams_status1.do' />"; // 시스템관리자 권한 화면
-			} else if (code == "20") {
-				document.lForm.action = "<c:url value='bams_mng/bams_status2.do' />"; // 약정수용가 권한 화면
-			} else if (code == "30") {
-				document.lForm.action = "<c:url value='bams_mng/bams_status3.do' />"; // 일반사용자 권한 화면
+			window.onload = function() {
+				var code = document.getElementById("userAuth").value;
+				if (code == "00") {
+					document.lForm.action = "<c:url value='main.do' />";
+				} else if (code == "10") {
+					document.lForm.action = "<c:url value='bams_mng/bams_status1.do' />"; // 시스템관리자 권한 화면
+				} else if (code == "20") {
+					document.lForm.action = "<c:url value='bams_mng/bams_status2.do' />"; // 약정수용가 권한 화면
+				} else if (code == "30") {
+					document.lForm.action = "<c:url value='bams_mng/bams_status3.do' />"; // 일반사용자 권한 화면
+				}
+				opener.name = "header";
+				document.lForm.target = "header";
+				document.lForm.submit();
+				opener.document.location.reload();
+				close();
 			}
-			window.opener.name = "header";
-			document.lForm.target = "header";
-			document.lForm.submit();
-			self.close();
 		</script>
 	</c:when>
 	<c:when test="${loginResult eq 'E1'}">

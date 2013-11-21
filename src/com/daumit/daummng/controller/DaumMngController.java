@@ -60,6 +60,9 @@ public class DaumMngController {
 	// login
 	@RequestMapping(value = "/login")
 	public ModelAndView login() {
+		
+		log.info("console - login");
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
 		return mav;
@@ -69,6 +72,8 @@ public class DaumMngController {
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public ModelAndView loginCheck(@RequestParam HashMap<String, Object> map, HttpSession session) throws Exception {
 
+		log.info("console - loginCheck");
+		
 		ModelAndView mav = new ModelAndView();
 
 		if (!map.get("userId").equals("typeofb")) { // 아이디가 등록되지 않는 경우
@@ -100,6 +105,9 @@ public class DaumMngController {
 	// logout
 	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpSession session) {
+		
+		log.info("console - logout");
+		
 		ModelAndView mav = new ModelAndView();
 		session.invalidate();
 		mav.setViewName("redirect:main.do");
@@ -109,12 +117,18 @@ public class DaumMngController {
 	// 제어관리
 	@RequestMapping(value = "/controlMng")
 	public String controlMng() {
+		
+		log.info("console - controlMng");
+		
 		return "controlMng";
 	}
 	
 	// 제어전송
 	@RequestMapping(value = "/commandControl")
 	public ModelAndView commandControl(HttpServletRequest request) {
+		
+		log.info("console - commandControl");
+		
 		try {
 			InetAddress local = InetAddress.getLocalHost();
 			socket = new Socket(local.getHostAddress(), 3000);
@@ -124,7 +138,7 @@ public class DaumMngController {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(baos);
 			
-			out.writeByte(0x41);	// command A
+			out.writeByte(0x41);	// Command A
 			out.write(182);			// 회차 번호
 			out.write(1);			// 1: 단일 전송, 2: 다수 전송
 			out.write(8052);		// DC ID
