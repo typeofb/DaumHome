@@ -16,7 +16,7 @@ function redirectLogin() {
 		<ul>
 			<li><a href="#" onclick="redirectLogin();"><c:if test="${not empty userId}">${userId}</c:if><c:if test="${empty userId}">로그인</c:if></a></li>
 			<li><a href="<c:url value='logout.do' />">로그아웃</a></li>
-			<li><a href="#">회사소개</a></li>
+			<li><a href="<c:url value='iBatis.do' />">아이바티스 연습</a></li>
 			<li><a href="<c:url value='controlMng.do' />">제어관리</a></li>
 			<li><a href="#">게시판</a></li>
 		</ul>

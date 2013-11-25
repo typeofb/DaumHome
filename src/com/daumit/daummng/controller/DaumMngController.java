@@ -12,16 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.Common;
 import com.daumit.daummng.service.DaumMngService;
 
 @Controller
@@ -40,6 +39,22 @@ public class DaumMngController {
 		map.put("postId", 273);
 		map.put("usrgrdCd", 30);
 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userId", hashMap.get("userId"));
+		mav.setViewName("main");
+		return mav;
+	}
+	
+	// 아이바티스 연습
+	@RequestMapping(value = "/iBatis")
+	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
+
+		log.info("console - iBatis");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("postId", 273);
+		map.put("usrgrdCd", 30);
+
 		// retrieve list
 		List<Map<String, Object>> resultList = service.selectBBS(map);
 		System.out.println(resultList);
@@ -53,68 +68,10 @@ public class DaumMngController {
 		System.out.println(resultInt);
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("userId", hashMap.get("userId"));
 		mav.setViewName("main");
 		return mav;
 	}
 
-	// login
-	@RequestMapping(value = "/login")
-	public ModelAndView login() {
-		
-		log.info("console - login");
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login");
-		return mav;
-	}
-
-	// loginCheck
-	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam HashMap<String, Object> map, HttpSession session) throws Exception {
-
-		log.info("console - loginCheck");
-		
-		ModelAndView mav = new ModelAndView();
-
-		if (!map.get("userId").equals("typeofb")) { // 아이디가 등록되지 않는 경우
-			mav.addObject("loginResult", "E3");
-			session.setAttribute("loginResult", "E3");
-		} else {
-			if (!map.get("userPw").equals("1234")) { // 패스워드가 틀릴 경우
-				mav.addObject("loginResult", "E2");
-				session.setAttribute("loginResult", "E2");
-			} else {
-				String userStat = "Y";
-				if (!userStat.equals("Y")) { // 아이디가 휴면, 대기상태일 경우
-					mav.addObject("loginResult", "E1");
-					session.setAttribute("loginResult", "E1");
-				} else { // 성공일 경우
-					mav.addObject("loginResult", "C");
-					session.setAttribute("loginResult", "C");
-					
-					mav.addObject("userAuth", "00");
-					mav.addObject("userId", map.get("userId"));
-					session.setAttribute("userId", map.get("userId"));
-				}
-			}
-		}
-		mav.setViewName("loginCheck");
-		return mav;
-	}
-
-	// logout
-	@RequestMapping(value = "/logout")
-	public ModelAndView logout(HttpSession session) {
-		
-		log.info("console - logout");
-		
-		ModelAndView mav = new ModelAndView();
-		session.invalidate();
-		mav.setViewName("redirect:main.do");
-		return mav;
-	}
-	
 	// 제어관리
 	@RequestMapping(value = "/controlMng")
 	public String controlMng() {
@@ -141,10 +98,10 @@ public class DaumMngController {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(baos);
 			
-			out.writeByte(0x41);					// Command A
-			out.write(182);							// 회차 번호
-			out.write(1);							// 1: 단일 전송, 2: 다수 전송
-			out.write(intToFourByteArray(8052));	// DC ID
+			out.writeByte(0x41);						// Command A
+			out.write(182);								// 회차 번호
+			out.write(1);								// 1: 단일 전송, 2: 다수 전송
+			out.write(Common.intToFourByteArray(8052));	// DC ID
 			
 			sendResultArr = baos.toByteArray();
 			dos.write(sendResultArr);
@@ -157,8 +114,8 @@ public class DaumMngController {
 				int size = 0;
 				byte[] buffer = new byte[128];
 				if ((size = dis.read(buffer)) != -1) {
-					System.out.println((char) buffer[0]);				// Command A
-					System.out.println(twoByteArrayToInt(buffer, 1));	// DC ID
+					System.out.println((char) buffer[0]);						// Command A
+					System.out.println(Common.twoByteArrayToInt(buffer, 1));	// DC ID
 					break;
 				}
 			}
@@ -172,20 +129,5 @@ public class DaumMngController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("controlMng");
 		return mav;
-	}
-
-	// int -> 2byte
-	private byte[] intToFourByteArray(int integer) {
-		byte[] byteArray = new byte[2];
-		byteArray[0] |= (byte) ((integer & 0xFF00) >> 8);
-		byteArray[1] |= (byte) (integer & 0xFF);
-		return byteArray;
-	}
-	
-	// 2byte -> int
-	public int twoByteArrayToInt(byte[] byteArray, int index) {
-		int s1 = byteArray[index] & 0xFF;
-		int s2 = byteArray[index + 1] & 0xFF;
-		return ((s1 << 8) + (s2 << 0));
 	}
 }

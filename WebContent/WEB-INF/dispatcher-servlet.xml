@@ -12,6 +12,7 @@
 
 	<!-- 컨트롤러 객체 설정 -->
 	<bean class="com.daumit.daummng.controller.DaumMngController" />
+	<bean class="com.daumit.daummng.controller.LoginController" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
