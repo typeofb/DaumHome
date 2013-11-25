@@ -3,7 +3,7 @@ package com.common;
 public class Common {
 
 	// int -> 2byte
-	public static byte[] intToFourByteArray(int integer) {
+	public static byte[] intToTwoByteArray(int integer) {
 		byte[] byteArray = new byte[2];
 		byteArray[0] |= (byte) ((integer & 0xFF00) >> 8);
 		byteArray[1] |= (byte) (integer & 0xFF);

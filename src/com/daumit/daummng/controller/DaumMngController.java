@@ -94,7 +94,7 @@ public class DaumMngController {
 			out.writeByte(0x41);						// Command A
 			out.write(182);								// 회차 번호
 			out.write(1);								// 1: 단일 전송, 2: 다수 전송
-			out.write(Common.intToFourByteArray(8052));	// DC ID
+			out.write(Common.intToTwoByteArray(8052));	// DC ID
 			
 			sendResultArr = baos.toByteArray();
 			dos.write(sendResultArr);
