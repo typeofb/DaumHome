@@ -1,6 +1,7 @@
 package com.daumit.daummng.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -123,7 +124,7 @@ public class DaumMngController {
 		return "controlMng";
 	}
 	
-	// 제어전송
+	// 예약제어
 	@RequestMapping(value = "/commandControl")
 	public ModelAndView commandControl(HttpServletRequest request) {
 		
@@ -132,21 +133,35 @@ public class DaumMngController {
 		try {
 			InetAddress local = InetAddress.getLocalHost();
 			socket = new Socket(local.getHostAddress(), 3000);
+			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 			
+			// ① Web -> Server
 			byte[] sendResultArr = new byte[32];
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(baos);
 			
-			out.writeByte(0x41);	// Command A
-			out.write(182);			// 회차 번호
-			out.write(1);			// 1: 단일 전송, 2: 다수 전송
-			out.write(8052);		// DC ID
+			out.writeByte(0x41);					// Command A
+			out.write(182);							// 회차 번호
+			out.write(1);							// 1: 단일 전송, 2: 다수 전송
+			out.write(intToFourByteArray(8052));	// DC ID
 			
 			sendResultArr = baos.toByteArray();
 			dos.write(sendResultArr);
 			dos.flush();
 			
+			//socket.setSoTimeout(3000);
+			
+			// ④ Server -> Web
+			while (dis != null) {
+				int size = 0;
+				byte[] buffer = new byte[128];
+				if ((size = dis.read(buffer)) != -1) {
+					System.out.println((char) buffer[0]);				// Command A
+					System.out.println(twoByteArrayToInt(buffer, 1));	// DC ID
+					break;
+				}
+			}
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -157,5 +172,20 @@ public class DaumMngController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("controlMng");
 		return mav;
+	}
+
+	// int -> 2byte
+	private byte[] intToFourByteArray(int integer) {
+		byte[] byteArray = new byte[2];
+		byteArray[0] |= (byte) ((integer & 0xFF00) >> 8);
+		byteArray[1] |= (byte) (integer & 0xFF);
+		return byteArray;
+	}
+	
+	// 2byte -> int
+	public int twoByteArrayToInt(byte[] byteArray, int index) {
+		int s1 = byteArray[index] & 0xFF;
+		int s2 = byteArray[index + 1] & 0xFF;
+		return ((s1 << 8) + (s2 << 0));
 	}
 }

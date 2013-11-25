@@ -21,7 +21,7 @@ function control() {
 <body>
 <%@ include file="header.jsp"%>
 <form name="cForm" method="post">
-	<div><input type="button" value="제어전송" onclick="control();" /></div>
+	<div><input type="button" value="예약제어" onclick="control();" /></div>
 </form>
 </body>
 </html>
