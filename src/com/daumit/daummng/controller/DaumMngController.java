@@ -31,18 +31,11 @@ public class DaumMngController {
 	private Socket socket = null;
 
 	@RequestMapping(value = "/main")
-	public ModelAndView main(@RequestParam HashMap<String, Object> hashMap) {
+	public String main() {
 
 		log.info("console - main");
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("postId", 273);
-		map.put("usrgrdCd", 30);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("userId", hashMap.get("userId"));
-		mav.setViewName("main");
-		return mav;
+		return "main";
 	}
 	
 	// 아이바티스 연습
