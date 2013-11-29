@@ -104,13 +104,20 @@ public class DaumMngController {
 			
 			// ④ Server -> Web
 			while (dis != null) {
-				int size = 0;
 				byte[] buffer = new byte[128];
-				if ((size = dis.read(buffer)) != -1) {
-					System.out.println((char) buffer[0]);						// Command A
-					System.out.println(Common.twoByteArrayToInt(buffer, 1));	// DC ID
+				byte[] result = null;
+				int leftBufferSize = 0;
+				while ((leftBufferSize = dis.read(buffer, 0, buffer.length)) != -1) {
+					result = new byte[leftBufferSize];
+					for (int i = 0; i < result.length; i++) {
+						result[i] = buffer[i];
+					}
+					
+					System.out.println((char) result[0]);						// Command A
+					System.out.println(Common.twoByteArrayToInt(result, 1));	// DC ID
 					break;
 				}
+				break;
 			}
 			socket.close();
 		} catch (UnknownHostException e) {
