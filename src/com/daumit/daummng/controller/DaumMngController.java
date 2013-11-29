@@ -94,7 +94,7 @@ public class DaumMngController {
 			out.writeByte(0x41);						// Command A
 			out.write(182);								// 회차 번호
 			out.write(1);								// 1: 단일 전송, 2: 다수 전송
-			out.write(Common.intToTwoByteArray(8052));	// DC ID
+			out.write(Common.intToTwoByteArray(8052));	// DC ID, 1byte 최대값 255를 넘어서 2byte를 사용[최대값:65536(2^16 -1)]
 			
 			sendResultArr = baos.toByteArray();
 			dos.write(sendResultArr);
