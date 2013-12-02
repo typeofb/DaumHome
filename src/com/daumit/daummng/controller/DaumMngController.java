@@ -107,17 +107,15 @@ public class DaumMngController {
 				byte[] buffer = new byte[128];
 				byte[] result = null;
 				int leftBufferSize = 0;
-				if (dis.available() > 0) {
-					while ((leftBufferSize = dis.read(buffer, 0, buffer.length)) != -1) {
-						result = new byte[leftBufferSize];
-						for (int i = 0; i < result.length; i++) {
-							result[i] = buffer[i];
-						}
-						
-						System.out.println((char) result[0]);						// Command A
-						System.out.println(Common.twoByteArrayToInt(result, 1));	// DC ID
-						break;
+				while ((leftBufferSize = dis.read(buffer, 0, buffer.length)) != -1) {
+					result = new byte[leftBufferSize];
+					for (int i = 0; i < result.length; i++) {
+						result[i] = buffer[i];
 					}
+					
+					System.out.println((char) result[0]);						// Command A
+					System.out.println(Common.twoByteArrayToInt(result, 1));	// DC ID
+					break;
 				}
 				break;
 			}
