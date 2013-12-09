@@ -4,16 +4,19 @@
 	<c:when test="${loginResult eq 'E3'}">
 		<script>
 			alert("등록되지 않은 아이디입니다. 계정요청을 하셔야 로그인할 수 있습니다.");
+			location.href = "<c:url value='login.do' />";
 		</script>
 	</c:when>
 	<c:when test="${loginResult eq 'E2'}">
 		<script>
 			alert("패스워드를 확인해주세요.");
+			location.href = "<c:url value='login.do' />";
 		</script>
 	</c:when>
 	<c:when test="${loginResult eq 'E1'}">
 		<script>
 			alert("아이디가 사용가능한 상태가 아닙니다.");
+			location.href = "<c:url value='login.do' />";
 		</script>
 	</c:when>
 	<c:when test="${loginResult eq 'C'}">
@@ -33,7 +36,7 @@
 				document.lForm.target = "header";
 				document.lForm.submit();
 				opener.document.location.reload();
-				close();
+				window.close();
 			}
 		</script>
 	</c:when>
