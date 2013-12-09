@@ -122,18 +122,8 @@ public class DaumMngController {
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			try {
-				socket.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			try {
-				socket.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {

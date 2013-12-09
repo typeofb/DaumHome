@@ -1,4 +1,4 @@
-package com.daumit.daummng.controller;
+package com.common;
 
 import java.util.HashMap;
 

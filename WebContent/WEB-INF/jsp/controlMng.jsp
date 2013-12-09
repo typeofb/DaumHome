@@ -10,12 +10,6 @@ function control() {
 	document.cForm.submit();
 }
 </script>
-<c:if test="${sessionScope.loginResult ne 'C'}">
-	<script>
-		alert("비정상적인 접근이거나 잘못된 경로입니다.");
-		location.href = "<c:url value='main.do' />";
-	</script>
-</c:if>
 </head>
 
 <body>
