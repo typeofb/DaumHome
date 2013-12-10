@@ -137,4 +137,12 @@ public class DaumMngController {
 		mav.setViewName("controlMng");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/bbs")
+	public String bbs() {
+
+		log.info("console - bbs");
+
+		return "bbs";
+	}
 }

@@ -8,6 +8,6 @@
 
 <body>
 <%@ include file="header.jsp"%>
-	<div>다음정보기술</div>
+<div>다음정보기술</div>
 </body>
 </html>
