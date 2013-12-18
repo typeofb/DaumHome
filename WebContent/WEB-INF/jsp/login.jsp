@@ -22,8 +22,8 @@ function cancel() {
 		<ul>
 			<li><input type="text" name="userId" value="typeofb" />아이디</li>
 			<li><input type="password" name="userPw" id="userPw" value="1234" />비밀번호</li>
-			<li><a href="#" onclick="login();">로그인</a></li>
-			<li><a href="#" onclick="cancel();">취소</a></li>
+			<li><a href="javascript:;" onclick="login();">로그인</a></li>
+			<li><a href="javascript:;" onclick="cancel();">취소</a></li>
 			<li>계정요청</li>
 		</ul>
 	</div>
