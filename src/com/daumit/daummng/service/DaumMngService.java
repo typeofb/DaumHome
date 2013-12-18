@@ -1,5 +1,6 @@
 package com.daumit.daummng.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
@@ -25,6 +26,11 @@ public class DaumMngService {
 
 	public int selectUser(String string) {
 		int result = dao.selectUser(string);
+		return result;
+	}
+
+	public boolean insertFile(HashMap<String, String> pMap) {
+		boolean result = dao.insertFile(pMap);
 		return result;
 	}
 }

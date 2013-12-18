@@ -59,6 +59,12 @@ public class DaumMngController {
 		// retrieve integer
 		int resultInt = service.selectUser("약정수용가");
 		System.out.println(resultInt);
+		
+		// procedure
+		HashMap<String, String> pMap = new HashMap<String, String>();
+		pMap.put("p_usr_id", "admin1");
+		boolean resultBoolean = service.insertFile(pMap);
+		System.out.println(resultBoolean);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");

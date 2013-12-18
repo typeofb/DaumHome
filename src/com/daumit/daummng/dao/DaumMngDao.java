@@ -1,6 +1,7 @@
 package com.daumit.daummng.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
@@ -38,6 +39,28 @@ public class DaumMngDao {
 			result = (Integer) sql.queryForObject("DaumMng.selectUser", string);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean insertFile(HashMap<String, String> pMap) {
+		boolean result = false;
+		try {
+			sql.startTransaction();
+			sql.queryForObject("DaumMng.insertFile", pMap);
+			String rowCount = String.valueOf(pMap.get("p_output"));
+			System.out.println("Mysql Function ROW_COUNT() : " + rowCount);
+			sql.getCurrentConnection().commit();
+			sql.endTransaction();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				sql.getCurrentConnection().rollback();
+				sql.endTransaction();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		return result;
 	}
