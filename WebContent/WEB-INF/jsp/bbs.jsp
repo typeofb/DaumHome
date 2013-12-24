@@ -470,6 +470,7 @@
 <script type="text/javascript">
 	/* 예제용 함수 */
 	function saveContent() {
+		document.tx_editor_form.action = "<c:url value='insertBbs.do' />";
 		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 	}
 
@@ -524,7 +525,7 @@
                 alert('attachment information - image[' + i + '] \r\n' + JSON.stringify(images[i].data));
                 input = document.createElement('input');
                 input.type = 'hidden';
-                input.name = 'attach_image';
+                input.name = 'attach_image[' + i + ']';
                 input.value = images[i].data.imageurl;  // 예에서는 이미지경로만 받아서 사용
                 form.createField(input);
             }
@@ -534,7 +535,7 @@
         for (i = 0; i < files.length; i++) {
             input = document.createElement('input');
             input.type = 'hidden';
-            input.name = 'attach_file';
+            input.name = 'attach_file[' + i + ']';
             input.value = files[i].data.attachurl;
             form.createField(input);
         }
