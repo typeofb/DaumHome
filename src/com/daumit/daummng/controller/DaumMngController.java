@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,8 +39,6 @@ import com.daumit.daummng.service.DaumMngService;
 public class DaumMngController {
 
 	private Log log = LogFactory.getLog(getClass());
-	private DaumMngService service = new DaumMngService();
-	private Socket socket = null;
 
 	@RequestMapping(value = "/main")
 	public String main() {
@@ -47,11 +46,13 @@ public class DaumMngController {
 
 		return "main";
 	}
-	
+
 	// 아이바티스 연습
 	@RequestMapping(value = "/iBatis")
 	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
 		log.info("console - iBatis");
+		
+		DaumMngService service = new DaumMngService();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("postId", 273);
@@ -68,7 +69,7 @@ public class DaumMngController {
 		// retrieve integer
 		int resultInt = service.selectUser("약정수용가");
 		System.out.println(resultInt);
-		
+
 		// procedure
 		HashMap<String, String> pMap = new HashMap<String, String>();
 		pMap.put("p_usr_id", "admin1");
@@ -84,57 +85,62 @@ public class DaumMngController {
 	@RequestMapping(value = "/controlMng")
 	public String controlMng() {
 		log.info("console - controlMng");
-		
+
 		return "controlMng";
 	}
-	
+
 	// 예약제어
 	@RequestMapping(value = "/commandControl")
 	public ModelAndView commandControl(HttpServletRequest request) {
 		log.info("console - commandControl");
 		
+		Socket socket = null;
+
 		try {
 			InetAddress local = InetAddress.getLocalHost();
 			socket = new Socket(local.getHostAddress(), 3000);
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			
+
 			// ① Web -> Server
 			byte[] sendResultArr = new byte[32];
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(baos);
-			
-			out.writeByte(0x41);						// Command A
+
+			out.writeByte(0x41); 						// Command A
 			out.write(182);								// 회차 번호
 			out.write(1);								// 1: 단일 전송, 2: 다수 전송
-			out.write(Common.intToTwoByteArray(8052));	// DC ID, 1byte 최대값 255를 넘어서 2byte를 사용[최대값:65536(2^16 -1)]
-			
+			out.write(Common.intToTwoByteArray(8052)); 	// DC ID, 1byte 최대값 255를 넘어서 2byte를 사용[최대값:65536(2^16 -1)]
+
 			sendResultArr = baos.toByteArray();
 			dos.write(sendResultArr);
 			dos.flush();
-			
-			//socket.setSoTimeout(3000);
-			
+
+			// dis.read()이 3초간 응답없으면 SocketTimeoutException
+			socket.setSoTimeout(3000);
+
 			// ④ Server -> Web
-			while (dis != null) {
-				byte[] buffer = new byte[128];
-				byte[] result = null;
-				int leftBufferSize = 0;
-				while ((leftBufferSize = dis.read(buffer, 0, buffer.length)) != -1) {
-					result = new byte[leftBufferSize];
-					for (int i = 0; i < result.length; i++) {
-						result[i] = buffer[i];
-					}
-					
-					System.out.println((char) result[0]);						// Command A
-					System.out.println(Common.twoByteArrayToInt(result, 1));	// DC ID
-					break;
-				}
-				break;
+			byte[] buffer = new byte[128];
+			byte[] result = null;
+			int leftBufferSize = 0;
+			leftBufferSize = dis.read(buffer, 0, buffer.length);
+			result = new byte[leftBufferSize];
+			for (int i = 0; i < result.length; i++) {
+				result[i] = buffer[i];
 			}
+			
+			System.out.println((char) result[0]);						// Command A
+			System.out.println(Common.twoByteArrayToInt(result, 1));  	// DC ID
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
+		} catch (SocketTimeoutException e) {
+			e.printStackTrace();
+			try {
+				socket.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -145,12 +151,12 @@ public class DaumMngController {
 				e1.printStackTrace();
 			}
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("controlMng");
 		return mav;
 	}
-	
+
 	// 게시판
 	@RequestMapping(value = "/bbs")
 	public String bbs() {
@@ -158,7 +164,7 @@ public class DaumMngController {
 
 		return "bbs";
 	}
-	
+
 	// 게시판 사진, 파일 업로드
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/daumeditor/pages/trex/upload")
@@ -213,12 +219,12 @@ public class DaumMngController {
 		}
 		printwriter.print(jsonArray);
 	}
-	
+
 	// 게시판 등록
 	@RequestMapping(value = "/insertBbs")
 	public String insertBbs(@RequestParam HashMap<String, Object> param) {
 		log.info("console - insertBbs");
-		
+
 		System.out.println(param);
 		return "bbs";
 	}
