@@ -51,7 +51,7 @@ public class DaumMngController {
 	@RequestMapping(value = "/iBatis")
 	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
 		log.info("console - iBatis");
-		
+
 		DaumMngService service = new DaumMngService();
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -93,7 +93,7 @@ public class DaumMngController {
 	@RequestMapping(value = "/commandControl")
 	public ModelAndView commandControl(HttpServletRequest request) {
 		log.info("console - commandControl");
-		
+
 		Socket socket = null;
 
 		try {
@@ -107,8 +107,8 @@ public class DaumMngController {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			DataOutputStream out = new DataOutputStream(baos);
 
-			out.writeByte(0x41); 						// Command A
-			out.write(182);								// 회차 번호
+			out.writeByte(0x41);						// Command A
+			out.write(182); 							// 회차 번호
 			out.write(1);								// 1: 단일 전송, 2: 다수 전송
 			out.write(Common.intToTwoByteArray(8052)); 	// DC ID, 1byte 최대값 255를 넘어서 2byte를 사용[최대값:65536(2^16 -1)]
 
@@ -128,9 +128,9 @@ public class DaumMngController {
 			for (int i = 0; i < result.length; i++) {
 				result[i] = buffer[i];
 			}
-			
-			System.out.println((char) result[0]);						// Command A
-			System.out.println(Common.twoByteArrayToInt(result, 1));  	// DC ID
+
+			System.out.println((char) result[0]); 						// Command A
+			System.out.println(Common.twoByteArrayToInt(result, 1)); 	// DC ID
 			socket.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
