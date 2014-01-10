@@ -5,16 +5,28 @@
 <sqlMapConfig>
 	<properties resource="com/web/db/SqlMapConfig.properties" />
 
-	<settings cacheModelsEnabled="true" enhancementEnabled="true"
-		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
-		maxTransactions="5" useStatementNamespaces="false" />
+	<settings
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		maxRequests="32"
+		maxSessions="10"
+		maxTransactions="5"
+		useStatementNamespaces="false" />
 
 	<transactionManager type="JDBC">
-		<dataSource type="SIMPLE">
-			<property name="JDBC.Driver" value="${driver}" />
-			<property name="JDBC.ConnectionURL" value="${url}" />
-			<property name="JDBC.Username" value="${username}" />
-			<property name="JDBC.Password" value="${password}" />
+		<dataSource type="DBCP">
+			<property name="driverClassName" value="${driver}" />
+			<property name="url" value="${url}" />
+			<property name="username" value="${username}" />
+			<property name="password" value="${password}" />
+			<property name="defaultAutoCommit" value="true" />
+			<property name="initialSize" value="15" />
+			<property name="maxActive" value="30" />
+			<property name="maxIdle" value="20" />
+			<property name="validationQuery" value="SELECT 1 FROM DUAL" />
+			<property name="testWhileIdle" value="true" />
+			<property name="timeBetweenEvictionRunsMillis" value="7200000" />
 		</dataSource>
 	</transactionManager>
 
