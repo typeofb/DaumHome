@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
+	<select id="DaumMng.selectCopy" parameterClass="java.util.List" resultClass="java.util.HashMap">
+		SELECT NC FROM COPY_T
+		WHERE 1 = 1
+		<iterate prepend="AND NN IN " open="(" close=")" conjunction=",">
+			#list[]#
+		</iterate>
+	</select>
+	
 	<select id="DaumMng.selectBBS" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 		SELECT TITLE FROM BBS_T WHERE POST_ID = #postId#
 	</select>

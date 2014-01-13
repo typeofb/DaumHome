@@ -1,7 +1,6 @@
 package com.daumit.daummng.dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +13,28 @@ import com.web.db.SqlConfig;
 
 @SuppressWarnings("unchecked")
 public class DaumMngDao {
-
-	private SqlMapClient sql = SqlConfig.getSqlMapInstance();
-
-	public List<Map<String, Object>> selectBBS(Map<String, Object> map) {
+	
+	private SqlMapClient sql = null;
+	
+	public DaumMngDao() {
+		sql = SqlConfig.getSqlMapInstance();
 		DataSource dataSource = sql.getDataSource();
 		BasicDataSource basicDataSource = (BasicDataSource) dataSource;
 		System.out.println("Active 상태 객체수: " + basicDataSource.getNumActive());
 		System.out.println("Idle 상태 객체수: " + basicDataSource.getNumIdle());
-
+	}
+	
+	public List<Integer> selectCopy(List<Integer> list) {
+		List<Integer> result = null;
+		try {
+			result = sql.queryForList("DaumMng.selectCopy", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Map<String, Object>> selectBBS(Map<String, Object> map) {
 		List<Map<String, Object>> result = null;
 		try {
 			result = sql.queryForList("DaumMng.selectBBS", map);
@@ -31,7 +43,7 @@ public class DaumMngDao {
 		}
 		return result;
 	}
-
+	
 	public Map<String, Object> selectAuth(Map<String, Object> map) {
 		Map<String, Object> result = null;
 		try {
@@ -41,7 +53,7 @@ public class DaumMngDao {
 		}
 		return result;
 	}
-
+	
 	public int selectUser(String string) {
 		int result = 0;
 		try {
@@ -51,8 +63,8 @@ public class DaumMngDao {
 		}
 		return result;
 	}
-
-	public boolean insertFile(HashMap<String, String> pMap) {
+	
+	public boolean insertFile(Map<String, String> pMap) {
 		boolean result = false;
 		try {
 			sql.startTransaction();
