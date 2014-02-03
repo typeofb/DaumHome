@@ -6,13 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=10" />
 <title>다음정보기술</title>
+<link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8"/>
 <link rel="stylesheet" href="daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
 <script src="daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
 <%@ include file="header.jsp"%>
-<div class="body">
+<div class="container">
 	<!-- 에디터 시작 -->
 	<!--
 		@decsription

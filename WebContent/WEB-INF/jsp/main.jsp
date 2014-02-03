@@ -4,10 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <title>다음정보기술</title>
+<link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8"/>
 </head>
 
 <body>
 <%@ include file="header.jsp"%>
-<div>다음정보기술</div>
+<div class="container">http://javascript-array.com/scripts/jquery_simple_drop_down_menu/</div>
 </body>
 </html>
