@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="BoardMng.selectBoardList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		<![CDATA[
+		SELECT
+			A.POST_ID,
+			(SELECT B.USR_NM FROM USR_INFO_T B WHERE B.USR_ID = A.USR_ID) USR_NM,
+			A.TITLE,
+			A.READ_CNT,
+			A.REG_DT
+		FROM BBS_T A
+		WHERE A.CLS_CD = 1
+		ORDER BY A.POST_ID DESC
+		LIMIT #targetPage#, #rowSize#
+		]]>
+	</select>
+	
+	<select id="BoardMng.selectBoardCnt" resultClass="java.lang.Integer">
+		<![CDATA[
+		SELECT COUNT(1) TOTAL_ROW_SIZE FROM BBS_T
+		WHERE CLS_CD = 1
+		]]>
+	</select>
+	
+	<select id="BoardMng.selectBoardDetail" parameterClass="java.lang.String" resultClass="java.util.HashMap">
+		<![CDATA[
+		SELECT POST_ID, TITLE, CONTENTS, REG_DT, READ_CNT, USR_ID
+		FROM BBS_T
+		WHERE POST_ID = #postId#
+		]]>
+	</select>
+	
+	<insert id="BoardMng.insertBoard" parameterClass="java.util.HashMap">
+		<![CDATA[
+		INSERT INTO BBS_T (USR_ID, CLS_CD, TITLE, CONTENTS, READ_CNT, REG_DT)
+		VALUES ('daumit', 1, #title#, #contents#, 0, DATE_FORMAT(NOW(), '%Y%m%d'));
+		]]>
+	</insert>
+	
+	<update id="BoardMng.updateBoard" parameterClass="java.util.HashMap">
+		<![CDATA[
+		UPDATE BBS_T SET TITLE = #title#, CONTENTS = #contents#
+		WHERE POST_ID = #postId#
+		]]>
+	</update>
+	
+	<delete id="BoardMng.deleteBoard" parameterClass="java.lang.String">
+		<![CDATA[
+		DELETE FROM BBS_T WHERE POST_ID = #postId#
+		]]>
+	</delete>
+</sqlMap>

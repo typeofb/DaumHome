@@ -173,7 +173,7 @@ public class DaumMngController {
 		return mav;
 	}
 	
-	// 게시판
+	// 다음에디터
 	@RequestMapping(value = "/bbs")
 	public String bbs() {
 		log.info("console - bbs");
@@ -181,7 +181,7 @@ public class DaumMngController {
 		return "bbs";
 	}
 	
-	// 게시판 사진, 파일 업로드
+	// 다음에디터 사진, 파일 업로드
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/daumeditor/pages/trex/upload")
 	public void upload(HttpServletRequest request, HttpServletResponse response) {
@@ -236,7 +236,7 @@ public class DaumMngController {
 		printwriter.print(jsonArray);
 	}
 	
-	// 게시판 등록
+	// 다음에디터 등록
 	@RequestMapping(value = "/insertBbs")
 	public String insertBbs(@RequestParam HashMap<String, Object> param) {
 		log.info("console - insertBbs");
