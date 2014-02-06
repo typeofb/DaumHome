@@ -3,8 +3,10 @@
 
 /* menu styles */
 #jsddm {
-	margin: 0;
-	padding: 0;
+	height: 30px;
+	width: 1240px;
+	margin-left: 10px;
+	margin: 0 auto;
 }
 
 #jsddm li {
@@ -15,8 +17,8 @@
 
 #jsddm li a {
 	display: block;
-	background: #20548E;
-	padding: 5px 12px;
+	background: #0c4da2;
+	padding: 10px 12px;
 	text-decoration: none;
 	border-right: 1px solid white;
 	width: 70px;

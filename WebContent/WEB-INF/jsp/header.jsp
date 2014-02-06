@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <title>다음정보기술</title>
+<link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8"/>
 <link rel="stylesheet" href="css/dropDownMenu.css" type="text/css" charset="utf-8"/>
 <script src="js/jquery-1.4.3.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
@@ -43,16 +44,24 @@ document.onclick = jsddm_close;
 </head>
 
 <body>
-	<div>
-		<ul id="jsddm">
+	<div class="topBar">
+		<ul>
+			<li class="logo"><a href="${pageContext.request.contextPath}/main.do"><img src="<c:url value='/images/logo.gif' />" /></a></li>
+		</ul>
+		<ul class="admin">
 			<li><a href="${pageContext.request.contextPath}/login.do" onclick="window.open(this.href, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400'); return false;"><c:if test="${not empty userId}">${userId}</c:if><c:if test="${empty userId}">로그인</c:if></a></li>
-			<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+			<li>|</li>
+			<li><a href="${pageContext.request.contextPath}/logout.do">LOGOUT</a></li>
+		</ul>
+	</div>
+	<div class="gnbBar">
+		<ul id="jsddm">
 			<li><a href="#">기능들</a>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/iBatis.do">아이바티스 연습</a></li>
 					<li><a href="<c:out value='${pageContext.request.contextPath}'/>/controlMng.do">제어관리</a></li>
 				</ul>
-			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">게시판</a></li>
+			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a></li>
 		</ul>
 	</div>
 </body>
