@@ -35,8 +35,8 @@
 				opener.name = "header";
 				document.lForm.target = "header";
 				document.lForm.submit();
-				opener.document.location.reload();
 				window.close();
+				opener.document.location.reload();
 			}
 		</script>
 	</c:when>

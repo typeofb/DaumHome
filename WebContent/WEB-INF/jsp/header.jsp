@@ -51,9 +51,14 @@ document.onclick = jsddm_close;
 			<li class="logo"><a href="${pageContext.request.contextPath}/main.do"><img src="<c:url value='/images/logo.gif' />" /></a></li>
 		</ul>
 		<ul class="admin">
-			<li><a href="${pageContext.request.contextPath}/login.do" onclick="window.open(this.href, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400'); return false;"><c:if test="${not empty userId}">${userId}</c:if><c:if test="${empty userId}">로그인</c:if></a></li>
-			<li>|</li>
-			<li><a href="${pageContext.request.contextPath}/logout.do">LOGOUT</a></li>
+			<c:if test="${empty sessionScope.userId}">
+				<li><a href="${pageContext.request.contextPath}/login.do" onclick="window.open(this.href, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400'); return false;">로그인</a></li>
+			</c:if>
+			<c:if test="${not empty sessionScope.userId}">
+				<li>${sessionScope.userId}님이 로그인 하셨습니다</li>
+				<li>|</li>
+				<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div class="gnbBar">
