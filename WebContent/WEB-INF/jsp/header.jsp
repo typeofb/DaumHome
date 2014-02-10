@@ -63,12 +63,13 @@ document.onclick = jsddm_close;
 	</div>
 	<div class="gnbBar">
 		<ul id="jsddm">
-			<li><a href="#">기능들</a>
+			<li><a href="${pageContext.request.contextPath}/boardList.do">기능들</a>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/boardList.do">게시판</a></li>
 					<li><a href="${pageContext.request.contextPath}/iBatis.do">아이바티스 연습</a></li>
 					<li><a href="<c:out value='${pageContext.request.contextPath}'/>/controlMng.do">제어관리</a></li>
 				</ul>
+			</li>
 			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a></li>
 		</ul>
 	</div>
