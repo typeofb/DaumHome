@@ -17,7 +17,7 @@ var ddmenuitem = 0;
 function jsddm_open() {
 	jsddm_canceltimer();
 	jsddm_close();
-	ddmenuitem = $(this).find('ul').css('visibility', 'visible');
+	ddmenuitem = $(this).find('ul').css({'visibility':'visible', 'z-index':'10'});
 }
 
 function jsddm_close() {
