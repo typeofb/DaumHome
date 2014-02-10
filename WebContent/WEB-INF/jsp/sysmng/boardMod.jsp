@@ -6,9 +6,21 @@
 <title>다음정보기술</title>
 <script type="text/javascript">
 function boardMod() {
-	$("form").attr("method", "post");
-	$("form").attr("action", "boardMod.do");
-	$("form").submit();
+	$.ajax({
+		url : "boardMod.do",
+		data : $("form").serializeArray(),
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(result) {
+			if ($.trim(result) == "true") {
+				alert("수정되었습니다.");
+				window.location.href = "<c:url value='/boardList.do' />";
+			} else if ($.trim(result) == "false") {
+				alert("실패하였습니다.");
+			}
+		}
+	});
 }
 
 function goList() {

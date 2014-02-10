@@ -1,7 +1,11 @@
 package com.daumit.sysmng.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -76,22 +80,17 @@ public class BoardMngController {
 
 	// 게시판 등록
 	@RequestMapping(value = "boardReg")
-	public ModelAndView boardReg(@RequestParam HashMap<String, Object> iMaps) {
+	public ModelAndView boardReg(HttpServletResponse response,
+			@RequestParam HashMap<String, Object> iMaps) throws IOException {
 		log.info("console - boardReg");
 		
 		boolean result = false;
 		result = boardMngService.insertBoard(iMaps);
-		String resultMessage = null;
-		if (result) {
-			resultMessage = "등록되었습니다.";
-		} else {
-			resultMessage = "실패하였습니다.";
-		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultMessage", resultMessage);
-		mav.setViewName("forward:/boardList.do");
-		return mav;
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(result);
+		return null;
 	}
 	
 	// 게시판 수정으로 이동
@@ -109,41 +108,31 @@ public class BoardMngController {
 	
 	// 게시판 수정
 	@RequestMapping(value = "boardMod")
-	public ModelAndView boardMod(@RequestParam HashMap<String, Object> iMaps) {
+	public ModelAndView boardMod(HttpServletResponse response,
+			@RequestParam HashMap<String, Object> iMaps) throws IOException {
 		log.info("console - boardMod");
 		
 		boolean result = false;
 		result = boardMngService.updateBoard(iMaps);
-		String resultMessage = null;
-		if (result) {
-			resultMessage = "수정되었습니다.";
-		} else {
-			resultMessage = "실패하였습니다.";
-		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultMessage", resultMessage);
-		mav.setViewName("forward:/boardList.do");
-		return mav;
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(result);
+		return null;
 	}
 	
 	// 게시판 삭제
 	@RequestMapping(value = "boardDel")
-	public ModelAndView boardDel(@RequestParam(value="postId", required=true) String postId) {
+	public ModelAndView boardDel(HttpServletResponse response,
+			@RequestParam(value="postId", required=true) String postId) throws IOException {
 		log.info("console - boardDel");
 		
 		boolean result = false;
 		result = boardMngService.deleteBoard(postId);
-		String resultMessage = null;
-		if (result) {
-			resultMessage = "삭제되었습니다.";
-		} else {
-			resultMessage = "실패하였습니다.";
-		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultMessage", resultMessage);
-		mav.setViewName("forward:/boardList.do");
-		return mav;
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(result);
+		return null;
 	}
 }

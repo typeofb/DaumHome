@@ -13,9 +13,21 @@ function goMod() {
 
 function boardDel() {
 	if(!confirm("삭제하시겠습니까?")) return;
-	$("form").attr("method", "post");
-	$("form").attr("action", "boardDel.do");
-	$("form").submit();
+	$.ajax({
+		url : "boardDel.do",
+		data : $("form").serializeArray(),
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(result) {
+			if ($.trim(result) == "true") {
+				alert("삭제되었습니다.");
+				window.location.href = "<c:url value='/boardList.do' />";
+			} else if ($.trim(result) == "false") {
+				alert("실패하였습니다.");
+			}
+		}
+	});
 }
 
 function goList() {

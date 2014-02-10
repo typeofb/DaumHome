@@ -5,12 +5,6 @@
 <head>
 <title>다음정보기술</title>
 <script type="text/javascript">
-window.onload = function(){
-	if ("${resultMessage}" != "") {
-		alert("${resultMessage}");
-	}
-}
-
 function goDetail(postId) {
 	$("#postId").val(postId);
 	$("form").attr("method", "post");
