@@ -5,17 +5,11 @@
 <head>
 <title>다음정보기술</title>
 <script type="text/javascript">
-function goMod() {
-	$("form").attr("method", "post");
-	$("form").attr("action", "goMod.do");
-	$("form").submit();
-}
-
 function boardDel() {
 	if(!confirm("삭제하시겠습니까?")) return;
 	$.ajax({
 		url : "boardDel.do",
-		data : $("form").serializeArray(),
+		data : {postId : $("#postId").val()},
 		type : "post",
 		cache : false,
 		dataType : "html",
@@ -28,6 +22,12 @@ function boardDel() {
 			}
 		}
 	});
+}
+
+function goMod() {
+	$("form").attr("method", "post");
+	$("form").attr("action", "goMod.do");
+	$("form").submit();
 }
 
 function goList() {

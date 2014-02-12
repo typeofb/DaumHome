@@ -5,16 +5,16 @@
 <head>
 <title>다음정보기술</title>
 <script type="text/javascript">
+function goReg() {
+	$("form").attr("method", "post");
+	$("form").attr("action", "goReg.do");
+	$("form").submit();
+}
+
 function goDetail(postId) {
 	$("#postId").val(postId);
 	$("form").attr("method", "post");
 	$("form").attr("action", "boardDetail.do");
-	$("form").submit();
-}
-
-function goReg() {
-	$("form").attr("method", "post");
-	$("form").attr("action", "goReg.do");
 	$("form").submit();
 }
 

@@ -36,7 +36,7 @@
 				document.lForm.target = "header";
 				document.lForm.submit();
 				window.close();
-				opener.document.location.reload();
+				window.opener.document.location.href = window.opener.document.URL;
 			}
 		</script>
 	</c:when>
