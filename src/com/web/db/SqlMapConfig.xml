@@ -32,5 +32,6 @@
 
 	<sqlMap resource="com/daumit/daummng/sqlmap/DaumMng.xml" />
 	<sqlMap resource="com/daumit/sysmng/sqlmap/BoardMng.xml" />
+	<sqlMap resource="com/daumit/sysmng/sqlmap/CodeMng.xml" />
 
 </sqlMapConfig>

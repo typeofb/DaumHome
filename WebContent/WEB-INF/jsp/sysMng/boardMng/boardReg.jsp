@@ -5,16 +5,16 @@
 <head>
 <title>다음정보기술</title>
 <script type="text/javascript">
-function boardMod() {
+function boardReg() {
 	$.ajax({
-		url : "boardMod.do",
+		url : "boardReg.do",
 		data : $("form").serializeArray(),
 		type : "post",
 		cache : false,
 		dataType : "html",
 		success : function(result) {
 			if ($.trim(result) == "true") {
-				alert("수정되었습니다.");
+				alert("등록되었습니다.");
 				window.location.href = "<c:url value='/boardList.do' />";
 			} else if ($.trim(result) == "false") {
 				alert("실패하였습니다.");
@@ -32,10 +32,10 @@ function goList() {
 </head>
 
 <body>
-<%@ include file="../header.jsp"%>
+<%@ include file="../../header.jsp"%>
 <div class="container">
 	<div class="location">
-		<h2>게시판 수정</h2>
+		<h2>게시판 등록</h2>
 		<ul>
 			<li>
 				<span><img src="<c:url value='/images/icon_home.gif' />" /></span>
@@ -47,27 +47,22 @@ function goList() {
 	</div>
 	<div class="list_table">
 		<form>
-			<input type="hidden" id="postId" name="postId" value="${map.POST_ID}" />
 			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 				<colgroup>
 					<col width="50" />
-					<col width="770" />
-					<col width="100" />
-					<col width="80" />
+					<col width="950" />
 				</colgroup>
 				<tr>
 					<th>제 목</th>
-					<td><input type="text" id="title" name="title" value="${map.TITLE}" style="width: 700px; padding-left: 5px;" /></td>
-					<th>등록일</th>
-					<td>${map.REG_DT}</td>
+					<td><input type="text" id="title" name="title" style="width: 850px; padding-left: 5px;" /></td>
 				</tr>
 				<tr>
-					<td colspan="4"><textarea id="contents" name="contents">${map.CONTENTS}</textarea></td>
+					<td colspan="4"><textarea id="contents" name="contents"></textarea></td>
 				</tr>
 			</table>
 		</form>
 		<div class="btn">
-			<a href="javascript:boardMod();" class="btnB"><span>수정</span></a>
+			<a href="javascript:boardReg();" class="btnB"><span>등록</span></a>
 			<a href="javascript:goList();" class="btnB"><span>목록</span></a>
 		</div>
 	</div>

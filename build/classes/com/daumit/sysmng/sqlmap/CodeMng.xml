@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="CodeMng.selectAreaList" resultClass="java.util.HashMap">
+		<![CDATA[
+		SELECT AREA_CD, AREA_NM, AREA_PRIO
+		FROM AREA_T
+		ORDER BY AREA_PRIO
+		]]>
+	</select>
+	
+	<insert id="CodeMng.insertArea" parameterClass="java.util.HashMap">
+		<![CDATA[
+		INSERT INTO AREA_T (AREA_CD, AREA_NM, AREA_PRIO)
+		VALUES (#areaCd#, #areaNm#, #areaPrio#)
+		]]>
+	</insert>
+	
+	<update id="CodeMng.updateArea" parameterClass="java.util.HashMap">
+		<![CDATA[
+		UPDATE AREA_T
+		SET AREA_NM = #areaNm#, AREA_PRIO = #areaPrio#
+		WHERE AREA_CD = #areaCd#
+		]]>
+	</update>
+	
+	<delete id="CodeMng.deleteArea" parameterClass="java.lang.String">
+		<![CDATA[
+		DELETE FROM AREA_T WHERE AREA_CD = #areaCd#
+		]]>
+	</delete>
+</sqlMap>

@@ -28,7 +28,7 @@ function goPage(targetPage) {
 </head>
 
 <body>
-<%@ include file="../header.jsp"%>
+<%@ include file="../../header.jsp"%>
 <div class="container">
 	<div class="location">
 		<h2>게시판</h2>

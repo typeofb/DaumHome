@@ -39,7 +39,7 @@ function goList() {
 </head>
 
 <body>
-<%@ include file="../header.jsp"%>
+<%@ include file="../../header.jsp"%>
 <div class="container">
 	<div class="location">
 		<h2>게시판 상세보기</h2>

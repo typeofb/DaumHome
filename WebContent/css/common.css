@@ -212,6 +212,31 @@ textarea {
 	background: url(../images/btn_back.png) no-repeat;
 }
 
+.btnT {
+	margin: 0 2px;
+	display: inline-block;
+	padding-right: 4px;
+	background: url(../images/btn_back.png) no-repeat 100% -75px;
+	font-family: '돋움', dotum;
+	font-size: 12px;
+	color: #444;
+	line-height: 24px;
+	word-spacing: -1px;
+	text-decoration: none !important;
+	white-space: nowrap;
+}
+
+.btnT span {
+	color: #333;
+	font-size: 12px;
+	height: 24px;
+	line-height: 24px;
+	font-family: dotum;
+	display: block;
+	background: url(../images/btn_back.png) 0 -75px;
+	padding: 0 10px 0 14px
+}
+
 .pagination {
 	font-size: 12px;
 	color: #808080;
@@ -242,4 +267,66 @@ textarea {
 .pagination a:hover,.pagination a:active,.pagination a:focus {
 	color: #438cbf;
 	font-weight: bold;
+}
+
+.tab_v1 {
+	position: relative;
+	height: 25px;
+	margin-bottom: 5px;
+	background: url(../images/tab_menu.gif) repeat-x 0 100%;
+	font-family: '돋움', dotum;
+	font-size: 12px;
+	color: #666;
+}
+
+.tab_v1 ul,.tab_v1 ul li {
+	margin: 0;
+	padding: 0;
+}
+
+.tab_v1 ul li {
+	list-style: none;
+}
+
+.tab_v1 ul li,.tab_v1 ul li a {
+	background: url(../images/bg_tab_off.gif) no-repeat;
+}
+
+.tab_v1 ul li {
+	float: left;
+	margin-right: -1px;
+	line-height: 22px;
+}
+
+.tab_v1 ul li a {
+	display: inline-block;
+	padding: 2px 16px 1px;
+	_padding: 3px 16px 0;
+	background-position: 100% 0;
+	text-decoration: none !important;
+}
+
+.tab_v1 ul li.on,.tab_v1 ul li.on a {
+	background-image: url(../images/bg_tab_on.gif);
+}
+
+.tab_v1 ul li.on a {
+	color: #1d69a3;
+	font-weight: bold;
+}
+
+.list_search_bg {
+	border-radius: 5px;
+	background: #f7f7f7;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: solid 1px #d5dfe4;
+}
+
+.list_search td {
+	padding-right: 5px;
+}
+
+.th_line {
+	border-top: solid 1px #b3d2e9;
 }

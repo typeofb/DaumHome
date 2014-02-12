@@ -25,6 +25,7 @@
 	<bean class="com.common.LoginController" />
 	<bean class="com.daumit.daummng.controller.DaumMngController" />
 	<bean class="com.daumit.sysmng.controller.BoardMngController" />
+	<bean class="com.daumit.sysmng.controller.CodeMngController" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

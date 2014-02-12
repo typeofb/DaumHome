@@ -52,7 +52,7 @@ public class BoardMngController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("paging", Common.paging(totalRowSize, rowSize, targetPage, pageGroupSize));
-		mav.setViewName("sysmng/boardList");
+		mav.setViewName("sysMng/boardMng/boardList");
 		return mav;
 	}
 	
@@ -65,7 +65,7 @@ public class BoardMngController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
-		mav.setViewName("sysmng/boardDetail");
+		mav.setViewName("sysMng/boardMng/boardDetail");
 		return mav;
 	}
 	
@@ -74,7 +74,7 @@ public class BoardMngController {
 	public ModelAndView goReg() {
 		log.info("console - goReg");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("sysmng/boardReg");
+		mav.setViewName("sysMng/boardMng/boardReg");
 		return mav;
 	}
 
@@ -102,7 +102,7 @@ public class BoardMngController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
-		mav.setViewName("sysmng/boardMod");
+		mav.setViewName("sysMng/boardMng/boardMod");
 		return mav;
 	}
 	
