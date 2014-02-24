@@ -1,10 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-<head>
-<title>다음정보기술</title>
+<%@ include file="../../header.jsp"%>
 <script type="text/javascript">
+$(function() {
+	$('#beginDate').datepicker({
+		changeYear : true,
+		changeMonth : true,
+		yearRange : '2011:2030',
+		showOn : 'button',
+		buttonImage : '<c:url value='/images/icon_calendar.gif' />',
+		buttonImageOnly : true,
+		altField : '#beginDate',
+		altFormat : 'yy-mm-dd',
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : false,
+		showMonthAfterYear : true,
+		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		defaultDate : '+0m+0d'
+	});
+	$('.ui-datepicker-trigger').mouseover(function() {
+		$(this).css('cursor', 'pointer');
+	});
+	
+	$('#endDate').datepicker({
+		changeYear : true,
+		changeMonth : true,
+		yearRange : '2011:2030',
+		showOn : 'button',
+		buttonImage : '<c:url value='/images/icon_calendar.gif' />',
+		buttonImageOnly : true,
+		altField : '#endDate',
+		altFormat : 'yy-mm-dd',
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : false,
+		showMonthAfterYear : true,
+		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		defaultDate : '+0m+0d'
+	});
+	$('.ui-datepicker-trigger').mouseover(function() {
+		$(this).css('cursor', 'pointer');
+	});
+});
+
 function goReg() {
 	$("form").attr("method", "post");
 	$("form").attr("action", "goReg.do");
@@ -25,10 +63,7 @@ function goPage(targetPage) {
 	$("form").submit();
 }
 </script>
-</head>
 
-<body>
-<%@ include file="../../header.jsp"%>
 <div class="container">
 	<div class="location">
 		<h2>게시판</h2>
@@ -40,6 +75,25 @@ function goPage(targetPage) {
 				<span class="bold">게시판</span>
 			</li>
 		</ul>
+	</div>
+	<div class="tab_v1">
+		<ul>
+			<li class="on"><a href="#">게시판</a></li>
+			<li><a href="#">자료실</a></li>
+		</ul>
+	</div>
+	<div class="list_search_bg">
+		<form>
+			<table class="list_search" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>검색조건</td>
+					<td>
+						<input type="text" id="beginDate" name="beginDate" value="${beginDate}" readonly> ~ <input type="text" id="endDate" name="endDate" value="${endDate}" readonly>
+					</td>
+					<td id="btnReg"><a href="javascript:;" class="btnT"><span>검색</span></a></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<div class="list_table">
 		<form>

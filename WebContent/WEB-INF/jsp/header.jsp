@@ -4,11 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>다음정보기술</title>
-<link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8"/>
-<link rel="stylesheet" href="css/dropDownMenu.css" type="text/css" charset="utf-8"/>
-<script src="js/jquery-1.4.3.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css' />" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/dropDownMenu.css' />" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/jquery.ui.all.css' />" />
+<link rel="stylesheet" type="text/css" href="daumeditor/css/editor.css" />
+<script type="text/javascript" src="<c:url value='/js/jquery-1.9.1.min.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery.ui.core.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery.ui.datepicker.js' />"></script>
+<script type="text/javascript" src="daumeditor/js/editor_loader.js"></script>
 <script type="text/javascript">
 var timeout = 500;
 var closetimer = 0;
@@ -68,11 +73,9 @@ document.onclick = jsddm_close;
 					<li><a href="${pageContext.request.contextPath}/boardList.do">게시판</a></li>
 					<li><a href="${pageContext.request.contextPath}/codeArea.do">코드관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/iBatis.do">아이바티스 연습</a></li>
-					<li><a href="<c:out value='${pageContext.request.contextPath}'/>/controlMng.do">제어관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/controlMng.do">제어관리</a></li>
 				</ul>
 			</li>
 			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a></li>
 		</ul>
 	</div>
-</body>
-</html>
