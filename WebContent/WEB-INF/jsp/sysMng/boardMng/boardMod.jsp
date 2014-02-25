@@ -9,10 +9,16 @@ function boardMod() {
 		cache : false,
 		dataType : "html",
 		success : function(result) {
-			if ($.trim(result) == "true") {
+			var json = JSON.parse(result);
+			if (json.result == true) {
+				$("targetPage").val(json.targetPage);
+				$("beginDate").val(json.beginDate);
+				$("endDate").val(json.endDate);
 				alert("수정되었습니다.");
-				window.location.href = "<c:url value='/boardList.do' />";
-			} else if ($.trim(result) == "false") {
+				$("form").attr("method", "post");
+				$("form").attr("action", "boardList.do");
+				$("form").submit();
+			} else {
 				alert("실패하였습니다.");
 			}
 		}
@@ -41,6 +47,9 @@ function goList() {
 	<div class="list_table">
 		<form>
 			<input type="hidden" id="postId" name="postId" value="${map.POST_ID}" />
+			<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
+			<input type="hidden" id="beginDate" name="beginDate" value="${beginDate}" />
+			<input type="hidden" id="endDate" name="endDate" value="${endDate}" />
 			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 				<colgroup>
 					<col width="50" />

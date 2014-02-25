@@ -96,7 +96,7 @@ function goPage(targetPage) {
 	</div>
 	<div class="list_table">
 		<input type="hidden" id="rowSize" name="rowSize" value="15" />
-		<input type="hidden" id="targetPage" name="targetPage" value="1" />
+		<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="10" />
 		<input type="hidden" id="postId" name="postId" value="" />
 		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
