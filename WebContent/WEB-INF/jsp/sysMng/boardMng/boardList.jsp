@@ -82,54 +82,55 @@ function goPage(targetPage) {
 			<li><a href="#">자료실</a></li>
 		</ul>
 	</div>
+	<form>
 	<div class="list_search_bg">
-		<form>
-			<table class="list_search" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>검색조건</td>
-					<td>
-						<input type="text" id="beginDate" name="beginDate" value="${beginDate}" readonly> ~ <input type="text" id="endDate" name="endDate" value="${endDate}" readonly>
-					</td>
-					<td id="btnReg"><a href="javascript:;" class="btnT"><span>검색</span></a></td>
-				</tr>
-			</table>
-		</form>
+		<table class="list_search" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>검색조건</td>
+				<td>
+					<input type="text" id="beginDate" name="beginDate" value="${beginDate}" readonly> ~ <input type="text" id="endDate" name="endDate" value="${endDate}" readonly>
+				</td>
+				<td id="btnReg"><a href="javascript:goPage(1);" class="btnT"><span>검색</span></a></td>
+			</tr>
+		</table>
 	</div>
 	<div class="list_table">
-		<form>
-			<input type="hidden" id="rowSize" name="rowSize" value="15" />
-			<input type="hidden" id="targetPage" name="targetPage" value="1" />
-			<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="10" />
-			<input type="hidden" id="postId" name="postId" value="" />
-			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
-				<colgroup>
-					<col width="50" />
-					<col width="720" />
-					<col width="100" />
-					<col width="50" />
-					<col width="80" />
-				</colgroup>
-				<tr>
-					<th>번 호</th>
-					<th>제 목</th>
-					<th>작성자</th>
-					<th>조 회</th>
-					<th>등록일</th>
-				</tr>
-			<c:forEach items="${list}" var="x">
-				<tr onclick="goDetail('${x.POST_ID}')" style="cursor:pointer;">
-					<td>${x.POST_ID}</td>
-					<td>${x.TITLE}</td>
-					<td>${x.USR_NM}</td>
-					<td>${x.READ_CNT}</td>
-					<td>${x.REG_DT}</td>
-				</tr>
-			</c:forEach>
-			</table>
-		</form>
+		<input type="hidden" id="rowSize" name="rowSize" value="15" />
+		<input type="hidden" id="targetPage" name="targetPage" value="1" />
+		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="10" />
+		<input type="hidden" id="postId" name="postId" value="" />
+		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
+			<colgroup>
+				<col width="50" />
+				<col width="720" />
+				<col width="100" />
+				<col width="50" />
+				<col width="80" />
+			</colgroup>
+			<tr>
+				<th>번 호</th>
+				<th>제 목</th>
+				<th>작성자</th>
+				<th>조 회</th>
+				<th>등록일</th>
+			</tr>
+		<c:forEach items="${list}" var="x">
+			<tr onclick="goDetail('${x.POST_ID}')" style="cursor:pointer;">
+				<td>${x.POST_ID}</td>
+				<td>${x.TITLE}</td>
+				<td>${x.USR_NM}</td>
+				<td>${x.READ_CNT}</td>
+				<td>
+					<fmt:parseDate value="${x.REG_DT}" var="fmtDateTime" pattern="yyyyMMdd" />
+					<fmt:formatDate value="${fmtDateTime}" pattern="yyyy-MM-dd" />
+				</td>
+			</tr>
+		</c:forEach>
+		</table>
 		<div class="btn"><a href="javascript:goReg();" class="btnB"><span>등록</span></a></div>
 		<div class="pagination">${paging}</div>
 	</div>
+	</form>
 </div>
 </body>
 </html>

@@ -11,15 +11,17 @@
 			A.REG_DT
 		FROM BBS_T A
 		WHERE A.CLS_CD = 1
+		AND REG_DT >= #beginDate# AND REG_DT <= #endDate#
 		ORDER BY A.POST_ID DESC
 		LIMIT #targetPage#, #rowSize#
 		]]>
 	</select>
 	
-	<select id="BoardMng.selectBoardCnt" resultClass="java.lang.Integer">
+	<select id="BoardMng.selectBoardCnt" parameterClass="java.util.HashMap" resultClass="java.lang.Integer">
 		<![CDATA[
 		SELECT COUNT(1) TOTAL_ROW_SIZE FROM BBS_T
 		WHERE CLS_CD = 1
+		AND REG_DT >= #beginDate# AND REG_DT <= #endDate#
 		]]>
 	</select>
 	

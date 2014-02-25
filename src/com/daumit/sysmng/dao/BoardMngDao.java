@@ -25,10 +25,10 @@ public class BoardMngDao {
 		return result;
 	}
 
-	public int selectBoardCnt() {
+	public int selectBoardCnt(HashMap<String, Object> iMaps) {
 		int result = 0;
 		try {
-			result = (Integer) sql.queryForObject("BoardMng.selectBoardCnt");
+			result = (Integer) sql.queryForObject("BoardMng.selectBoardCnt", iMaps);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

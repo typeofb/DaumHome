@@ -18,8 +18,8 @@ public class BoardMngService {
 		return result;
 	}
 
-	public int selectBoardCnt() {
-		int result = dao.selectBoardCnt();
+	public int selectBoardCnt(HashMap<String, Object> iMaps) {
+		int result = dao.selectBoardCnt(iMaps);
 		return result;
 	}
 
