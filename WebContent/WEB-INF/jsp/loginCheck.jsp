@@ -32,11 +32,8 @@
 				} else if (code == "30") {
 					document.lForm.action = "<c:url value='bams_mng/bams_status3.do' />"; // 일반사용자 권한 화면
 				}
-				opener.name = "header";
-				document.lForm.target = "header";
-				document.lForm.submit();
 				window.close();
-				window.opener.document.location.href = window.opener.document.URL;
+				window.opener.document.location.reload();
 			}
 		</script>
 	</c:when>
