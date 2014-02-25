@@ -41,12 +41,10 @@ public class BoardMngController {
 		
 		if (beginDate == null || beginDate.equals("")) {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar begin = Calendar.getInstance();
-			begin.add(Calendar.DATE, -7);
-			beginDate = formatter.format(begin.getTime());
-			
-			Calendar end = Calendar.getInstance();
-			endDate = formatter.format(end.getTime());
+			Calendar cal = Calendar.getInstance();
+			endDate = formatter.format(cal.getTime());
+			cal.add(Calendar.DATE, -7);
+			beginDate = formatter.format(cal.getTime());
 		}
 		
 		int totalRowSize = 0;
