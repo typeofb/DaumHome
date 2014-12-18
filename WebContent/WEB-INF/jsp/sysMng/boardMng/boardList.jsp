@@ -121,7 +121,7 @@ function goPage(targetPage) {
 				<td>${x.USR_NM}</td>
 				<td>${x.READ_CNT}</td>
 				<td>
-					<fmt:parseDate value="${x.REG_DT}" var="fmtDateTime" pattern="yyyyMMdd" />
+					<fmt:parseDate value="${x.REG_DT}" var="fmtDateTime" pattern="yyyy-MM-dd HH:mm:ss" />
 					<fmt:formatDate value="${fmtDateTime}" pattern="yyyy-MM-dd" />
 				</td>
 			</tr>

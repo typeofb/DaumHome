@@ -62,7 +62,7 @@ function goList() {
 					<td><input type="text" id="title" name="title" value="${map.TITLE}" style="width: 700px; padding-left: 5px;" /></td>
 					<th>등록일</th>
 					<td>
-						<fmt:parseDate value="${map.REG_DT}" var="fmtDateTime" pattern="yyyyMMdd" />
+						<fmt:parseDate value="${map.REG_DT}" var="fmtDateTime" pattern="yyyy-MM-dd HH:mm:ss" />
 						<fmt:formatDate value="${fmtDateTime}" pattern="yyyy-MM-dd" />
 					</td>
 				</tr>

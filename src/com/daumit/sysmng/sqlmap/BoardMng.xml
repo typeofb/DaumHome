@@ -4,52 +4,48 @@
 	<select id="BoardMng.selectBoardList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 		<![CDATA[
 		SELECT
-			A.POST_ID,
-			(SELECT B.USR_NM FROM USR_INFO_T B WHERE B.USR_ID = A.USR_ID) USR_NM,
+			A.IDX AS POST_ID,
+			A.NAME AS USR_NM,
 			A.TITLE,
-			A.READ_CNT,
-			A.REG_DT
-		FROM BBS_T A
-		WHERE A.CLS_CD = 1
-		AND REG_DT >= #beginDate# AND REG_DT <= #endDate#
-		ORDER BY A.POST_ID DESC
+			A.USE_YN AS READ_CNT,
+			A.REGDATE AS REG_DT
+		FROM T_HELP A
+		ORDER BY A.IDX DESC
 		LIMIT #targetPage#, #rowSize#
 		]]>
 	</select>
 	
 	<select id="BoardMng.selectBoardCnt" parameterClass="java.util.HashMap" resultClass="java.lang.Integer">
 		<![CDATA[
-		SELECT COUNT(1) TOTAL_ROW_SIZE FROM BBS_T
-		WHERE CLS_CD = 1
-		AND REG_DT >= #beginDate# AND REG_DT <= #endDate#
+		SELECT COUNT(1) TOTAL_ROW_SIZE FROM T_HELP
 		]]>
 	</select>
 	
 	<select id="BoardMng.selectBoardDetail" parameterClass="java.lang.String" resultClass="java.util.HashMap">
 		<![CDATA[
-		SELECT POST_ID, TITLE, CONTENTS, REG_DT, READ_CNT, USR_ID
-		FROM BBS_T
-		WHERE POST_ID = #postId#
+		SELECT IDX AS POST_ID, TITLE, CONTENT AS CONTENTS, REGDATE AS REG_DT, USE_YN AS READ_CNT, NAME AS USR_ID
+		FROM T_HELP
+		WHERE IDX = #postId#
 		]]>
 	</select>
 	
 	<insert id="BoardMng.insertBoard" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO BBS_T (USR_ID, CLS_CD, TITLE, CONTENTS, READ_CNT, REG_DT)
-		VALUES ('daumit', 1, #title#, #contents#, 0, DATE_FORMAT(NOW(), '%Y%m%d'));
+		INSERT INTO T_HELP (IDX, NAME, TITLE, CONTENT, USE_YN, REGDATE)
+		VALUES ((SELECT MAX(IDX) + 1 FROM T_HELP), 'test', #title#, #contents#, 0, SYSDATE);
 		]]>
 	</insert>
 	
 	<update id="BoardMng.updateBoard" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE BBS_T SET TITLE = #title#, CONTENTS = #contents#
-		WHERE POST_ID = #postId#
+		UPDATE T_HELP SET TITLE = #title#, CONTENT = #contents#
+		WHERE IDX = #postId#
 		]]>
 	</update>
 	
 	<delete id="BoardMng.deleteBoard" parameterClass="java.lang.String">
 		<![CDATA[
-		DELETE FROM BBS_T WHERE POST_ID = #postId#
+		DELETE FROM T_HELP WHERE IDX = #postId#
 		]]>
 	</delete>
 </sqlMap>
