@@ -244,4 +244,12 @@ public class DaumMngController {
 		System.out.println(param);
 		return "bbs";
 	}
+	
+	// 모바일
+	@RequestMapping(value = "/mobile")
+	public String mobile() {
+		log.info("console - mobile");
+		
+		return "mobile/mobile";
+	}
 }

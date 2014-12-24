@@ -14,5 +14,6 @@ function fnUpload() {
 		<input type="button" value="Upload" onclick="fnUpload()" />
 	</form>
 </div>
+<a href="${pageContext.request.contextPath}/mobile.do">모바일</a>
 </body>
 </html>
