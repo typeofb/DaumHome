@@ -31,32 +31,27 @@ function done() {
 				return false;
 			}
 		},
-		success : function(result) {
-			var json = jQuery.parseJSON(result);
-			for ( var i = 0; i < json.length; i++) {
-				for (var j in json[i]) {
-					if (j == "URL_PATH") {
-						if (typeof(execAttach) == "undefined") { //Virtual Function
-							return;
-						}
-						
-						var _mockdata = {
-							"imageurl": json[i][j],
-							"filename": json[i][j],
-							"filesize": 640,
-							"imagealign": "C",
-							"originalurl": json[i][j],
-							"thumburl": json[i][j]
-						};
-						execAttach(_mockdata);
-						closeWindow();
-					}
+		success : function(json) {
+			$.each(json, function(key, value) {
+				if (typeof(execAttach) == "undefined") { //Virtual Function
+					return;
 				}
-			}
+				
+				var _mockdata = {
+					"imageurl": json[key].URL_PATH,
+					"filename": json[key].FILE_NM,
+					"filesize": json[key].FILE_SIZE,
+					"imagealign": "C",
+					"originalurl": json[key].URL_PATH,
+					"thumburl": json[key].URL_PATH
+				};
+				execAttach(_mockdata);
+				closeWindow();
+			});
 		},
 		url : "upload.do",
 		contentType : "multipart/form-data",
-		dataType : "html"
+		dataType : "json"
 	};
 	$("#mForm").ajaxSubmit(options);
 }
