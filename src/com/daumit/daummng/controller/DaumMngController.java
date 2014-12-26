@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -19,16 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -182,15 +182,14 @@ public class DaumMngController {
 	}
 	
 	// 다음에디터 사진, 파일 업로드
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/daumeditor/pages/trex/upload")
-	public void upload(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody ResponseEntity<List<Map<String, Object>>> upload(HttpServletRequest request) {
 		log.info("console - upload");
 		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		List<MultipartFile> mFiles = multipartRequest.getFiles("attachment");
 		
-		JSONArray jsonArray = new JSONArray();
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		
 		for (int i = 0; i < mFiles.size(); i++) {
 			MultipartFile mFile = mFiles.get(i);
@@ -218,22 +217,18 @@ public class DaumMngController {
 				}
 			}
 			
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("FILE_NM", fileName);
-			jsonObj.put("FILE_SIZE", fileSize);
-			jsonObj.put("URL_PATH", "upload/" + today + "/" + fileName);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("FILE_NM", fileName);
+			map.put("FILE_SIZE", fileSize);
+			map.put("URL_PATH", "upload/" + today + "/" + fileName);
 			
-			jsonArray.add(jsonObj);
+			listMap.add(map);
 		}
 		
-		PrintWriter printwriter = null;
-		response.setContentType("text/html;charset=UTF-8");
-		try {
-			printwriter = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		printwriter.print(jsonArray);
+		// IE에서 다운로드 팝업 나타나는 현상 수정
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		return new ResponseEntity<List<Map<String, Object>>>(listMap, responseHeaders, HttpStatus.CREATED);
 	}
 	
 	// 다음에디터 등록

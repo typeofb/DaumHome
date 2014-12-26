@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Daum에디터 - 이미지 첨부</title>
 <script src="../../js/popup.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/lib/json2.js" type="text/javascript"></script>
 <script src="/DaumHome/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/DaumHome/js/jquery.MultiFile.js" type="text/javascript"></script>
 <script src="/DaumHome/js/jquery.form.js" type="text/javascript"></script>
@@ -33,7 +32,7 @@ function done() {
 			}
 		},
 		success : function(result) {
-			var json = JSON.parse(result);
+			var json = jQuery.parseJSON(result);
 			for ( var i = 0; i < json.length; i++) {
 				for (var j in json[i]) {
 					if (j == "URL_PATH") {
