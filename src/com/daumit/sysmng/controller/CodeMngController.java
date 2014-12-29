@@ -33,7 +33,7 @@ public class CodeMngController extends MenuController {
 	
 	// 본부
 	@RequestMapping(value = "codeArea")
-	public ModelAndView codeArea(@ModelAttribute User user) { // 세션처리
+	public ModelAndView codeArea(@ModelAttribute User user) { // 세션체크
 		log.info("console - codeArea");
 		
 		ModelAndView mav = new ModelAndView();

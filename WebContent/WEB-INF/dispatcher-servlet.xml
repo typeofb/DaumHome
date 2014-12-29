@@ -12,14 +12,6 @@
 
 	<!-- 어노테이션 사용 설정 -->
 	<context:annotation-config />
-	
-	<!-- @MVC Interceptor -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/*.do" />
-			<bean class="com.common.LoginSessionCheckInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 
 	<!-- 컨트롤러 객체 설정 -->
 	<bean class="com.common.LoginController" />

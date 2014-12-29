@@ -35,11 +35,12 @@ public class LoginController {
 
 	// loginCheck
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam HashMap<String, Object> map, User user, Model model) throws Exception {
+	public ModelAndView loginCheck(@RequestParam HashMap<String, Object> map, Model model) {
 		
 		log.info("console - loginCheck");
 		
 		ModelAndView mav = new ModelAndView();
+		User user = new User();
 		
 		if (!map.get("userId").equals("typeofb")) { // 아이디가 등록되지 않는 경우
 			mav.addObject("loginResult", "E3");

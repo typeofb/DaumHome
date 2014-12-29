@@ -7,7 +7,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 4220461820168818967L;
 
 	private String userId;
-	private transient String password;
+	private transient String userPw;
 	private String userName;
 	private String userAuth;
 	private String userIp;
@@ -21,12 +21,12 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUserPw() {
+		return userPw;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 
 	public String getUserName() {
