@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.MenuController;
+import com.common.model.User;
 import com.daumit.sysmng.service.CodeMngService;
 
 @Controller
-public class CodeMngController {
+@SessionAttributes("user")
+public class CodeMngController extends MenuController {
 	
 	private Log log = null;
 	private CodeMngService codeMngService;
@@ -28,7 +33,7 @@ public class CodeMngController {
 	
 	// 본부
 	@RequestMapping(value = "codeArea")
-	public ModelAndView codeArea() {
+	public ModelAndView codeArea(@ModelAttribute User user) { // 세션처리
 		log.info("console - codeArea");
 		
 		ModelAndView mav = new ModelAndView();

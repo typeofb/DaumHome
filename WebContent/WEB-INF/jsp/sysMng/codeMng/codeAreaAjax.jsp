@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<div>${menu}</div>
 	<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 		<colgroup>
 			<col width="30%" />

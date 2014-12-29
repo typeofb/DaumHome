@@ -108,6 +108,7 @@ window.onload = function() {
 		</ul>
 	</div>
 	<div class="list_search_bg">
+	<div>${menu}</div>
 		<form>
 			<table class="list_search" cellpadding="0" cellspacing="0">
 				<tr>
