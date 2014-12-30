@@ -24,7 +24,7 @@
 			window.onload = function() {
 				var code = document.getElementById("userAuth").value;
 				if (code == "00") {
-					document.lForm.action = "<c:url value='main.do' />";
+					document.lForm.action = "<c:url value='boardList.do' />";
 				} else if (code == "10") {
 					document.lForm.action = "<c:url value='bams_mng/bams_status1.do' />"; // 시스템관리자 권한 화면
 				} else if (code == "20") {
@@ -32,8 +32,10 @@
 				} else if (code == "30") {
 					document.lForm.action = "<c:url value='bams_mng/bams_status3.do' />"; // 일반사용자 권한 화면
 				}
+				window.opener.parent.name = "myParent";
+				document.lForm.target = window.opener.parent.name;
+				document.lForm.submit();
 				window.close();
-				window.opener.document.location.reload();
 			}
 		</script>
 	</c:when>
