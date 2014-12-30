@@ -1,7 +1,5 @@
 package com.common;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -10,14 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.model.User;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes("sessionCheck")
 public class LoginController {
 	
 	private Log log = LogFactory.getLog(getClass());
@@ -35,18 +32,17 @@ public class LoginController {
 
 	// loginCheck
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-	public ModelAndView loginCheck(@RequestParam HashMap<String, Object> map, Model model) {
+	public ModelAndView loginCheck(User user, Model model) {
 		
 		log.info("console - loginCheck");
 		
 		ModelAndView mav = new ModelAndView();
-		User user = new User();
 		
-		if (!map.get("userId").equals("typeofb")) { // 아이디가 등록되지 않는 경우
+		if (!user.getUserId().equals("typeofb")) { // 아이디가 등록되지 않는 경우
 			mav.addObject("loginResult", "E3");
 			user.setLoginResult("E3");
 		} else {
-			if (!map.get("userPw").equals("1234")) { // 패스워드가 틀릴 경우
+			if (!user.getUserPw().equals("1234")) { // 패스워드가 틀릴 경우
 				mav.addObject("loginResult", "E2");
 				user.setLoginResult("E2");
 			} else {
@@ -57,14 +53,13 @@ public class LoginController {
 				} else { // 성공일 경우
 					mav.addObject("loginResult", "C");
 					mav.addObject("userAuth", "00");
-					mav.addObject("userId", map.get("userId"));
+					mav.addObject("userId", user.getUserId());
 					user.setLoginResult("C");
 					user.setUserAuth("00");
-					user.setUserId(map.get("userId").toString());
 				}
 			}
 		}
-		model.addAttribute("user", user);
+		model.addAttribute("sessionCheck", user);
 		mav.setViewName("loginCheck");
 		return mav;
 	}

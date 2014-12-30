@@ -20,7 +20,7 @@ import com.common.model.User;
 import com.daumit.sysmng.service.CodeMngService;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes("sessionCheck")
 public class CodeMngController extends MenuController {
 	
 	private Log log = null;
@@ -33,7 +33,7 @@ public class CodeMngController extends MenuController {
 	
 	// 본부
 	@RequestMapping(value = "codeArea")
-	public ModelAndView codeArea(@ModelAttribute User user) { // 세션체크
+	public ModelAndView codeArea(@ModelAttribute("sessionCheck") User user) { // 세션체크
 		log.info("console - codeArea");
 		
 		ModelAndView mav = new ModelAndView();
