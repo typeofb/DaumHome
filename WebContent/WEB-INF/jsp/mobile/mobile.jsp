@@ -101,59 +101,59 @@
 			<a href="${pageContext.request.contextPath}/main.do">PC버전보기</a>
 		</div>
 	</div>
-	<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="js/idangerous.swiper-2.1.min.js"></script>
-	<script src="js/jquery.animate-enhanced.min.js"></script>
-	<script src="js/slidemenu.js"></script>
-	<script>
-	var scLNB = new Swiper('.sc-lnb', {
-		watchActiveIndex : true,
-		slidesPerView : 'auto',
-		onTouchMove : function() {
-			if (scLNB.activeIndex == 0) {
-				$(".sc-lnb-left").addClass('hc');
-			} else {
-				$(".sc-lnb-left").removeClass('hc');
-			}
-			if (scLNB.activeIndex > scLNB.slides.length / 3) {
-				$(".sc-lnb-right").addClass('hc');
-			} else {
-				$(".sc-lnb-right").removeClass('hc');
-			}
-		}
-	});
-	$(".sc-lnb-left").click(function(e) {
-		e.preventDefault();
-		scLNB.swipeTo(0);
-		$(".sc-lnb-left").addClass('hc');
-		$(".sc-lnb-right").removeClass('hc');
-	});
-	$(".sc-lnb-right").click(function(e) {
-		e.preventDefault();
-		scLNB.swipeTo(9);
-		$(".sc-lnb-right").addClass('hc');
-		$(".sc-lnb-left").removeClass('hc');
-	});
-	var tabsSwiper = new Swiper('.swiper-container', {
-		speed : 500,
-		onSlideChangeStart : function() {
-			$(".tabs .active").removeClass('active');
-			$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
-		}
-	});
-	$(".tabs a").on('touchstart mousedown', function(e) {
-		e.preventDefault();
-		$(".tabs .active").removeClass('active');
-		$(this).addClass('active');
-		tabsSwiper.swipeTo($(this).index());
-	});
-	$(".tabs a").click(function(e) {
-		e.preventDefault();
-	});
-	$(".BTgotoMain").click(function(e) {
-		e.preventDefault();
-		tabsSwiper.swipeTo(0);
-	});
-	</script>
 </body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/idangerous.swiper-2.1.min.js"></script>
+<script src="js/jquery.animate-enhanced.min.js"></script>
+<script src="js/slidemenu.js"></script>
+<script>
+var scLNB = new Swiper('.sc-lnb', {
+	watchActiveIndex : true,
+	slidesPerView : 'auto',
+	onTouchMove : function() {
+		if (scLNB.activeIndex == 0) {
+			$(".sc-lnb-left").addClass('hc');
+		} else {
+			$(".sc-lnb-left").removeClass('hc');
+		}
+		if (scLNB.activeIndex > scLNB.slides.length / 3) {
+			$(".sc-lnb-right").addClass('hc');
+		} else {
+			$(".sc-lnb-right").removeClass('hc');
+		}
+	}
+});
+$(".sc-lnb-left").click(function(e) {
+	e.preventDefault();
+	scLNB.swipeTo(0);
+	$(".sc-lnb-left").addClass('hc');
+	$(".sc-lnb-right").removeClass('hc');
+});
+$(".sc-lnb-right").click(function(e) {
+	e.preventDefault();
+	scLNB.swipeTo(9);
+	$(".sc-lnb-right").addClass('hc');
+	$(".sc-lnb-left").removeClass('hc');
+});
+var tabsSwiper = new Swiper('.swiper-container', {
+	speed : 500,
+	onSlideChangeStart : function() {
+		$(".tabs .active").removeClass('active');
+		$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+	}
+});
+$(".tabs a").on('touchstart mousedown', function(e) {
+	e.preventDefault();
+	$(".tabs .active").removeClass('active');
+	$(this).addClass('active');
+	tabsSwiper.swipeTo($(this).index());
+});
+$(".tabs a").click(function(e) {
+	e.preventDefault();
+});
+$(".BTgotoMain").click(function(e) {
+	e.preventDefault();
+	tabsSwiper.swipeTo(0);
+});
+</script>
 </html>
