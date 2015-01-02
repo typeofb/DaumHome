@@ -103,10 +103,10 @@ public class CodeMngController extends MenuController {
 	// 본부 삭제
 	@RequestMapping(value = "codeAreaDel")
 	public ModelAndView codeAreaDel(HttpServletResponse response,
-			@RequestParam(value="areaCd", required=true) String areaCd) throws IOException {
+			@RequestParam(value="keyword", required=true) String keyword) throws IOException {
 		log.info("console - codeAreaDel");
 		
-		boolean result = codeMngService.deleteArea(areaCd);
+		boolean result = codeMngService.deleteArea(keyword);
 		String strMessage = null;
 		if (result) {
 			strMessage = "삭제되었습니다.";

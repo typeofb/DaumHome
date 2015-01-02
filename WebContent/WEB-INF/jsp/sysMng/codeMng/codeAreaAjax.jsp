@@ -21,8 +21,8 @@
 			<col width="30%" />
 		</colgroup>
 		<tr>
-			<th>본부코드</th>
-			<th>본부명</th>
+			<th>키워드</th>
+			<th>유의어</th>
 			<th>직제순서</th>
 		</tr>
 		<c:choose>
@@ -33,10 +33,10 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="x" items="${list}">
-					<tr onclick="areaSel('${x.AREA_CD}', '${x.AREA_NM}', '${x.AREA_PRIO}');" style="cursor: pointer;">
-						<th class="th_line">${x.AREA_CD}</th>
-						<td>${x.AREA_NM}</td>
-						<td>${x.AREA_PRIO}</td>
+					<tr onclick="areaSel('${x.KEYWORD}', '${x.THESAURUS}', '${x.IDX}');" style="cursor: pointer;">
+						<th class="th_line">${x.KEYWORD}</th>
+						<td>${x.THESAURUS}</td>
+						<td>${x.IDX}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
