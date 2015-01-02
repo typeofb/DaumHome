@@ -34,10 +34,10 @@ public class DaumMngDao {
 		return result;
 	}
 	
-	public List<Map<String, Object>> selectBBS(Map<String, Object> map) {
+	public List<Map<String, Object>> selectBBS() {
 		List<Map<String, Object>> result = null;
 		try {
-			result = sql.queryForList("DaumMng.selectBBS", map);
+			result = sql.queryForList("DaumMng.selectBBS");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

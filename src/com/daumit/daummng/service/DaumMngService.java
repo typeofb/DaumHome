@@ -18,8 +18,8 @@ public class DaumMngService {
 		return result;
 	}
 	
-	public List<Map<String, Object>> selectBBS(Map<String, Object> map) {
-		List<Map<String, Object>> result = dao.selectBBS(map);
+	public List<Map<String, Object>> selectBBS() {
+		List<Map<String, Object>> result = dao.selectBBS();
 		return result;
 	}
 	

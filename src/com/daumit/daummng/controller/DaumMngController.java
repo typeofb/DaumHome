@@ -70,20 +70,18 @@ public class DaumMngController {
 		List<Integer> resultList = service.selectCopy(list);
 		System.out.println(resultList);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("postId", 273);
-		map.put("usrgrdCd", 30);
-		
 		// retrieve list
-		List<Map<String, Object>> resultListMap = service.selectBBS(map);
+		List<Map<String, Object>> resultListMap = service.selectBBS();
 		System.out.println(resultListMap);
 		
 		// retrieve map
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("useYN", "Y");
 		Map<String, Object> resultMap = service.selectAuth(map);
 		System.out.println(resultMap);
 		
 		// retrieve integer
-		int resultInt = service.selectUser("약정수용가");
+		int resultInt = service.selectUser("레피아");
 		System.out.println(resultInt);
 		
 		// procedure
