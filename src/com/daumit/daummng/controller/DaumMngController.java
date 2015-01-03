@@ -4,8 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -18,9 +20,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +43,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.common.Common;
 import com.daumit.daummng.service.DaumMngService;
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfWriter;
 
 @Controller
 public class DaumMngController {
@@ -244,5 +258,121 @@ public class DaumMngController {
 		log.info("console - mobile");
 		
 		return "mobile/mobile";
+	}
+	
+	// 비 HTML
+	@RequestMapping(value = "/nonHtml")
+	public String nonHtml() {
+		log.info("console - nonHtml");
+		
+		return "nonHtml/nonHtml";
+	}
+	
+	@RequestMapping("/file")
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("console - file");
+		
+		String path = request.getServletContext().getRealPath("/WEB-INF/web.xml");
+		File file = new File(path);
+		response.setContentType("application/octet-stream");
+		response.setContentLength((int) file.length());
+		response.setHeader("Content-Disposition", "attachment; fileName=\"" + file.getName() + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		OutputStream out = response.getOutputStream();
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+		} finally {
+			if (fis != null)
+				try {
+					fis.close();
+				} catch (IOException ex) {
+				}
+		}
+		out.flush();
+	}
+	
+	@RequestMapping("/excel")
+	public void downloadExcel() throws Exception {
+		log.info("console - excel");
+		
+		List<String> pageRanks = new ArrayList<String>();
+		pageRanks.add(new String("/bbs/telzone/list"));
+		pageRanks.add(new String("/bbs/humor/list"));
+		pageRanks.add(new String("/bbs/agora/list"));
+		
+		Workbook workbook = new HSSFWorkbook();
+		Sheet sheet = createFirstSheet(workbook);
+		createColumnLabel(sheet);
+		
+		short rowNum = 1;
+		for (String rank : pageRanks) {
+			createPageRankRow(sheet, rank, rowNum++);
+		}
+		
+		FileOutputStream fileOut = new FileOutputStream("C:\\workbook.xls");
+		workbook.write(fileOut);
+		fileOut.close();
+	}
+	
+	private Sheet createFirstSheet(Workbook workbook) {
+		Sheet sheet = workbook.createSheet("Report1");
+		sheet.setColumnWidth((short) 1, (short) (256 * 20));
+		return sheet;
+	}
+	
+	private void createColumnLabel(Sheet sheet) {
+		Row firstRow = sheet.createRow((short) 0);
+		Cell cell = firstRow.createCell((short) 0);
+		cell.setCellValue("첫번째 열제목");
+		
+		cell = firstRow.createCell((short) 1);
+		cell.setCellValue("두번째 열제목");
+	}
+	
+	private void createPageRankRow(Sheet sheet, String rank, short rowNum) {
+		Row row = sheet.createRow(rowNum);
+		Cell cell = row.createCell((short) 0);
+		cell.setCellValue(rank);
+		
+		cell = row.createCell((short) 1);
+		cell.setCellValue(rank);
+	}
+	
+	@RequestMapping("/pdf")
+	public void downloadPdf(Document document) throws Exception {
+		log.info("console - pdf");
+		
+		List<String> pageViews = new ArrayList<String>();
+		pageViews.add(new String("/bbs/telzone/list"));
+		pageViews.add(new String("/bbs/humor/list"));
+		pageViews.add(new String("/bbs/agora/list"));
+		
+		Table table = new Table(2, pageViews.size() + 1);
+		table.setPadding(5);
+		
+		BaseFont bfKorean = BaseFont.createFont(
+				  "c:\\windows\\fonts\\batang.ttc,0",
+				  BaseFont.IDENTITY_H,
+				  BaseFont.EMBEDDED);
+		
+		Font font = new Font(bfKorean);
+		com.lowagie.text.Cell cell = new com.lowagie.text.Cell(new Paragraph("첫번째 열제목", font));
+		cell.setHeader(true);
+		table.addCell(cell);
+		cell = new com.lowagie.text.Cell(new Paragraph("두번째 열제목", font));
+		table.addCell(cell);
+		table.endHeaders();
+		
+		for (String view : pageViews) {
+			table.addCell(view);
+			table.addCell(view);
+		}
+		
+		PdfWriter.getInstance(document, new FileOutputStream("C:\\iTextTest.pdf"));
+		document.open();
+		document.add(table);
+		document.close();
 	}
 }

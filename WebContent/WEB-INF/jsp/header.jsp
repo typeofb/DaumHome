@@ -77,6 +77,10 @@ document.onclick = jsddm_close;
 					<li><a href="${pageContext.request.contextPath}/controlMng.do">제어관리</a></li>
 				</ul>
 			</li>
-			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a></li>
+			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/nonHtml.do">비 HTML</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
