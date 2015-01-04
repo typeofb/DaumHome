@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -268,11 +269,8 @@ public class DaumMngController {
 		return "nonHtml/nonHtml";
 	}
 	
-	@RequestMapping("/file")
-    public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		log.info("console - file");
-		
-		String path = request.getServletContext().getRealPath("/WEB-INF/web.xml");
+	private void downloadCommon(HttpServletResponse response, String path)
+			throws IOException, FileNotFoundException {
 		File file = new File(path);
 		response.setContentType("application/octet-stream");
 		response.setContentLength((int) file.length());
@@ -293,8 +291,17 @@ public class DaumMngController {
 		out.flush();
 	}
 	
+	@RequestMapping("/file")
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("console - file");
+		
+		String path = request.getServletContext().getRealPath("/WEB-INF/web.xml");
+		
+		downloadCommon(response, path);
+	}
+	
 	@RequestMapping("/excel")
-	public void downloadExcel() throws Exception {
+	public void downloadExcel(HttpServletResponse response) throws Exception {
 		log.info("console - excel");
 		
 		List<String> pageRanks = new ArrayList<String>();
@@ -311,9 +318,12 @@ public class DaumMngController {
 			createPageRankRow(sheet, rank, rowNum++);
 		}
 		
-		FileOutputStream fileOut = new FileOutputStream("C:\\workbook.xls");
+		String path = "C:\\workbook.xls";
+		FileOutputStream fileOut = new FileOutputStream(path);
 		workbook.write(fileOut);
 		fileOut.close();
+		
+		downloadCommon(response, path);
 	}
 	
 	private Sheet createFirstSheet(Workbook workbook) {
@@ -341,7 +351,7 @@ public class DaumMngController {
 	}
 	
 	@RequestMapping("/pdf")
-	public void downloadPdf(Document document) throws Exception {
+	public void downloadPdf(HttpServletResponse response) throws Exception {
 		log.info("console - pdf");
 		
 		List<String> pageViews = new ArrayList<String>();
@@ -370,9 +380,13 @@ public class DaumMngController {
 			table.addCell(view);
 		}
 		
-		PdfWriter.getInstance(document, new FileOutputStream("C:\\iTextTest.pdf"));
+		String path = "C:\\iText.pdf";
+		Document document = new Document();
+		PdfWriter.getInstance(document, new FileOutputStream(path));
 		document.open();
 		document.add(table);
 		document.close();
+		
+		downloadCommon(response, path);
 	}
 }
