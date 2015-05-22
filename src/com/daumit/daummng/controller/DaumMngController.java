@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -218,13 +218,13 @@ public class DaumMngController {
 			filePath = filePath + "\\upload\\" + today + "\\";
 			File file = new File(filePath + fileName);
 			try {
-				FileCopyUtils.copy(mFile.getInputStream(), new FileOutputStream(file));
+//				FileCopyUtils.copy(mFile.getInputStream(), new FileOutputStream(file));
 			} catch (Exception e) {
 				log.error(e);
 				File folder = new File(filePath);
 				folder.mkdirs();
 				try {
-					FileCopyUtils.copy(mFile.getInputStream(), new FileOutputStream(file));
+//					FileCopyUtils.copy(mFile.getInputStream(), new FileOutputStream(file));
 				} catch (Exception e1) {
 					log.error(e1);
 				}
@@ -319,9 +319,9 @@ public class DaumMngController {
 		}
 		
 		String path = "C:\\workbook.xls";
-		FileOutputStream fileOut = new FileOutputStream(path);
-		workbook.write(fileOut);
-		fileOut.close();
+//		FileOutputStream fileOut = new FileOutputStream(path);
+//		workbook.write(fileOut);
+//		fileOut.close();
 		
 		downloadCommon(response, path);
 	}
@@ -382,7 +382,7 @@ public class DaumMngController {
 		
 		String path = "C:\\iText.pdf";
 		Document document = new Document();
-		PdfWriter.getInstance(document, new FileOutputStream(path));
+//		PdfWriter.getInstance(document, new FileOutputStream(path));
 		document.open();
 		document.add(table);
 		document.close();
