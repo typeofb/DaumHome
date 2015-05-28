@@ -102,10 +102,10 @@ function goPage(targetPage) {
 		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 			<colgroup>
 				<col width="50" />
-				<col width="720" />
-				<col width="100" />
-				<col width="50" />
-				<col width="80" />
+				<col width="620" />
+				<col width="150" />
+				<col width="70" />
+				<col width="110" />
 			</colgroup>
 			<tr>
 				<th>번 호</th>
@@ -115,15 +115,12 @@ function goPage(targetPage) {
 				<th>등록일</th>
 			</tr>
 		<c:forEach items="${list}" var="x">
-			<tr onclick="goDetail('${x.POST_ID}')" style="cursor:pointer;">
-				<td>${x.POST_ID}</td>
-				<td>${x.TITLE}</td>
-				<td>${x.USR_NM}</td>
-				<td>${x.READ_CNT}</td>
-				<td>
-					<fmt:parseDate value="${x.REG_DT}" var="fmtDateTime" pattern="yyyy-MM-dd HH:mm:ss" />
-					<fmt:formatDate value="${fmtDateTime}" pattern="yyyy-MM-dd" />
-				</td>
+			<tr onclick="goDetail('${x.BOARD_ID}')" style="cursor:pointer;">
+				<td>${x.BOARD_ID}</td>
+				<td>${x.ART_TITLE}</td>
+				<td>${x.BOARD_NAME}</td>
+				<td>${x.ARTICLE_ID}</td>
+				<td>${x.REG_DATE}</td>
 			</tr>
 		</c:forEach>
 		</table>
