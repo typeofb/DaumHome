@@ -57,7 +57,7 @@
 						<div class="title">메뉴 10</div>
 					</div>
 				</div>
-				<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"><</a>
+				<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"></a>
 				<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px">></a>
 			</div>
 			<div class="sc-lnb-pagination"></div>
