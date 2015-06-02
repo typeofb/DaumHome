@@ -74,6 +74,7 @@ textarea {
 	height: 50px;
 	width: auto;
 	margin: 0 auto;
+	padding: 0px 50px 0px 50px;
 }
 
 .logo {
@@ -105,11 +106,13 @@ textarea {
 .gnbBar {
 	height: 32px;
 	margin-bottom: 10px;
+	padding-left: 50px;
 	background: #0c4da2;
 }
 
 .container {
 	width: auto;
+	height: 500px;
 	padding-left: 10px;
 	clear: both;
 	margin: 0 auto;
@@ -329,4 +332,8 @@ textarea {
 
 .th_line {
 	border-top: solid 1px #b3d2e9;
+}
+
+.bottomBar {
+	padding-left: 50px;
 }

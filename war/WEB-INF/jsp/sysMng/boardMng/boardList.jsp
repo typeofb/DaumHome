@@ -129,5 +129,6 @@ function goPage(targetPage) {
 	</div>
 	</form>
 </div>
+<%@ include file="../../footer.jsp"%>
 </body>
 </html>

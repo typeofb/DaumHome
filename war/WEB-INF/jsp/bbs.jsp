@@ -583,5 +583,6 @@
 <div><button onclick='loadContent()'>SAMPLE - load contents to editor</button></div>
 <!-- End: Loading Contents -->
 
+<%@ include file="footer.jsp"%>
 </body>
 </html>
