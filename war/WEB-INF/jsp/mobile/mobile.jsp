@@ -13,89 +13,114 @@
 <link rel="stylesheet" type="text/css" href="css/idangerous.swiper.css">
 </head>
 <body>
-	<a href="#" class="BTgotoMain">매인</a>
-	<div id="left-menu" class="left-menu">left sidebar</div>
-	<div id="right-menu" class="right-menu">right sidebar</div>
+	<div id="left-menu" class="left-menu">
+		<div class="d-table">
+			<div class="d-row">
+				<div class="d-cell1">left sidebar</div>
+				<div class="d-cell2" id="bt_lasideClose"><a href="#">X</a></div>
+			</div>
+		</div>
+	</div>
+	<div id="right-menu" class="right-menu">
+		<div class="d-table">
+			<div class="d-row">
+				<div class="d-cell1">right sidebar</div>
+				<div class="d-cell2" id="bt_rasideClose"><a href="#">X</a></div>
+			</div>
+		</div>
+	</div>
 	<div class="bg_modal"></div>
 	<div class="wrap" id="content-wrapper">
 		<!-- <a href="#content">컨텐트로 바로가기</a> -->
 		<div class="header">
+			<a href="${pageContext.request.contextPath}/mobile.do" class="BTgotoMain"
+				style="position: relative; left: 50%; margin-left: -115px;">매인</a>
 			<a href="#" id="bt_laside" style="float: left;">좌확장영역열기</a>
 			<a href="#" id="bt_raside" style="float: right;">우확장영역열기</a>
-		</div>
-		<div class="container">
-			<div class="sc-lnb">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<div class="title">전체</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">세이브더칠드런</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">후원하기</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">캠페인</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 5</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 6</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 7</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 8</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 9</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="title">메뉴 10</div>
-					</div>
-				</div>
-				<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"></a>
-				<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px">></a>
-			</div>
-			<div class="sc-lnb-pagination"></div>
 			<div class="tabs">
 				<a style="display: none;" class="BTgotoMain">Tab 0</a>
 				<a href="#">Tab 1</a>
 				<a href="#" style="margin: 0 17px">Tab 2</a>
 				<a href="#">Tab 3</a>
 			</div>
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<div class="content-slide">
-							<h2>Main</h2>
-							<p>매인</p>
+		</div>
+		<div class="container">
+			<div class="SlideContent">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<!-- Main 시작 -->
+						<div class="swiper-slide">
+							<div class="content-slide">
+								<div class="sc-lnb">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<div class="title">전체</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">세이브더칠드런</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">후원하기</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">캠페인</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 5</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 6</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 7</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 8</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 9</div>
+										</div>
+										<div class="swiper-slide">
+											<div class="title">메뉴 10</div>
+										</div>
+									</div>
+									<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"></a>
+									<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px">></a>
+								</div>
+								<div class="sc-lnb-pagination"></div>
+								<h2>Main</h2>
+								<p>매인</p>
+							</div>
 						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="content-slide">
-							<h2>Tab 1</h2>
-							<p>1번째 컨텐트</p>
+						<!-- Main 끝 -->
+						<!-- Tab 1 시작 -->
+						<div class="swiper-slide">
+							<div class="content-slide">
+								<h2>Tab 1</h2>
+								<p>1번째 컨텐트</p>
+							</div>
 						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="content-slide">
-							<h2>Tab 2</h2>
-							<p>2번째 컨텐트</p>
+						<!-- Tab 1 끝 -->
+						<!-- Tab 2 시작 -->
+						<div class="swiper-slide">
+							<div class="content-slide">
+								<h2>Tab 2</h2>
+								<p>2번째 컨텐트</p>
+							</div>
 						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="content-slide">
-							<h2>Tab 3</h2>
-							<p>3번째 컨텐트</p>
+						<!-- Tab 2 끝 -->
+						<!-- Tab 3 시작 -->
+						<div class="swiper-slide">
+							<div class="content-slide">
+								<h2>Tab 3</h2>
+								<p>3번째 컨텐트</p>
+							</div>
 						</div>
+						<!-- Tab 3 끝 -->
 					</div>
 				</div>
+				<div id="content"></div>
 			</div>
-			<div id="content"></div>
 		</div>
 		<div class="footer">
 			<a href="${pageContext.request.contextPath}/main.do">PC버전보기</a>

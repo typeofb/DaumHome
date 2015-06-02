@@ -51,6 +51,25 @@ body.open-menu {
 	color: #fff
 }
 
+.d-table {
+	display: table;
+	width: 100%;
+}
+
+.d-row {
+	display: table-row;
+}
+
+.d-cell1 {
+	display: table-cell;
+	width: 90%;
+}
+
+.d-cell2 {
+	display: table-cell;
+	width: 10%;
+}
+
 .SlideContent {
 	position: relative;
 	width: 100%;
