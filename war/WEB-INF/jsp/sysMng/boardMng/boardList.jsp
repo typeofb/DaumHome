@@ -95,9 +95,9 @@ function goPage(targetPage) {
 		</table>
 	</div>
 	<div class="list_table">
-		<input type="hidden" id="rowSize" name="rowSize" value="15" />
+		<input type="hidden" id="rowSize" name="rowSize" value="${rowSize}" />
 		<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
-		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="10" />
+		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="${pageGroupSize}" />
 		<input type="hidden" id="postId" name="postId" value="" />
 		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 			<colgroup>
@@ -115,12 +115,19 @@ function goPage(targetPage) {
 				<th>등록일</th>
 			</tr>
 		<c:forEach items="${list}" var="x">
-			<tr onclick="goDetail('${x.BOARD_ID}')" style="cursor:pointer;">
+			<!-- <tr onclick="goDetail('${x.BOARD_ID}')" style="cursor:pointer;">
 				<td>${x.BOARD_ID}</td>
 				<td>${x.ART_TITLE}</td>
 				<td>${x.BOARD_NAME}</td>
 				<td>${x.ARTICLE_ID}</td>
 				<td>${x.REG_DATE}</td>
+			</tr> -->
+			<tr onclick="goDetail('${x.POST_ID}')" style="cursor:pointer;">
+				<td>${x.POST_ID}</td>
+				<td>${x.TITLE}</td>
+				<td>${x.USR_NM}</td>
+				<td>${x.READ_CNT}</td>
+				<td>${x.REG_DT}</td>
 			</tr>
 		</c:forEach>
 		</table>

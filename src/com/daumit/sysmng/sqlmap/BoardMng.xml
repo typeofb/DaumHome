@@ -4,48 +4,54 @@
 	<select id="BoardMng.selectBoardList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 		<![CDATA[
 		SELECT
-			A.IDX AS POST_ID,
-			A.NAME AS USR_NM,
-			A.TITLE,
-			A.USE_YN AS READ_CNT,
-			A.REGDATE AS REG_DT
-		FROM T_HELP A
-		ORDER BY A.IDX DESC
+			USER_ID AS POST_ID,
+			USER_NAME AS USR_NM,
+			BRAND_NAME AS TITLE,
+			ROLE AS READ_CNT,
+			LAST_UPDATE_DTIME AS REG_DT
+		FROM USER
+		ORDER BY LAST_UPDATE_DTIME DESC
 		LIMIT #targetPage#, #rowSize#
 		]]>
 	</select>
 	
 	<select id="BoardMng.selectBoardCnt" parameterClass="java.util.HashMap" resultClass="java.lang.Integer">
 		<![CDATA[
-		SELECT COUNT(1) TOTAL_ROW_SIZE FROM T_HELP
+		SELECT COUNT(1) TOTAL_ROW_SIZE FROM USER
 		]]>
 	</select>
 	
 	<select id="BoardMng.selectBoardDetail" parameterClass="java.lang.String" resultClass="java.util.HashMap">
 		<![CDATA[
-		SELECT IDX AS POST_ID, TITLE, CONTENT AS CONTENTS, REGDATE AS REG_DT, USE_YN AS READ_CNT, NAME AS USR_ID
-		FROM T_HELP
-		WHERE IDX = #postId#
+		SELECT 
+			USER_ID AS POST_ID,
+			BRAND_NAME AS TITLE,
+			EMAIL_ADDRESS AS CONTENTS,
+			LAST_UPDATE_DTIME AS REG_DT,
+			ROLE AS READ_CNT,
+			LAST_UPDATE_USER_ID AS USR_ID
+		FROM USER
+		WHERE USER_ID = #postId#
 		]]>
 	</select>
 	
 	<insert id="BoardMng.insertBoard" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO T_HELP (IDX, NAME, TITLE, CONTENT, USE_YN, REGDATE)
-		VALUES ((SELECT MAX(IDX) + 1 FROM T_HELP), 'test', #title#, #contents#, 0, SYSDATE);
+		INSERT INTO USER (USER_ID, USER_NAME, BRAND_NAME, EMAIL_ADDRESS, LAST_UPDATE_DTIME)
+		VALUES (#title#, 'test', 'TEST', #contents#, CURTIME());
 		]]>
 	</insert>
 	
 	<update id="BoardMng.updateBoard" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE T_HELP SET TITLE = #title#, CONTENT = #contents#
-		WHERE IDX = #postId#
+		UPDATE USER SET BRAND_NAME = #title#, EMAIL_ADDRESS = #contents#
+		WHERE USER_ID = #postId#
 		]]>
 	</update>
 	
 	<delete id="BoardMng.deleteBoard" parameterClass="java.lang.String">
 		<![CDATA[
-		DELETE FROM T_HELP WHERE IDX = #postId#
+		DELETE FROM USER WHERE USER_ID = #postId#
 		]]>
 	</delete>
 </sqlMap>

@@ -61,10 +61,7 @@ function goList() {
 					<th>제 목</th>
 					<td><input type="text" id="title" name="title" value="${map.TITLE}" style="width: 700px; padding-left: 5px;" /></td>
 					<th>등록일</th>
-					<td>
-						<fmt:parseDate value="${map.REG_DT}" var="fmtDateTime" pattern="yyyy-MM-dd HH:mm:ss" />
-						<fmt:formatDate value="${fmtDateTime}" pattern="yyyy-MM-dd" />
-					</td>
+					<td>${map.REG_DT}</td>
 				</tr>
 				<tr>
 					<td colspan="4"><textarea id="contents" name="contents">${map.CONTENTS}</textarea></td>

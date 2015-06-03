@@ -61,16 +61,16 @@ public class BoardMngController {
 		}
 		
 		int totalRowSize = 0;
-		int rowSize = Integer.parseInt(Common.NVL(rowSizeStr, "15"));
+		int rowSize = Integer.parseInt(Common.NVL(rowSizeStr, "10"));
 		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
 		int pageGroupSize = Integer.parseInt(Common.NVL(pageGroupSizeStr, "10"));
 		
-//		HashMap<String, Object> iMaps = new HashMap<String, Object>();
-//		iMaps.put("beginDate", beginDate.replaceAll("-", ""));
-//		iMaps.put("endDate", endDate.replaceAll("-", ""));
-//		iMaps.put("targetPage", Integer.valueOf((targetPage - 1) * rowSize));
-//		iMaps.put("rowSize", Integer.valueOf(rowSize));
-		
+		HashMap<String, Object> iMaps = new HashMap<String, Object>();
+		iMaps.put("beginDate", beginDate.replaceAll("-", ""));
+		iMaps.put("endDate", endDate.replaceAll("-", ""));
+		iMaps.put("targetPage", Integer.valueOf((targetPage - 1) * rowSize));
+		iMaps.put("rowSize", Integer.valueOf(rowSize));
+		/*
 		String url = "http://typeofb.woobi.co.kr/index.php/rest_server/board";
 		
 		HttpClient client = HttpClientBuilder.create().build();
@@ -104,17 +104,19 @@ public class BoardMngController {
 		JSONObject jsonObject = (JSONObject) obj;
 		List<HashMap<String, Object>> list = (List<HashMap<String, Object>>) jsonObject.get("board");
 		System.out.println(list);
-		
-//		List<HashMap<String, Object>> list = boardMngService.selectBoardList(iMaps);
-//		if (list.size() > 0) {
-//			totalRowSize = boardMngService.selectBoardCnt(iMaps);
-//		}
+		*/
+		List<HashMap<String, Object>> list = boardMngService.selectBoardList(iMaps);
+		if (list.size() > 0) {
+			totalRowSize = boardMngService.selectBoardCnt(iMaps);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("targetPage", targetPage);
 		mav.addObject("beginDate", beginDate);
 		mav.addObject("endDate", endDate);
 		mav.addObject("list", list);
+		mav.addObject("rowSize", rowSize);
+		mav.addObject("pageGroupSize", pageGroupSize);
 		mav.addObject("paging", Common.paging(totalRowSize, rowSize, targetPage, pageGroupSize));
 		mav.setViewName("sysMng/boardMng/boardList");
 		return mav;
