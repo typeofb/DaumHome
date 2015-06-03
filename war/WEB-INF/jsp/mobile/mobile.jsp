@@ -17,7 +17,7 @@
 		<div class="d-table">
 			<div class="d-row">
 				<div class="d-cell1">left sidebar</div>
-				<div class="d-cell2" id="bt_lasideClose"><a href="#">X</a></div>
+				<div class="d-cell2" id="bt_lasideClose"><a href="#" style="color: #fff;">X</a></div>
 			</div>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 		<div class="d-table">
 			<div class="d-row">
 				<div class="d-cell1">right sidebar</div>
-				<div class="d-cell2" id="bt_rasideClose"><a href="#">X</a></div>
+				<div class="d-cell2" id="bt_rasideClose"><a href="#" style="color: #fff;">X</a></div>
 			</div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 			<div class="tabs">
 				<a style="display: none;" class="BTgotoMain">Tab 0</a>
 				<a href="#">Tab 1</a>
-				<a href="#" style="margin: 0 17px">Tab 2</a>
+				<a href="#" style="margin: 0 17px;">Tab 2</a>
 				<a href="#">Tab 3</a>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 										</div>
 									</div>
 									<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"></a>
-									<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px">></a>
+									<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px;">></a>
 								</div>
 								<div class="sc-lnb-pagination"></div>
 								<h2>Main</h2>
