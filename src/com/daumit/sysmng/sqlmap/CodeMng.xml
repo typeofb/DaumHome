@@ -3,30 +3,30 @@
 <sqlMap>
 	<select id="CodeMng.selectAreaList" resultClass="java.util.HashMap">
 		<![CDATA[
-		SELECT KEYWORD, THESAURUS, IDX
-		FROM T_DICT_THESAURUS
-		ORDER BY IDX
+		SELECT USER_ID, USER_NAME, ROLE
+		FROM USER
+		ORDER BY ROLE
 		]]>
 	</select>
 	
 	<insert id="CodeMng.insertArea" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO T_DICT_THESAURUS (KEYWORD, THESAURUS, IDX)
-		VALUES (#keyword#, #thesaurus#, #idx#)
+		INSERT INTO USER (USER_ID, USER_NAME, ROLE)
+		VALUES (#userID#, #userName#, #role#)
 		]]>
 	</insert>
 	
 	<update id="CodeMng.updateArea" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE T_DICT_THESAURUS
-		SET THESAURUS = #thesaurus#, IDX = #idx#
-		WHERE KEYWORD = #keyword#
+		UPDATE USER
+		SET USER_NAME = #userName#, ROLE = #role#
+		WHERE USER_ID = #userID#
 		]]>
 	</update>
 	
 	<delete id="CodeMng.deleteArea" parameterClass="java.lang.String">
 		<![CDATA[
-		DELETE FROM T_DICT_THESAURUS WHERE KEYWORD = #keyword#
+		DELETE FROM USER WHERE USER_ID = #userID#
 		]]>
 	</delete>
 </sqlMap>

@@ -2,17 +2,17 @@
 <%@ include file="../../header.jsp"%>
 <script type="text/javascript">
 function dispEditArea(sMod, cd, nm, prio) {
-	$("#keyword").val(cd);
-	$("#thesaurus").val(nm);
-	$("#idx").val(prio);
+	$("#userID").val(cd);
+	$("#userName").val(nm);
+	$("#role").val(prio);
 	if (sMod == "reg") {
-		$("#keyword").removeAttr("readonly");
+		$("#userID").removeAttr("readonly");
 		$("#btnReg").show();
 		$("#btnMod").hide();
 		$("#btnDel").hide();
 		$("#btnCan").hide();
 	} else {
-		$("#keyword").attr("readonly", true);
+		$("#userID").attr("readonly", true);
 		$("#btnReg").hide();
 		$("#btnMod").show();
 		$("#btnDel").show();
@@ -112,12 +112,12 @@ window.onload = function() {
 		<form>
 			<table class="list_search" cellpadding="0" cellspacing="0">
 				<tr>
-					<td>키워드</td>
-					<td><input id="keyword" name="keyword" readonly /></td>
-					<td>유의어</td>
-					<td><input id="thesaurus" name="thesaurus" /></td>
+					<td>아이디</td>
+					<td><input id="userID" name="userID" readonly /></td>
+					<td>이름</td>
+					<td><input id="userName" name="userName" /></td>
 					<td>직제순서</td>
-					<td><input id="idx" name="idx" /></td>
+					<td><input id="role" name="role" /></td>
 					<td id="btnReg"><a href="javascript:areaReg();" class="btnT"><span>등록</span></a></td>
 					<td id="btnMod"><a href="javascript:areaMod();" class="btnT"><span>수정</span></a></td>
 					<td id="btnDel"><a href="javascript:areaDel();" class="btnT"><span>삭제</span></a></td>
@@ -134,8 +134,8 @@ window.onload = function() {
 				<col width="30%" />
 			</colgroup>
 			<tr>
-				<th>키워드</th>
-				<th>유의어</th>
+				<th>아이디</th>
+				<th>이름</th>
 				<th>직제순서</th>
 			</tr>
 			<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>

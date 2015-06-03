@@ -2,23 +2,23 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
 	<select id="DaumMng.selectCopy" parameterClass="java.util.List" resultClass="java.util.HashMap">
-		SELECT POWER FROM T_ADMIN_USER
+		SELECT WRITER_ID, WRITER_NAME FROM ARTICLE
 		WHERE 1 = 1
-		<iterate prepend="AND IDX IN " open="(" close=")" conjunction=",">
+		<iterate prepend="AND ARTICLE_SEQ IN " open="(" close=")" conjunction=",">
 			#list[]#
 		</iterate>
 	</select>
 	
 	<select id="DaumMng.selectBBS" resultClass="java.util.HashMap">
-		SELECT NAME, E_MAIL FROM T_ADMIN_USER
+		SELECT BOARD_ID, BOARD_NAME FROM BOARD
 	</select>
 	
 	<select id="DaumMng.selectAuth" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
-		SELECT NAME, E_MAIL FROM T_ADMIN_USER WHERE USE_YN = #useYN#
+		SELECT CODE, CODE_NAME FROM CODE WHERE USE_YN = #useYN#
 	</select>
 	
 	<select id="DaumMng.selectUser" parameterClass="java.lang.String" resultClass="java.lang.Integer">
-		SELECT IDX FROM T_ADMIN_USER WHERE NAME = #string#
+		SELECT ROLE FROM USER WHERE USER_NAME = #string#
 	</select>
 	
 	<parameterMap id="fileParameters" class="java.util.HashMap">
