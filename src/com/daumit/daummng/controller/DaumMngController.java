@@ -92,7 +92,8 @@ public class DaumMngController {
 		// retrieve map
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("useYN", "Y");
-		Map<String, Object> resultMap = service.selectAuth(map);
+		map.put("sortOrder", "0");
+		Map<String, Object> resultMap = service.selectAuth(map);	// 반드시 결과 row가 하나이어야 한다.
 		System.out.println(resultMap);
 		
 		// retrieve integer

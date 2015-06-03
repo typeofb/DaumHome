@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="DaumMng.selectAuth" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
-		SELECT CODE, CODE_NAME FROM CODE WHERE USE_YN = #useYN#
+		SELECT CODE, CODE_NAME FROM CODE WHERE USE_YN = #useYN# AND SORT_ORDER = #sortOrder#
 	</select>
 	
 	<select id="DaumMng.selectUser" parameterClass="java.lang.String" resultClass="java.lang.Integer">
