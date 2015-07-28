@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
-	<select id="CodeMng.selectAreaList" resultClass="java.util.HashMap">
+	<select id="CodeMng.selectAreaList" parameterClass="java.lang.Integer" resultClass="java.util.HashMap">
 		<![CDATA[
-		SELECT USER_ID, USER_NAME, ROLE
-		FROM USER
-		ORDER BY ROLE
+		SELECT
+		    D.*
+		FROM
+		(
+		    SELECT
+		        C.*,
+		        TRUNCATE((ROWNUM - 1) / 10, 0) + 1 AS PAGE
+		    FROM
+		    (
+		        SELECT
+		            B.*,
+		            (@RNUM := @RNUM + 1) AS ROWNUM,
+		            TRUNCATE((TOTAL_ROW_SIZE - 1) / 10, 0) + 1 AS TOTAL_PAGE_SIZE
+		        FROM
+		        (
+		            SELECT
+		                A.USER_ID,
+		                A.USER_NAME,
+		                A.ROLE,
+		                (SELECT COUNT(*) FROM USER) AS TOTAL_ROW_SIZE
+		            FROM USER A
+		        ) B, (SELECT @RNUM := 0) R
+		    ) C
+		) D
+		WHERE PAGE = #targetPage#
 		]]>
 	</select>
 	

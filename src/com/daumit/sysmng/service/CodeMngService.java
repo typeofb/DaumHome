@@ -13,8 +13,8 @@ public class CodeMngService {
 		dao = new CodeMngDao();
 	}
 	
-	public List<HashMap<String, Object>> selectAreaList() {
-		List<HashMap<String, Object>> result = dao.selectAreaList();
+	public List<HashMap<String, Object>> selectAreaList(int targetPage) {
+		List<HashMap<String, Object>> result = dao.selectAreaList(targetPage);
 		return result;
 	}
 	

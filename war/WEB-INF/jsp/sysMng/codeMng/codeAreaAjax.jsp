@@ -42,5 +42,6 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+<div class="pagination">${paging}</div>
 </body>
 </html>

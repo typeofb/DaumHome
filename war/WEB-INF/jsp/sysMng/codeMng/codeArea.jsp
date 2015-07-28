@@ -33,6 +33,21 @@ function search() {
 	});
 }
 
+function goPage(targetPage) {
+	$("#targetPage").val(targetPage);
+	$.ajax({
+		url : "codeAreaSearch.do",
+		data : $("form").serializeArray(),
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(result) {
+			$("#divResultArea").html(result);
+			dispEditArea("reg", "", "", "");
+		}
+	});
+}
+
 function areaReg() {
 	$.ajax({
 		url : "codeAreaReg.do",
@@ -110,6 +125,7 @@ window.onload = function() {
 	<div class="list_search_bg">
 	<div>${menu}</div>
 		<form>
+			<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 			<table class="list_search" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>아이디</td>

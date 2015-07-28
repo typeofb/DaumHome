@@ -15,10 +15,10 @@ public class CodeMngDao {
 		sql = SqlConfig.getSqlMapInstance();
 	}
 	
-	public List<HashMap<String, Object>> selectAreaList() {
+	public List<HashMap<String, Object>> selectAreaList(int targetPage) {
 		List<HashMap<String, Object>> result = null;
 		try {
-			result = sql.queryForList("CodeMng.selectAreaList");
+			result = sql.queryForList("CodeMng.selectAreaList", targetPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
