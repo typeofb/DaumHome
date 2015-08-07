@@ -35,12 +35,31 @@
 	
 	<bean id="jsonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="order" value="0" /><!-- 먼저 annotation handler 검색 -->
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
 				<ref bean="jsonHttpMessageConverter" />
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Dependency Injection 연습 -->
+	<bean name="oracleDao" class="com.daumit.daummng.dao.OracleDaoImpl" />
+	<bean name="mysqlDao" class="com.daumit.daummng.dao.MysqlDaoImpl" />
+	<bean id="defaultController" class="com.daumit.daummng.controller.DiController">
+		<!-- <property name="dao" ref="oracleDao" /> -->
+		<property name="dao" ref="mysqlDao" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" /><!-- 없으면 general handler 검색 -->
+		<property name="mappings">
+			<value>/**=defaultController</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 </beans>

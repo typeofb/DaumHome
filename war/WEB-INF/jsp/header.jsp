@@ -80,6 +80,7 @@ document.onclick = jsddm_close;
 			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/nonHtml.do">비 HTML</a></li>
+					<li><a href="${pageContext.request.contextPath}/module/DI.do">Dependency Injection</a></li>
 				</ul>
 			</li>
 		</ul>
