@@ -39,6 +39,10 @@
 		<param-value>/WEB-INF/log4j.properties</param-value>
 	</context-param>
 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

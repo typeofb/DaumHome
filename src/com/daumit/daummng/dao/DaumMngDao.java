@@ -9,15 +9,18 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+import com.common.QuerySupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.web.db.SqlConfig;
 
 @SuppressWarnings("unchecked")
-public class DaumMngDao {
+@Repository("DaumMngDao")
+public class DaumMngDao extends QuerySupport {
 	
 	private SqlMapClient sql = null;
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+//	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	public DaumMngDao() {
 		sql = SqlConfig.getSqlMapInstance();
@@ -26,7 +29,7 @@ public class DaumMngDao {
 		System.out.println("Active 상태 객체수: " + basicDataSource.getNumActive());
 		System.out.println("Idle 상태 객체수: " + basicDataSource.getNumIdle());
 		
-		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+//		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
 	public List<Integer> selectCopy(List<Integer> list) {
@@ -46,7 +49,8 @@ public class DaumMngDao {
 			String sql = "SELECT BOARD_ID, BOARD_NAME FROM BOARD WHERE BOARD_NAME = :BOARD_NAME";
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("BOARD_NAME", "NOTICE");
-			result = namedParameterJdbcTemplate.queryForList(sql, paramMap);
+//			result = namedParameterJdbcTemplate.queryForList(sql, paramMap);
+			result = queryForPage(sql, paramMap, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

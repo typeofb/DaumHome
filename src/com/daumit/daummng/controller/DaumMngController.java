@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,6 +61,9 @@ public class DaumMngController {
 		log = LogFactory.getLog(getClass());
 	}
 	
+	@Resource(name="DaumMngService")
+	private DaumMngService daumMngService;
+	
 	@RequestMapping(value = "/main")
 	public String main() {
 		log.info("console - main");
@@ -72,38 +76,29 @@ public class DaumMngController {
 	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
 		log.info("console - iBatis");
 		
-		DaumMngService service = new DaumMngService();
-		
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		list.add(4);
-		list.add(5);
-		
 		// pass list
-		List<Integer> resultList = service.selectCopy(list);
-		System.out.println(resultList);
+//		List<Integer> resultList = daumMngService.selectCopy(list);
+//		System.out.println(resultList);
 		
 		// retrieve list
-		List<Map<String, Object>> resultListMap = service.selectBBS();
+		List<Map<String, Object>> resultListMap = daumMngService.selectBBS();
 		System.out.println(resultListMap);
 		
 		// retrieve map
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("useYN", "Y");
-		map.put("sortOrder", "0");
-		Map<String, Object> resultMap = service.selectAuth(map);	// 반드시 결과 row가 하나이어야 한다.
-		System.out.println(resultMap);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("useYN", "Y");
+//		map.put("sortOrder", "0");
+//		Map<String, Object> resultMap = daumMngService.selectAuth(map);	// 반드시 결과 row가 하나이어야 한다.
+//		System.out.println(resultMap);
 		
 		// retrieve integer
-		int resultInt = service.selectUser("관리자");
-		System.out.println(resultInt);
+//		int resultInt = daumMngService.selectUser("관리자");
+//		System.out.println(resultInt);
 		
 		// procedure
 //		Map<String, String> pMap = new HashMap<String, String>();
 //		pMap.put("p_usr_id", "admin1");
-//		boolean resultBoolean = service.insertFile(pMap);
+//		boolean resultBoolean = daumMngService.insertFile(pMap);
 //		System.out.println(resultBoolean);
 		
 		ModelAndView mav = new ModelAndView();
