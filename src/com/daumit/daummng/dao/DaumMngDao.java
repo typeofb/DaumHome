@@ -32,10 +32,16 @@ public class DaumMngDao extends QuerySupport {
 //		this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public List<Integer> selectCopy(List<Integer> list) {
-		List<Integer> result = null;
+	public List<Map<String, Object>> selectCopy(List<Object> list) {
+		List<Map<String, Object>> result = null;
+		String key = "idx";
 		try {
-			result = sql.queryForList("DaumMng.selectCopy", list);
+//			result = sql.queryForList("DaumMng.selectCopy", list);
+			String sql = "SELECT WRITER_ID, WRITER_NAME FROM ARTICLE WHERE 1 = :PARAM AND ARTICLE_SEQ IN (" + createInSql(key, list) + ")";
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("PARAM", 1);
+			assignInParam(key, list, paramMap);
+			result = queryForPage(sql, paramMap, 11);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

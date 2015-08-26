@@ -15,8 +15,8 @@ public class DaumMngServiceImpl implements DaumMngService {
 	@Resource(name="DaumMngDao")
 	private DaumMngDao daumMngDao;
 	
-	public List<Integer> selectCopy(List<Integer> list) {
-		List<Integer> result = daumMngDao.selectCopy(list);
+	public List<Map<String, Object>> selectCopy(List<Object> list) {
+		List<Map<String, Object>> result = daumMngDao.selectCopy(list);
 		return result;
 	}
 	

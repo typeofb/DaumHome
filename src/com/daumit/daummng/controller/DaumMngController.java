@@ -76,9 +76,16 @@ public class DaumMngController {
 	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
 		log.info("console - iBatis");
 		
+		List<Object> list = new ArrayList<Object>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(5);
+		
 		// pass list
-//		List<Integer> resultList = daumMngService.selectCopy(list);
-//		System.out.println(resultList);
+		List<Map<String, Object>> resultList = daumMngService.selectCopy(list);
+		System.out.println(resultList);
 		
 		// retrieve list
 		List<Map<String, Object>> resultListMap = daumMngService.selectBBS();
