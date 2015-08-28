@@ -37,7 +37,6 @@ public class ResultSetData extends ArrayList<Object> implements java.io.Serializ
 	
 	public ResultSetData(int size) {
 		super(size);
-		cursor = -1;
 	}
 	
 	public Object get() {
