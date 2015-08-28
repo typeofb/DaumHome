@@ -120,7 +120,9 @@ public class CodeMngController extends MenuController {
 		} else {
 			strMessage = "실패하였습니다.";
 		}
-
+		
+		new Exception();
+		
 		List<HashMap<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(targetPage));
 		
 		ModelAndView mav = new ModelAndView();
