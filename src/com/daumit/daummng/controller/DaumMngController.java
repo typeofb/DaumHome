@@ -92,15 +92,15 @@ public class DaumMngController {
 		System.out.println(resultListMap);
 		
 		// retrieve map
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("useYN", "Y");
-//		map.put("sortOrder", "0");
-//		Map<String, Object> resultMap = daumMngService.selectAuth(map);	// 반드시 결과 row가 하나이어야 한다.
-//		System.out.println(resultMap);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("useYN", "Y");
+		map.put("sortOrder", "0");
+		Map<String, Object> resultMap = daumMngService.selectAuth(map);	// 반드시 결과 row가 하나이어야 한다.
+		System.out.println(resultMap);
 		
 		// retrieve integer
-//		int resultInt = daumMngService.selectUser("관리자");
-//		System.out.println(resultInt);
+		int resultInt = daumMngService.selectUser("관리자");
+		System.out.println(resultInt);
 		
 		// procedure
 //		Map<String, String> pMap = new HashMap<String, String>();

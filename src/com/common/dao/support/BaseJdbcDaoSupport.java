@@ -47,4 +47,8 @@ public class BaseJdbcDaoSupport extends AbstractDaoOperationSupport implements I
 	protected List<Map<String, Object>> queryForPage(String sql, Map<String, ?> paramMap, int expectedRows) {
 		return namedParameterJdbcTemplate.queryForPage(sql, paramMap, expectedRows);
 	}
+	
+	protected List<Map<String, Object>> queryForList(String sql, Map<String, ?> paramMap) {
+		return namedParameterJdbcTemplate.queryForList(sql, paramMap);
+	}
 }

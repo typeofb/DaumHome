@@ -11,11 +11,11 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.common.QuerySupport;
+import com.common.dao.QuerySupport;
+import com.common.dao.ResultSetData;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.web.db.SqlConfig;
 
-@SuppressWarnings("unchecked")
 @Repository("DaumMngDao")
 public class DaumMngDao extends QuerySupport {
 	
@@ -63,21 +63,25 @@ public class DaumMngDao extends QuerySupport {
 		return result;
 	}
 	
-	public Map<String, Object> selectAuth(Map<String, Object> map) {
-		Map<String, Object> result = null;
+	public ResultSetData selectAuth(Map<String, Object> map) {
+		ResultSetData result = null;
 		try {
-			result = (Map<String, Object>) sql.queryForObject("DaumMng.selectAuth", map);
+//			result = (Map<String, Object>) sql.queryForObject("DaumMng.selectAuth", map);
+			String sql = "SELECT CODE, CODE_NAME FROM CODE WHERE USE_YN = :useYN AND SORT_ORDER = :sortOrder";
+			result = queryForResultSet(sql, map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
-	public int selectUser(String string) {
-		int result = 0;
+	public ResultSetData selectUser(String string) {
+		ResultSetData result = null;
 		try {
-			result = (Integer) sql.queryForObject("DaumMng.selectUser", string);
-		} catch (SQLException e) {
+//			result = (Integer) sql.queryForObject("DaumMng.selectUser", string);
+			String sql = "SELECT ROLE FROM USER";
+			result = queryForResultSet(sql, null);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;

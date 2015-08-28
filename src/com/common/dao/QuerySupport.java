@@ -1,4 +1,4 @@
-package com.common;
+package com.common.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,14 @@ public class QuerySupport extends BaseJdbcDaoSupport {
 	protected List<Map<String, Object>> queryForPage(String sql, Map<String, ?> paramMap, int expectedRows) {
 		return super.queryForPage(sql, paramMap, expectedRows);
 	}
-
+	
+	protected ResultSetData queryForResultSet(String sql, Map<String, ?> paramMap) {
+		List<Map<String, Object>> resultList = queryForList(sql, paramMap);
+		if (resultList == null || resultList.size() == 0)
+			return new ResultSetData(0);
+		return new ResultSetData(resultList);
+	}
+	
 	public String createInSql(String key, List<Object> list) {
 		StringBuffer sqlBuffer = new StringBuffer();
 		for (int i = 0; i < list.size(); i++) {
@@ -20,7 +27,7 @@ public class QuerySupport extends BaseJdbcDaoSupport {
 		}
 		return sqlBuffer.toString();
 	}
-
+	
 	public String createInSql(String key, String[] str) {
 		StringBuffer sqlBuffer = new StringBuffer();
 		for (int i = 0; i < str.length; i++) {
@@ -30,12 +37,12 @@ public class QuerySupport extends BaseJdbcDaoSupport {
 		}
 		return sqlBuffer.toString();
 	}
-
+	
 	public void assignInParam(String key, List<Object> list, Map<String, Object> paramMap) {
 		for (int i = 0; i < list.size(); i++)
 			paramMap.put(key + "_" + (i + 1), list.get(i).toString());
 	}
-
+	
 	public void assignInParam(String key, String[] str, Map<String, Object> paramMap) {
 		for (int i = 0; i < str.length; i++) {
 			paramMap.put(key + "_" + (i + 1), str[i]);
