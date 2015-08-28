@@ -35,7 +35,7 @@ public class DaumMngServiceImpl implements DaumMngService {
 	public int selectUser(String string) {
 		ResultSetData result = daumMngDao.selectUser(string);
 		
-		System.out.println(result.getRow());
+		System.out.println(result.isFirst());
 		
 		result.beforeFirst();
 		System.out.println(result.getRow());
@@ -47,6 +47,8 @@ public class DaumMngServiceImpl implements DaumMngService {
 		
 		result.last();
 		System.out.println("row count : " + result.getRow());
+		
+		System.out.println(result.isLast());
 		
 		result.afterLast();
 		System.out.println(result.getRow());

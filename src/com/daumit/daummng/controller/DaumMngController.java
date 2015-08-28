@@ -99,8 +99,8 @@ public class DaumMngController {
 		System.out.println(resultMap);
 		
 		// retrieve integer
-		int resultInt = daumMngService.selectUser("관리자");
-		System.out.println(resultInt);
+		int rowCount = daumMngService.selectUser("관리자");
+		System.out.println(rowCount);
 		
 		// procedure
 //		Map<String, String> pMap = new HashMap<String, String>();

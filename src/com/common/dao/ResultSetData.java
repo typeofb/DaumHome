@@ -104,11 +104,11 @@ public class ResultSetData extends ArrayList<Object> implements java.io.Serializ
 	}
 	
 	public void last() {
-		cursor = size() - 1;
+		cursor = size();
 	}
 	
 	public void afterLast() {
-		cursor = size();
+		cursor = size() + 1;
 	}
 	
 	public boolean previous() {
@@ -128,18 +128,18 @@ public class ResultSetData extends ArrayList<Object> implements java.io.Serializ
 		}
 	}
 	
-//	 public boolean isFirst() throws SQLException {
-//	 return rs.isFirst();
-//	 }
-//	
-//	 public boolean isLast() throws SQLException {
-//	 return rs.isLast();
-//	 }
+	public boolean isFirst() {
+		return cursor == 0;
+	}
+	
+	public boolean isLast() {
+		return cursor == size();
+	}
 	
 	public boolean isMultiRow() {
 		return multiRow;
 	}
-
+	
 	public boolean isMultiObject() {
 		return multiObject;
 	}
