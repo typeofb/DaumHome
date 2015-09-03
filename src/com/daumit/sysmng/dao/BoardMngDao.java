@@ -1,73 +1,50 @@
 package com.daumit.sysmng.dao;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
-import com.web.db.SqlConfig;
+import org.springframework.stereotype.Repository;
 
-@SuppressWarnings("unchecked")
-public class BoardMngDao extends SqlConfig {
+import com.common.dao.QuerySupport;
+import com.common.dao.ResultSetData;
+import com.daumit.sysmng.dto.BoardMngDto;
+
+@Repository("BoardMngDao")
+public class BoardMngDao extends QuerySupport {
 	
-	public List<HashMap<String, Object>> selectBoardList(HashMap<String, Object> iMaps) {
-		List<HashMap<String, Object>> result = null;
-		try {
-			result = getSqlMapInstance().queryForList("BoardMng.selectBoardList", iMaps);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public ResultSetData selectBoardList(Map<String, Object> paramMap) {
+		String sql = "SELECT USER_ID AS POST_ID, USER_NAME AS USR_NM, BRAND_NAME AS TITLE, ROLE AS READ_CNT, LAST_UPDATE_DTIME AS REG_DT"
+				  + " FROM USER"
+				  + " ORDER BY LAST_UPDATE_DTIME DESC"
+				  + " LIMIT :targetPage, :rowSize";
+		return queryForResultSet(sql, paramMap);
 	}
 	
-	public int selectBoardCnt(HashMap<String, Object> iMaps) {
-		int result = 0;
-		try {
-			result = (Integer) getSqlMapInstance().queryForObject("BoardMng.selectBoardCnt", iMaps);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public int selectBoardCnt(Map<String, Object> paramMap) {
+		String sql = "SELECT COUNT(1) TOTAL_ROW_SIZE FROM USER";
+		return queryForInt(sql, paramMap);
 	}
 	
-	public HashMap<String, Object> selectBoardDetail(String postId) {
-		HashMap<String, Object> result = null;
-		try {
-			result = (HashMap<String, Object>) getSqlMapInstance().queryForObject("BoardMng.selectBoardDetail", postId);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public Map<String, Object> selectBoardDetail(Map<String, Object> paramMap) {
+		String sql = "SELECT USER_ID AS POST_ID, BRAND_NAME AS TITLE, EMAIL_ADDRESS AS CONTENTS, LAST_UPDATE_DTIME AS REG_DT, ROLE AS READ_CNT, LAST_UPDATE_USER_ID AS USR_ID"
+				  + " FROM USER"
+				  + " WHERE USER_ID = :postId";
+		return queryForMap(sql, paramMap);
 	}
 	
-	public boolean insertBoard(HashMap<String, Object> iMaps) {
-		boolean result = false;
-		try {
-			getSqlMapInstance().update("BoardMng.insertBoard", iMaps);
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public int insertBoard(BoardMngDto paramMap) {
+		String sql = "INSERT INTO USER (USER_ID, USER_NAME, BRAND_NAME, EMAIL_ADDRESS, LAST_UPDATE_DTIME)"
+				  + " VALUES (:title, 'test', 'TEST', :contents, CURTIME())";
+		return update(sql, paramMap);
 	}
 	
-	public boolean updateBoard(HashMap<String, Object> iMaps) {
-		boolean result = false;
-		try {
-			getSqlMapInstance().update("BoardMng.updateBoard", iMaps);
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public int updateBoard(BoardMngDto paramMap) {
+		String sql = "UPDATE USER SET BRAND_NAME = :title, EMAIL_ADDRESS = :contents"
+				  + " WHERE USER_ID = :postId";
+		return update(sql, paramMap);
 	}
 	
-	public boolean deleteBoard(String postId) {
-		boolean result = false;
-		try {
-			getSqlMapInstance().delete("BoardMng.deleteBoard", postId);
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+	public int deleteBoard(BoardMngDto paramMap) {
+		String sql = "DELETE FROM USER WHERE USER_ID = :postId";
+		return update(sql, paramMap);
 	}
 }

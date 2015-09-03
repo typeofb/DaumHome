@@ -44,6 +44,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.Common;
+import com.common.dao.ResultSetData;
 import com.daumit.daummng.service.DaumMngService;
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
@@ -73,7 +74,7 @@ public class DaumMngController {
 	
 	// 아이바티스 연습
 	@RequestMapping(value = "/iBatis")
-	public ModelAndView iBatis(@RequestParam HashMap<String, Object> hashMap) {
+	public ModelAndView iBatis(@RequestParam Map<String, Object> hashMap) {
 		log.info("console - iBatis");
 		
 		List<Object> list = new ArrayList<Object>();
@@ -84,11 +85,11 @@ public class DaumMngController {
 		list.add(5);
 		
 		// pass list
-		List<Map<String, Object>> resultList = daumMngService.selectCopy(list);
+		ResultSetData resultList = daumMngService.selectCopy(list);
 		System.out.println(resultList);
 		
 		// retrieve list
-		List<Map<String, Object>> resultListMap = daumMngService.selectBBS();
+		ResultSetData resultListMap = daumMngService.selectBBS();
 		System.out.println(resultListMap);
 		
 		// retrieve map
@@ -249,7 +250,7 @@ public class DaumMngController {
 	
 	// 다음에디터 등록
 	@RequestMapping(value = "/insertBbs")
-	public String insertBbs(@RequestParam HashMap<String, Object> param) {
+	public String insertBbs(@RequestParam Map<String, Object> param) {
 		log.info("console - insertBbs");
 		
 		System.out.println(param);

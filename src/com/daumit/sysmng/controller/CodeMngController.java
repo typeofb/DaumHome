@@ -1,9 +1,10 @@
 package com.daumit.sysmng.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -20,17 +21,18 @@ import com.common.MenuController;
 import com.common.model.User;
 import com.daumit.sysmng.service.CodeMngService;
 
-@Controller
 @SessionAttributes("sessionCheck")
+@Controller
 public class CodeMngController extends MenuController {
 	
 	private Log log = null;
-	private CodeMngService codeMngService;
 	
 	public CodeMngController() {
 		log = LogFactory.getLog(getClass());
-		codeMngService = new CodeMngService();
 	}
+	
+	@Resource(name="CodeMngService")
+	private CodeMngService codeMngService;
 	
 	// 본부
 	@RequestMapping(value = "codeArea")
@@ -48,7 +50,7 @@ public class CodeMngController extends MenuController {
 		log.info("console - codeAreaSearch");
 		
 		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
-		List<HashMap<String, Object>> list = codeMngService.selectAreaList(targetPage);
+		List<Map<String, Object>> list = codeMngService.selectAreaList(targetPage);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -61,10 +63,10 @@ public class CodeMngController extends MenuController {
 	// 본부 등록
 	@RequestMapping(value = "codeAreaReg")
 	public ModelAndView codeAreaReg(HttpServletResponse response,
-			@RequestParam HashMap<String, Object> iMaps) throws IOException {
+			@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeAreaReg");
 		
-		boolean result = codeMngService.insertArea(iMaps);
+		boolean result = codeMngService.insertArea(paramMap);
 		String strMessage = null;
 		if (result) {
 			strMessage = "등록되었습니다.";
@@ -72,12 +74,12 @@ public class CodeMngController extends MenuController {
 			strMessage = "실패하였습니다.";
 		}
 		
-		List<HashMap<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(iMaps.get("targetPage").toString()));
+		List<Map<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(paramMap.get("targetPage").toString()));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("strMessage", strMessage);
-		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(iMaps.get("targetPage").toString()), 10));
+		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(paramMap.get("targetPage").toString()), 10));
 		mav.setViewName("sysMng/codeMng/codeAreaAjax");
 		return mav;
 	}
@@ -85,10 +87,10 @@ public class CodeMngController extends MenuController {
 	// 본부 수정
 	@RequestMapping(value = "codeAreaMod")
 	public ModelAndView codeAreaMod(HttpServletResponse response,
-			@RequestParam HashMap<String, Object> iMaps) throws IOException {
+			@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeAreaMod");
 		
-		boolean result = codeMngService.updateArea(iMaps);
+		boolean result = codeMngService.updateArea(paramMap);
 		String strMessage = null;
 		if (result) {
 			strMessage = "수정되었습니다.";
@@ -96,12 +98,12 @@ public class CodeMngController extends MenuController {
 			strMessage = "실패하였습니다.";
 		}
 		
-		List<HashMap<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(iMaps.get("targetPage").toString()));
+		List<Map<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(paramMap.get("targetPage").toString()));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("strMessage", strMessage);
-		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(iMaps.get("targetPage").toString()), 10));
+		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(paramMap.get("targetPage").toString()), 10));
 		mav.setViewName("sysMng/codeMng/codeAreaAjax");
 		return mav;
 	}
@@ -123,7 +125,7 @@ public class CodeMngController extends MenuController {
 		
 		new Exception();
 		
-		List<HashMap<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(targetPage));
+		List<Map<String, Object>> list = codeMngService.selectAreaList(Integer.valueOf(targetPage));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

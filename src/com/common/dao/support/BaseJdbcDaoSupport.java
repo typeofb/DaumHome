@@ -44,11 +44,15 @@ public class BaseJdbcDaoSupport extends AbstractDaoOperationSupport implements I
 		Assert.notNull(namedParameterJdbcTemplate, "BaseJdbcDaoSupport\uC758 JdbcTemplate\uC740 Null\uC774 \uC62C \uC218 \uC5C6\uC2B5\uB2C8\uB2E4.");
 	}
 	
-	protected List<Map<String, Object>> queryForPage(String sql, Map<String, ?> paramMap, int expectedRows) {
+	protected List<Map<String, Object>> queryForPage(String sql, Map<String, Object> paramMap, int expectedRows) {
 		return namedParameterJdbcTemplate.queryForPage(sql, paramMap, expectedRows);
 	}
 	
-	protected List<Map<String, Object>> queryForList(String sql, Map<String, ?> paramMap) {
+	protected List<Map<String, Object>> queryForList(String sql, Map<String, Object> paramMap) {
 		return namedParameterJdbcTemplate.queryForList(sql, paramMap);
+	}
+	
+	protected int update(String sql, Object paramObj) {
+		return namedParameterJdbcTemplate.update(sql, paramObj);
 	}
 }

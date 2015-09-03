@@ -7,15 +7,36 @@ import com.common.dao.support.BaseJdbcDaoSupport;
 
 public class QuerySupport extends BaseJdbcDaoSupport {
 
-	protected List<Map<String, Object>> queryForPage(String sql, Map<String, ?> paramMap, int expectedRows) {
+	protected List<Map<String, Object>> queryForPage(String sql, Map<String, Object> paramMap, int expectedRows) {
 		return super.queryForPage(sql, paramMap, expectedRows);
 	}
 	
-	protected ResultSetData queryForResultSet(String sql, Map<String, ?> paramMap) {
+	protected ResultSetData queryForResultSet(String sql, Map<String, Object> paramMap) {
 		List<Map<String, Object>> resultList = queryForList(sql, paramMap);
 		if (resultList == null || resultList.size() == 0)
 			return new ResultSetData(0);
 		return new ResultSetData(resultList);
+	}
+	
+	protected Map<String, Object> queryForMap(String sql, Map<String, Object> paramMap) {
+		List<Map<String, Object>> resultList = queryForList(sql, paramMap);
+		if (resultList == null || resultList.size() == 0)
+			return null;
+		return (Map<String, Object>) resultList.get(0);
+	}
+	
+	protected String queryForString(String sql, Map<String, Object> paramMap) {
+		List<Map<String, Object>> resultList = queryForList(sql, paramMap);
+		if (resultList == null || resultList.size() == 0)
+			return null;
+		Map<String, Object> resultMap = (Map<String, Object>) resultList.get(0);
+		Map.Entry<String, Object> entry = (Map.Entry<String, Object>) resultMap.entrySet().iterator().next();
+		return (entry.getValue() != null) ? entry.getValue().toString() : null;
+	}
+	
+	protected int queryForInt(String sql, Map<String, Object> paramMap) {
+		String value = queryForString(sql, paramMap);
+		return (value != null) ? Integer.parseInt(value) : 0;
 	}
 	
 	public String createInSql(String key, List<Object> list) {

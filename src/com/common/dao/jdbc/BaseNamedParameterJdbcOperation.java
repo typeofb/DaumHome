@@ -7,5 +7,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 public interface BaseNamedParameterJdbcOperation extends NamedParameterJdbcOperations {
 
-	public abstract List<Map<String, Object>> queryForPage(String sql, Map<String, ?> paramMap, int expectedRows);
+	public abstract List<Map<String, Object>> queryForPage(String sql, Map<String, Object> paramMap, int expectedRows);
+	
+	public abstract int update(String sql, Object paramObj);
 }

@@ -1,30 +1,36 @@
 package com.daumit.sysmng.service;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
 
 import com.daumit.sysmng.dao.CodeMngDao;
 
+@Service("CodeMngService")
 public class CodeMngService {
 	
-	private CodeMngDao dao = null;
+	@Resource(name="CodeMngDao")
+	private CodeMngDao dao;
 	
 	public CodeMngService() {
 		dao = new CodeMngDao();
 	}
 	
-	public List<HashMap<String, Object>> selectAreaList(int targetPage) {
-		List<HashMap<String, Object>> result = dao.selectAreaList(targetPage);
+	public List<Map<String, Object>> selectAreaList(int targetPage) {
+		List<Map<String, Object>> result = dao.selectAreaList(targetPage);
 		return result;
 	}
 	
-	public boolean insertArea(HashMap<String, Object> iMaps) {
-		boolean result = dao.insertArea(iMaps);
+	public boolean insertArea(Map<String, Object> paramMap) {
+		boolean result = dao.insertArea(paramMap);
 		return result;
 	}
 	
-	public boolean updateArea(HashMap<String, Object> iMaps) {
-		boolean result = dao.updateArea(iMaps);
+	public boolean updateArea(Map<String, Object> paramMap) {
+		boolean result = dao.updateArea(paramMap);
 		return result;
 	}
 	

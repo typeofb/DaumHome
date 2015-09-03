@@ -16,24 +16,8 @@ public class DaumMngServiceImpl implements DaumMngService {
 	@Resource(name="DaumMngDao")
 	private DaumMngDao daumMngDao;
 	
-	public List<Map<String, Object>> selectCopy(List<Object> list) {
-		List<Map<String, Object>> result = daumMngDao.selectCopy(list);
-		return result;
-	}
-	
-	public List<Map<String, Object>> selectBBS() {
-		List<Map<String, Object>> result = daumMngDao.selectBBS();
-		return result;
-	}
-	
-	public Map<String, Object> selectAuth(Map<String, Object> map) {
-		ResultSetData result = daumMngDao.selectAuth(map);
-		System.out.println(result.get("CODE_NAME"));
-		return (Map<String, Object>) result.get();
-	}
-	
-	public int selectUser(String string) {
-		ResultSetData result = daumMngDao.selectUser(string);
+	public ResultSetData selectCopy(List<Object> list) {
+		ResultSetData result = daumMngDao.selectCopy(list);
 		
 		System.out.println(result.isFirst());
 		
@@ -52,8 +36,22 @@ public class DaumMngServiceImpl implements DaumMngService {
 		
 		result.afterLast();
 		System.out.println(result.getRow());
-		
-		return result.getRow() - 1;
+
+		return result;
+	}
+	
+	public ResultSetData selectBBS() {
+		ResultSetData result = daumMngDao.selectBBS();
+		return result;
+	}
+	
+	public Map<String, Object> selectAuth(Map<String, Object> map) {
+		Map<String, Object> result = daumMngDao.selectAuth(map);
+		return (Map<String, Object>) result;
+	}
+	
+	public int selectUser(String string) {
+		return daumMngDao.selectUser(string);
 	}
 	
 	public boolean insertFile(Map<String, String> pMap) {
