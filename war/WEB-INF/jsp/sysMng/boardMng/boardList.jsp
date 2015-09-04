@@ -41,6 +41,15 @@ $(function() {
 	$('.ui-datepicker-trigger').mouseover(function() {
 		$(this).css('cursor', 'pointer');
 	});
+	
+	var selectItem = "${selectItem}";
+	if (selectItem != "") {
+		$("#selectItem option").each(function(index, element) {
+			if (element.value == selectItem) {
+				element.selected = true;
+			}
+		});
+	}
 });
 
 function goReg() {
@@ -86,9 +95,19 @@ function goPage(targetPage) {
 	<div class="list_search_bg">
 		<table class="list_search" cellpadding="0" cellspacing="0">
 			<tr>
-				<td>검색조건</td>
+				<td>검색날짜</td>
 				<td>
-					<input type="text" id="beginDate" name="beginDate" value="${beginDate}" readonly> ~ <input type="text" id="endDate" name="endDate" value="${endDate}" readonly>
+					<input type="text" id="beginDate" name="beginDate" value="${beginDate}" readonly /> ~ <input type="text" id="endDate" name="endDate" value="${endDate}" readonly />
+				</td>
+				<td>&nbsp;&nbsp;검색어</td>
+				<td>
+					<select id="selectItem" name="selectItem">
+						<option value="work_place">제목</option>
+						<option value="user_name">작성자</option>
+					</select>
+				</td>
+				<td>
+					<input id="searchText" name="searchText" value="${searchText}" onkeydown="if (event.keyCode==13) {goPage(1); return false;}" />
 				</td>
 				<td id="btnReg"><a href="javascript:goPage(1);" class="btnT"><span>검색</span></a></td>
 			</tr>

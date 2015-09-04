@@ -41,7 +41,9 @@ public class BoardMngController {
 			@RequestParam(value="targetPage", required=false) String targetPageStr,
 			@RequestParam(value="pageGroupSize", required=false) String pageGroupSizeStr,
 			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) throws Exception {
+			@RequestParam(value="endDate", required=false) String endDate,
+			@RequestParam(value="selectItem", required=false) String selectItem,
+			@RequestParam(value="searchText", required=false) String searchText) throws Exception {
 		log.info("console - boardList");
 		
 		if (beginDate == null || beginDate.equals("")) {
@@ -52,21 +54,28 @@ public class BoardMngController {
 			beginDate = formatter.format(cal.getTime());
 		}
 		
-		int totalRowSize = 0;
+//		int totalRowSize = 0;
 		int rowSize = Integer.parseInt(Common.NVL(rowSizeStr, "10"));
 		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
 		int pageGroupSize = Integer.parseInt(Common.NVL(pageGroupSizeStr, "10"));
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("beginDate", beginDate.replaceAll("-", ""));
-		paramMap.put("endDate", endDate.replaceAll("-", ""));
-		paramMap.put("targetPage", Integer.valueOf((targetPage - 1) * rowSize));
-		paramMap.put("rowSize", Integer.valueOf(rowSize));
+//		paramMap.put("beginDate", beginDate.replaceAll("-", ""));
+//		paramMap.put("endDate", endDate.replaceAll("-", ""));
+//		paramMap.put("targetPage", Integer.valueOf((targetPage - 1) * rowSize));
+//		paramMap.put("rowSize", Integer.valueOf(rowSize));
+		paramMap.put("beginDate", beginDate);
+		paramMap.put("endDate", endDate);
+		paramMap.put("targetPage", targetPage);
+		paramMap.put("rowSize", rowSize);
+		paramMap.put("selectItem", selectItem);
+		paramMap.put("searchText", searchText);
+		paramMap.put("orderBy", "JOIN_DATE");
 		
 		ResultSetData list = boardMngService.selectBoardList(paramMap);
-		if (list.size() > 0) {
-			totalRowSize = boardMngService.selectBoardCnt(paramMap);
-		}
+//		if (list.size() > 0) {
+//			totalRowSize = boardMngService.selectBoardCnt(paramMap);
+//		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("targetPage", targetPage);
@@ -75,7 +84,15 @@ public class BoardMngController {
 		mav.addObject("list", list);
 		mav.addObject("rowSize", rowSize);
 		mav.addObject("pageGroupSize", pageGroupSize);
-		mav.addObject("paging", Common.paging(totalRowSize, rowSize, targetPage, pageGroupSize));
+		mav.addObject("selectItem", selectItem);
+		mav.addObject("searchText", searchText);
+		Map<String, Object> totalRowSize = new HashMap<String, Object>();
+		try {
+			totalRowSize = (Map<String, Object>) list.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			totalRowSize.put("H_CNT", 0);
+		}
+		mav.addObject("paging", Common.paging(Integer.valueOf(String.valueOf(totalRowSize.get("H_CNT"))), rowSize, targetPage, pageGroupSize));
 		mav.setViewName("sysMng/boardMng/boardList");
 		return mav;
 	}

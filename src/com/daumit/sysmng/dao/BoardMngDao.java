@@ -12,11 +12,15 @@ import com.daumit.sysmng.dto.BoardMngDto;
 public class BoardMngDao extends QuerySupport {
 	
 	public ResultSetData selectBoardList(Map<String, Object> paramMap) {
-		String sql = "SELECT USER_ID AS POST_ID, USER_NAME AS USR_NM, BRAND_NAME AS TITLE, ROLE AS READ_CNT, LAST_UPDATE_DTIME AS REG_DT"
-				  + " FROM USER"
-				  + " ORDER BY LAST_UPDATE_DTIME DESC"
-				  + " LIMIT :targetPage, :rowSize";
-		return queryForResultSet(sql, paramMap);
+//		String sql = "SELECT USER_ID AS POST_ID, USER_NAME AS USR_NM, BRAND_NAME AS TITLE, ROLE AS READ_CNT, LAST_UPDATE_DTIME AS REG_DT"
+//				  + " FROM USER"
+//				  + " ORDER BY LAST_UPDATE_DTIME DESC"
+//				  + " LIMIT :targetPage, :rowSize";
+//		return queryForResultSet(sql, paramMap);
+		String sql = "SELECT USER_ID AS POST_ID, USER_NAME AS USR_NM, WORK_PLACE AS TITLE, FEMALE AS READ_CNT, JOIN_DATE AS REG_DT"
+				  + " FROM TB_ORG_USER"
+				  + " WHERE 1 = 1";
+		return queryForPage(sql, paramMap);
 	}
 	
 	public int selectBoardCnt(Map<String, Object> paramMap) {
