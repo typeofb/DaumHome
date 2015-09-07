@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.common.Common;
 import com.common.dao.ResultSetData;
+import com.common.dao.SearchCondition;
 import com.daumit.sysmng.service.BoardMngService;
 
 @SuppressWarnings("unchecked")
@@ -54,28 +55,23 @@ public class BoardMngController {
 			beginDate = formatter.format(cal.getTime());
 		}
 		
-//		int totalRowSize = 0;
 		int rowSize = Integer.parseInt(Common.NVL(rowSizeStr, "10"));
 		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
 		int pageGroupSize = Integer.parseInt(Common.NVL(pageGroupSizeStr, "10"));
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-//		paramMap.put("beginDate", beginDate.replaceAll("-", ""));
-//		paramMap.put("endDate", endDate.replaceAll("-", ""));
-//		paramMap.put("targetPage", Integer.valueOf((targetPage - 1) * rowSize));
-//		paramMap.put("rowSize", Integer.valueOf(rowSize));
-		paramMap.put("beginDate", beginDate);
-		paramMap.put("endDate", endDate);
-		paramMap.put("targetPage", targetPage);
-		paramMap.put("rowSize", rowSize);
-		paramMap.put("selectItem", selectItem);
-		paramMap.put("searchText", searchText);
-		paramMap.put("orderBy", "JOIN_DATE");
+		paramMap.put("where", 1);
 		
-		ResultSetData list = boardMngService.selectBoardList(paramMap);
-//		if (list.size() > 0) {
-//			totalRowSize = boardMngService.selectBoardCnt(paramMap);
-//		}
+		SearchCondition sc = new SearchCondition();
+		sc.addSearchKey("searchText");
+		sc.addSearchParam("searchText", selectItem, searchText, "string", "like");
+		sc.addSearchKey("beginDate");
+		sc.addSearchParam("beginDate", "JOIN_DATE", (beginDate + "~" + endDate), "date", "between");
+		sc.addOrder("JOIN_DATE", false);
+		sc.setRowSize(rowSize);
+		sc.setTargetPage(targetPage);
+		
+		ResultSetData list = boardMngService.selectBoardList(paramMap, sc);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("targetPage", targetPage);

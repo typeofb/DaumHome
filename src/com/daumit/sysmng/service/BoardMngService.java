@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.common.dao.ResultSetData;
+import com.common.dao.SearchCondition;
 import com.daumit.sysmng.dao.BoardMngDao;
 import com.daumit.sysmng.dto.BoardMngDto;
 
@@ -17,8 +18,8 @@ public class BoardMngService {
 	@Resource(name="BoardMngDao")
 	private BoardMngDao dao;
 	
-	public ResultSetData selectBoardList(Map<String, Object> paramMap) {
-		ResultSetData result = dao.selectBoardList(paramMap);
+	public ResultSetData selectBoardList(Map<String, Object> paramMap, SearchCondition sc) {
+		ResultSetData result = dao.selectBoardList(paramMap, sc);
 		return result;
 	}
 	
