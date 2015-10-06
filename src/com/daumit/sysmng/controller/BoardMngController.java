@@ -41,6 +41,9 @@ public class BoardMngController {
 	public ModelAndView boardList(@RequestParam(value="rowSize", required=false) String rowSizeStr,
 			@RequestParam(value="targetPage", required=false) String targetPageStr,
 			@RequestParam(value="pageGroupSize", required=false) String pageGroupSizeStr,
+			@RequestParam(value="sortYn", required=false) String sortYn,
+			@RequestParam(value="sortField", required=false) String sortField,
+			@RequestParam(value="sortOrderBy", required=false) String sortOrderBy,
 			@RequestParam(value="beginDate", required=false) String beginDate,
 			@RequestParam(value="endDate", required=false) String endDate,
 			@RequestParam(value="selectItem", required=false) String selectItem,
@@ -67,9 +70,16 @@ public class BoardMngController {
 		sc.addSearchParam("searchText", selectItem, searchText, "string", "like");
 		sc.addSearchKey("beginDate");
 		sc.addSearchParam("beginDate", "JOIN_DATE", (beginDate + "~" + endDate), "date", "between");
-		sc.addOrder("JOIN_DATE", false);
+		if (sortOrderBy == null || sortOrderBy.equals("")) {
+		} else if ("ASC".equalsIgnoreCase(sortOrderBy))
+			sc.addOrder(sortField, true);
+		else
+			sc.addOrder(sortField, false);
 		sc.setRowSize(rowSize);
 		sc.setTargetPage(targetPage);
+		sc.setHeaderSortYn(sortYn);
+		sc.setHeaderSortField(sortField);
+		sc.setHeaderSortOrderBy(sortOrderBy);
 		
 		ResultSetData list = boardMngService.selectBoardList(paramMap, sc);
 		
@@ -82,6 +92,9 @@ public class BoardMngController {
 		mav.addObject("pageGroupSize", pageGroupSize);
 		mav.addObject("selectItem", selectItem);
 		mav.addObject("searchText", searchText);
+		mav.addObject("sortYn", sortYn);
+		mav.addObject("sortField", sortField);
+		mav.addObject("sortOrderBy", sortOrderBy);
 		Map<String, Object> totalRowSize = new HashMap<String, Object>();
 		try {
 			totalRowSize = (Map<String, Object>) list.get(0);

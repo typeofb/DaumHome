@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+		http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	
+	<description>EP UI tag library</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>h</short-name>
+	<uri>http://eagleoffice.co.kr/tags/neo</uri>
+	
+	<tag>
+		<description><![CDATA[헤더 소트를 수행하기 위한 태그]]></description>
+		<name>headerSort</name>
+		<tag-class>com.common.TagHandler</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description><![CDATA[헤더 소트의 listData명]]></description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[화면에 표시할 헤더의 글자]]></description>
+			<name>text</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[다국어 리소스에서 가져올 경우의 키값]]></description>
+			<name>rscKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[실제 DB에서 사용되는 필드명]]></description>
+			<name>field</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[헤더 소트 진행 여부]]></description>
+			<name>headerSortYn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[헤더 소트 DB 필드]]></description>
+			<name>headerSortField</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[헤더 소트 정렬 방법]]></description>
+			<name>headerSortOrderBy</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<example><![CDATA[h:headerSort]]></example>
+	</tag>
+	
+	<function>
+		<name>toURLEncode</name>
+		<function-class>hanwha.neo.commons.EPUtils</function-class>
+		<function-signature>java.lang.String toURLEncode(java.lang.String)</function-signature>
+	</function>
+</taglib>

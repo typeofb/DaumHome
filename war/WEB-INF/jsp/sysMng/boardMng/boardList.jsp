@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="h" uri="http://eagleoffice.co.kr/tags/neo"%>
 <%@ include file="../../header.jsp"%>
 <script type="text/javascript">
 $(function() {
@@ -71,6 +72,18 @@ function goPage(targetPage) {
 	$("form").attr("action", "boardList.do");
 	$("form").submit();
 }
+
+function headerSort(sortField, sortOrderBy) {
+	if (sortField == "")
+		$("#sortYn").val("N");
+	else
+		$("#sortYn").val("Y");
+	$("#sortField").val(sortField);
+	$("#sortOrderBy").val(sortOrderBy);
+	$("form").attr("method", "post");
+	$("form").attr("action", "boardList.do");
+	$("form").submit();
+}
 </script>
 
 <div class="container">
@@ -117,6 +130,9 @@ function goPage(targetPage) {
 		<input type="hidden" id="rowSize" name="rowSize" value="${rowSize}" />
 		<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="${pageGroupSize}" />
+		<input type="hidden" id="sortYn" name="sortYn" value="${sortYn}" />
+		<input type="hidden" id="sortField" name="sortField" value="${sortField}" />
+		<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${sortOrderBy}" />
 		<input type="hidden" id="postId" name="postId" value="" />
 		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 			<colgroup>
@@ -131,7 +147,7 @@ function goPage(targetPage) {
 				<th>제 목</th>
 				<th>작성자</th>
 				<th>조 회</th>
-				<th>등록일</th>
+				<th><h:headerSort name="list" field="REG_DT" text="등록일"></h:headerSort></th>
 			</tr>
 		<c:forEach items="${list}" var="x">
 			<!-- <tr onclick="goDetail('${x.BOARD_ID}')" style="cursor:pointer;">

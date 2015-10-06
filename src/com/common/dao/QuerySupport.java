@@ -61,10 +61,12 @@ public class QuerySupport extends BaseJdbcDaoSupport {
 			}
 		}
 		// 검색순서
-		for (Iterator<Object> keys = sc.getOrder().iterator(); keys.hasNext();) {
-			SearchCondition.Order key = (SearchCondition.Order) keys.next();
-			if (key.getFieldName() != null && !key.getFieldName().equalsIgnoreCase(""))
-				conditionSql.append(" ORDER BY " + key.getFieldName() + " " + (key.isAscending() ? "ASC" : "DESC"));
+		if (sc.hasOrder()) {
+			for (Iterator<Object> keys = sc.getOrder().iterator(); keys.hasNext();) {
+				SearchCondition.Order key = (SearchCondition.Order) keys.next();
+				if (key.getFieldName() != null && !key.getFieldName().equalsIgnoreCase(""))
+					conditionSql.append(" ORDER BY " + key.getFieldName() + " " + (key.isAscending() ? "ASC" : "DESC"));
+			}
 		}
 		originalSql.append(conditionSql);
 		
@@ -83,9 +85,11 @@ public class QuerySupport extends BaseJdbcDaoSupport {
 		sql = row.toString();
 		
 		List<Map<String, Object>> resultList = queryForList(sql, paramMap);
-		if (resultList == null || resultList.size() == 0)
-			return new ResultSetData(0);
-		return new ResultSetData(resultList);
+		ResultSetData rs = new ResultSetData(resultList);
+		rs.setHeaderSortYn(sc.getHeaderSortYn());
+		rs.setHeaderSortField(sc.getHeaderSortField());
+		rs.setHeaderSortOrderBy(sc.getHeaderSortOrderBy());
+		return rs;
 	}
 	
 	protected ResultSetData queryForResultSet(String sql, Map<String, Object> paramMap) {

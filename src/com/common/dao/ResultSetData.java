@@ -23,12 +23,40 @@ public class ResultSetData extends ArrayList<Object> implements java.io.Serializ
 	
 	private List<Object> orginal;
 	
+	private String headerSortYn;
+	private String headerSortField;
+	private String headerSortOrderBy;
+	
 	public List<Object> getOrginal() {
 		return orginal;
 	}
 	
 	public void setOrginal(List<Object> orginal) {
 		this.orginal = orginal;
+	}
+	
+	public String getHeaderSortYn() {
+		return headerSortYn;
+	}
+	
+	public void setHeaderSortYn(String headerSortYn) {
+		this.headerSortYn = headerSortYn;
+	}
+	
+	public String getHeaderSortField() {
+		return headerSortField;
+	}
+	
+	public void setHeaderSortField(String headerSortField) {
+		this.headerSortField = headerSortField;
+	}
+	
+	public String getHeaderSortOrderBy() {
+		return headerSortOrderBy;
+	}
+	
+	public void setHeaderSortOrderBy(String headerSortOrderBy) {
+		this.headerSortOrderBy = headerSortOrderBy;
 	}
 	
 	public ResultSetData(List<Map<String, Object>> list) {
