@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -204,12 +205,11 @@ public class DaumMngController {
 		log.info("console - upload");
 		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		List<MultipartFile> mFiles = multipartRequest.getFiles("attachment");
-		
+		Iterator<String> attachFiles = multipartRequest.getFileNames();
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		
-		for (int i = 0; i < mFiles.size(); i++) {
-			MultipartFile mFile = mFiles.get(i);
+		while (attachFiles.hasNext()) {
+			MultipartFile mFile = multipartRequest.getFile(attachFiles.next());
 			
 			String fileName = mFile.getOriginalFilename();
 			int fileSize = (int) mFile.getSize();
