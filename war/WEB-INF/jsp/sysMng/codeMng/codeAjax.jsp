@@ -16,27 +16,30 @@
 <div>${menu}</div>
 	<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 		<colgroup>
-			<col width="30%" />
-			<col width="40%" />
-			<col width="30%" />
+			<col width="25%" />
+			<col width="25%" />
+			<col width="25%" />
+			<col width="25%" />
 		</colgroup>
 		<tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>직제순서</th>
+			<th>그룹</th>
+			<th>키</th>
+			<th>값</th>
+			<th>수정일자</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="3">검색된 결과가 없습니다.</td>
+					<td colspan="4">검색된 결과가 없습니다.</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="x" items="${list}">
-					<tr onclick="areaSel('${x.USER_ID}', '${x.USER_NAME}', '${x.ROLE}');" style="cursor: pointer;">
-						<th class="th_line">${x.USER_ID}</th>
-						<td>${x.USER_NAME}</td>
-						<td>${x.ROLE}</td>
+					<tr onclick="codeSel('${x.CODE_GROUP_ID}', '${x.CODE}', '${x.CODE_NAME}');" style="cursor: pointer;">
+						<th class="th_line">${x.CODE_GROUP_ID}</th>
+						<td>${x.CODE}</td>
+						<td>${x.CODE_NAME}</td>
+						<td>${x.LAST_UPDATE_DTIME}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

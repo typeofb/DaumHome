@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
-	<select id="CodeMng.selectAreaList" parameterClass="java.lang.Integer" resultClass="java.util.HashMap">
+	<select id="CodeMng.selectCodeList" parameterClass="java.lang.Integer" resultClass="java.util.HashMap">
 		<![CDATA[
 		SELECT
 		    D.*
@@ -19,11 +19,13 @@
 		        FROM
 		        (
 		            SELECT
-		                A.USER_ID,
-		                A.USER_NAME,
-		                A.ROLE,
-		                (SELECT COUNT(*) FROM USER) AS TOTAL_ROW_SIZE
-		            FROM USER A
+		                A.CODE_GROUP_ID,
+		                A.CODE,
+		                A.CODE_NAME,
+		                A.LAST_UPDATE_DTIME,
+		                (SELECT COUNT(*) FROM CODE) AS TOTAL_ROW_SIZE
+		            FROM CODE A
+		            ORDER BY A.CODE_GROUP_ID
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
 		) D
@@ -31,24 +33,27 @@
 		]]>
 	</select>
 	
-	<insert id="CodeMng.insertArea" parameterClass="java.util.HashMap">
+	<insert id="CodeMng.insertCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO USER (USER_ID, USER_NAME, ROLE)
-		VALUES (#userID#, #userName#, #role#)
+		INSERT INTO CODE (CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME)
+		VALUES (#codeGroupId#, #code#, #codeName#, #lastUpdateDtime#)
 		]]>
 	</insert>
 	
-	<update id="CodeMng.updateArea" parameterClass="java.util.HashMap">
+	<update id="CodeMng.updateCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE USER
-		SET USER_NAME = #userName#, ROLE = #role#
-		WHERE USER_ID = #userID#
+		UPDATE CODE
+		SET CODE_GROUP_ID = #codeGroupId#, CODE = #code#, CODE_NAME = #codeName#, LAST_UPDATE_DTIME = #lastUpdateDtime#
+		WHERE CODE_GROUP_ID = #codeGroupId#
+		AND CODE = #code#
 		]]>
 	</update>
 	
-	<delete id="CodeMng.deleteArea" parameterClass="java.lang.String">
+	<delete id="CodeMng.deleteCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		DELETE FROM USER WHERE USER_ID = #userID#
+		DELETE FROM CODE
+		WHERE CODE_GROUP_ID = #codeGroupId#
+		AND CODE = #code#
 		]]>
 	</delete>
 </sqlMap>

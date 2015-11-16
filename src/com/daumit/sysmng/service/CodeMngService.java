@@ -19,23 +19,23 @@ public class CodeMngService {
 		dao = new CodeMngDao();
 	}
 	
-	public List<Map<String, Object>> selectAreaList(int targetPage) {
-		List<Map<String, Object>> result = dao.selectAreaList(targetPage);
+	public List<Map<String, Object>> selectCodeList(int targetPage) {
+		List<Map<String, Object>> result = dao.selectCodeList(targetPage);
 		return result;
 	}
 	
-	public boolean insertArea(Map<String, Object> paramMap) {
-		boolean result = dao.insertArea(paramMap);
+	public boolean insertCode(Map<String, Object> paramMap) {
+		boolean result = dao.insertCode(paramMap);
 		return result;
 	}
 	
-	public boolean updateArea(Map<String, Object> paramMap) {
-		boolean result = dao.updateArea(paramMap);
+	public boolean updateCode(Map<String, Object> paramMap) {
+		boolean result = dao.updateCode(paramMap);
 		return result;
 	}
 	
-	public boolean deleteArea(String postId) {
-		boolean result = dao.deleteArea(postId);
+	public boolean deleteCode(Map<String, Object> paramMap) {
+		boolean result = dao.deleteCode(paramMap);
 		return result;
 	}
 }

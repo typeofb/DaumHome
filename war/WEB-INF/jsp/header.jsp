@@ -72,7 +72,7 @@ document.onclick = jsddm_close;
 			<li><a href="${pageContext.request.contextPath}/boardList.do">기능들</a>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/boardList.do">게시판</a></li>
-					<li><a href="${pageContext.request.contextPath}/codeArea.do">코드관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/code.do">코드관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/iBatis.do">아이바티스 연습</a></li>
 					<li><a href="${pageContext.request.contextPath}/controlMng.do">제어관리</a></li>
 				</ul>

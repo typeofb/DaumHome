@@ -18,20 +18,20 @@ public class CodeMngDao {
 		sql = SqlConfig.getSqlMapInstance();
 	}
 	
-	public List<Map<String, Object>> selectAreaList(int targetPage) {
+	public List<Map<String, Object>> selectCodeList(int targetPage) {
 		List<Map<String, Object>> result = null;
 		try {
-			result = sql.queryForList("CodeMng.selectAreaList", targetPage);
+			result = sql.queryForList("CodeMng.selectCodeList", targetPage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
-	public boolean insertArea(Map<String, Object> paramMap) {
+	public boolean insertCode(Map<String, Object> paramMap) {
 		boolean result = false;
 		try {
-			sql.update("CodeMng.insertArea", paramMap);
+			sql.update("CodeMng.insertCode", paramMap);
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,10 +39,10 @@ public class CodeMngDao {
 		return result;
 	}
 	
-	public boolean updateArea(Map<String, Object> paramMap) {
+	public boolean updateCode(Map<String, Object> paramMap) {
 		boolean result = false;
 		try {
-			sql.update("CodeMng.updateArea", paramMap);
+			sql.update("CodeMng.updateCode", paramMap);
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,10 +50,10 @@ public class CodeMngDao {
 		return result;
 	}
 
-	public boolean deleteArea(String postId) {
+	public boolean deleteCode(Map<String, Object> paramMap) {
 		boolean result = false;
 		try {
-			sql.delete("CodeMng.deleteArea", postId);
+			sql.delete("CodeMng.deleteCode", paramMap);
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
