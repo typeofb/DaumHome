@@ -6,26 +6,16 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>DaumHome</display-name>
 
-	<!-- URL mapping -->
-	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.do</url-pattern>
-	</servlet-mapping>
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml, /WEB-INF/security-context.xml</param-value>
+	</context-param>
 
-	<!-- Quartz Scheduler -->
-	<servlet>
-		<servlet-name>JSStartServlet</servlet-name>
-		<servlet-class>com.components.jobsch.JSStartServlet</servlet-class>
-		<init-param>
-			<param-name>receiver</param-name>
-			<param-value>local</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
 
 	<!-- Encoding setting -->
 	<filter>
@@ -51,24 +41,42 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- log4j -->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 
+	<!-- CodeValue -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>com.components.codevalue.CodeValueSyncListener</listener-class>
 	</listener>
 
-	<context-param>
-		<param-name>log4jConfigLocation</param-name>
-		<param-value>/WEB-INF/log4j.properties</param-value>
-	</context-param>
+	<!-- URL mapping -->
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml, /WEB-INF/security-context.xml</param-value>
-	</context-param>
+	<!-- Quartz Scheduler -->
+	<!-- <servlet>
+		<servlet-name>JSStartServlet</servlet-name>
+		<servlet-class>com.components.jobsch.JSStartServlet</servlet-class>
+		<init-param>
+			<param-name>receiver</param-name>
+			<param-value>local</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet> -->
 
 	<jsp-config>
 		<taglib>

@@ -23,8 +23,9 @@
 		                A.CODE,
 		                A.CODE_NAME,
 		                A.LAST_UPDATE_DTIME,
-		                (SELECT COUNT(*) FROM CODE) AS TOTAL_ROW_SIZE
+		                (SELECT COUNT(*) FROM CODE WHERE USE_YN = 'Y') AS TOTAL_ROW_SIZE
 		            FROM CODE A
+		            WHERE A.USE_YN = 'Y'
 		            ORDER BY A.CODE_GROUP_ID
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
@@ -35,8 +36,8 @@
 	
 	<insert id="CodeMng.insertCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO CODE (CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME)
-		VALUES (#codeGroupId#, #code#, #codeName#, #lastUpdateDtime#)
+		INSERT INTO CODE (CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME, USE_YN)
+		VALUES (#codeGroupId#, #code#, #codeName#, #lastUpdateDtime#, 'Y')
 		]]>
 	</insert>
 	
@@ -51,7 +52,8 @@
 	
 	<delete id="CodeMng.deleteCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		DELETE FROM CODE
+		UPDATE CODE
+		SET USE_YN = 'N', LAST_UPDATE_DTIME = #lastUpdateDtime#
 		WHERE CODE_GROUP_ID = #codeGroupId#
 		AND CODE = #code#
 		]]>

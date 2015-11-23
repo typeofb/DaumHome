@@ -7,12 +7,14 @@ function dispEditArea(sMod, group, key, value) {
 	$("#codeName").val(value);
 	if (sMod == "reg") {
 		$("#codeGroupId").removeAttr("readonly");
+		$("#code").removeAttr("readonly");
 		$("#btnReg").show();
 		$("#btnMod").hide();
 		$("#btnDel").hide();
 		$("#btnCan").hide();
 	} else {
 		$("#codeGroupId").attr("readonly", true);
+		$("#code").attr("readonly", true);
 		$("#btnReg").hide();
 		$("#btnMod").show();
 		$("#btnDel").show();
@@ -37,6 +39,20 @@ function goPage(targetPage) {
 	$("#targetPage").val(targetPage);
 	$.ajax({
 		url : "codeSearch.do",
+		data : $("form").serializeArray(),
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(result) {
+			$("#divResultArea").html(result);
+			dispEditArea("reg", "", "", "");
+		}
+	});
+}
+
+function codeView() {
+	$.ajax({
+		url : "codeView.do",
 		data : $("form").serializeArray(),
 		type : "post",
 		cache : false,
@@ -129,11 +145,12 @@ window.onload = function() {
 			<table class="list_search" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>그룹</td>
-					<td><input id="codeGroupId" name="codeGroupId" readonly /></td>
+					<td><input id="codeGroupId" name="codeGroupId" /></td>
 					<td>키</td>
 					<td><input id="code" name="code" /></td>
 					<td>값</td>
 					<td><input id="codeName" name="codeName" /></td>
+					<td id="btnView"><a href="javascript:codeView();" class="btnT"><span>보기</span></a></td>
 					<td id="btnReg"><a href="javascript:codeReg();" class="btnT"><span>등록</span></a></td>
 					<td id="btnMod"><a href="javascript:codeMod();" class="btnT"><span>수정</span></a></td>
 					<td id="btnDel"><a href="javascript:codeDel();" class="btnT"><span>삭제</span></a></td>

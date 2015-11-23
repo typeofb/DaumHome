@@ -1,12 +1,14 @@
 package com.daumit.sysmng.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.common.Common;
 import com.common.MenuController;
 import com.common.model.User;
+import com.components.codevalue.CodeValueCache;
 import com.daumit.sysmng.service.CodeMngService;
 
 @SessionAttributes("sessionCheck")
@@ -60,6 +63,20 @@ public class CodeMngController extends MenuController {
 		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, targetPage, 10));
 		mav.setViewName("sysMng/codeMng/codeAjax");
 		return mav;
+	}
+	
+	// CodeValue 보기
+	@RequestMapping(value = "codeView")
+	public void codeView(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info("console - codeView");
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(CodeValueCache.get());
+		out.println("<br />");
+		out.println("<br />");
+		out.println("<a href='" + request.getContextPath() + "/code.do" + "'>코드관리 검색</a>");
+		out.flush();
 	}
 	
 	// 본부 등록
@@ -121,6 +138,8 @@ public class CodeMngController extends MenuController {
 			@RequestParam(value="targetPage", required=false) String targetPage) throws IOException {
 		log.info("console - codeDel");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		paramMap.put("lastUpdateDtime", sdf.format(new Date(System.currentTimeMillis())));
 		boolean result = codeMngService.deleteCode(paramMap);
 		String strMessage = null;
 		if (result) {
@@ -128,8 +147,6 @@ public class CodeMngController extends MenuController {
 		} else {
 			strMessage = "실패하였습니다.";
 		}
-		
-		new Exception();
 		
 		List<Map<String, Object>> list = codeMngService.selectCodeList(Integer.valueOf(targetPage));
 		
