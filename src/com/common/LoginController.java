@@ -40,26 +40,23 @@ public class LoginController {
 		
 		if (!user.getUserId().equals("typeofb")) { // 아이디가 등록되지 않는 경우
 			mav.addObject("loginResult", "E3");
-			user.setLoginResult("E3");
 		} else {
 			if (!user.getUserPw().equals("1234")) { // 패스워드가 틀릴 경우
 				mav.addObject("loginResult", "E2");
-				user.setLoginResult("E2");
 			} else {
 				String userStat = "Y";
 				if (!userStat.equals("Y")) { // 아이디가 휴면, 대기상태일 경우
 					mav.addObject("loginResult", "E1");
-					user.setLoginResult("E1");
 				} else { // 성공일 경우
 					mav.addObject("loginResult", "C");
 					mav.addObject("userAuth", "00");
 					mav.addObject("userId", user.getUserId());
 					user.setLoginResult("C");
 					user.setUserAuth("00");
+					model.addAttribute("sessionCheck", user);
 				}
 			}
 		}
-		model.addAttribute("sessionCheck", user);
 		mav.setViewName("loginCheck");
 		return mav;
 	}
