@@ -12,7 +12,7 @@ public class TagBase extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final String TAG_CONEXT = "TAGCTX";
+	private static final String TAG_CONTEXT = "TAGCTX";
 	
 	public Object getParameter(String name) throws JspTagException {
 		Object beanValue = pageContext.getAttribute(name, PageContext.REQUEST_SCOPE);
@@ -45,17 +45,17 @@ public class TagBase extends TagSupport {
 	}
 	
 	public Object getTagValue(String key, boolean isLocal) {
-		Map tagCtx = (HashMap) pageContext.getAttribute(TAG_CONEXT, PageContext.REQUEST_SCOPE);
+		Map tagCtx = (HashMap) pageContext.getAttribute(TAG_CONTEXT, PageContext.REQUEST_SCOPE);
 		if (tagCtx == null)
 			return null;
 		return tagCtx.get(isLocal ? getTagClassName() + key : key);
 	}
 	
 	public void setTagValue(String key, Object value, boolean isLocal) {
-		Map tagCtx = (HashMap) pageContext.getAttribute(TAG_CONEXT, PageContext.REQUEST_SCOPE);
+		Map tagCtx = (HashMap) pageContext.getAttribute(TAG_CONTEXT, PageContext.REQUEST_SCOPE);
 		if (tagCtx == null) {
 			tagCtx = new HashMap();
-			pageContext.setAttribute(TAG_CONEXT, tagCtx, PageContext.REQUEST_SCOPE);
+			pageContext.setAttribute(TAG_CONTEXT, tagCtx, PageContext.REQUEST_SCOPE);
 		}
 		tagCtx.put(isLocal ? getTagClassName() + key : key, value);
 	}

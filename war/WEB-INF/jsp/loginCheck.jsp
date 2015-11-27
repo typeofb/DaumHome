@@ -32,9 +32,9 @@
 				} else if (code == "30") {
 					document.lForm.action = "<c:url value='bams_mng/bams_status3.do' />"; // 일반사용자 권한 화면
 				}
-				window.opener.parent.name = "myParent";
-				document.lForm.target = window.opener.parent.name;
-				document.lForm.submit();
+				var userAuth = document.getElementById("userAuth");
+				var userId = document.getElementById("userId");
+				window.returnValue = { userAuth : userAuth.value, userId : userId.value }; //자바스크립트 객체 리터럴
 				window.close();
 			}
 		</script>

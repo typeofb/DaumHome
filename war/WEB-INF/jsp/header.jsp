@@ -48,6 +48,13 @@ $(document).ready(function() {
 });
 
 document.onclick = jsddm_close;
+
+function fnLogin() {
+	var rtnVal = window.showModalDialog("${pageContext.request.contextPath}/login.do", "", "resizable:yes; top:500; left:500; width:400; height:400;");
+	if (rtnVal != undefined)
+		if (rtnVal.userAuth == "00")
+			window.location.reload();
+}
 </script>
 </head>
 
@@ -58,7 +65,7 @@ document.onclick = jsddm_close;
 		</ul>
 		<ul class="admin">
 			<c:if test="${empty sessionCheck.userId}">
-				<li><a href="${pageContext.request.contextPath}/login.do" onclick="window.open(this.href, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400'); return false;">로그인</a></li>
+				<li><a href="#" onclick="fnLogin();">로그인</a></li>
 			</c:if>
 			<c:if test="${not empty sessionCheck.userId}">
 				<li>${sessionCheck.userId}님이 로그인 하셨습니다</li>

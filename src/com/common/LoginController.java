@@ -1,7 +1,5 @@
 package com.common;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -9,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.model.User;
@@ -66,12 +66,13 @@ public class LoginController {
 
 	// logout
 	@RequestMapping(value = "/logout")
-	public ModelAndView logout(HttpSession session) {
+	public ModelAndView logout(WebRequest request, SessionStatus status) {
 		
 		log.info("console - logout");
 		
 		ModelAndView mav = new ModelAndView();
-		session.invalidate();
+		status.setComplete();
+		request.removeAttribute("sessionCheck", WebRequest.SCOPE_SESSION);
 		mav.setViewName("redirect:main.do");
 		return mav;
 	}
