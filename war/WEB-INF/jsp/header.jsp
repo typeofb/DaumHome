@@ -15,6 +15,7 @@
 <script type="text/javascript" src="<c:url value='/js/jquery.ui.core.js' />"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery.ui.datepicker.js' />"></script>
 <script type="text/javascript" src="daumeditor/js/editor_loader.js"></script>
+<script type="text/javascript" src="<c:url value='/js/showModalDialog.js' />"></script>
 <script type="text/javascript">
 var timeout = 500;
 var closetimer = 0;
@@ -49,8 +50,18 @@ $(document).ready(function() {
 
 document.onclick = jsddm_close;
 
-function fnLogin() {
-	var rtnVal = window.showModalDialog("${pageContext.request.contextPath}/login.do", "", "resizable:yes; top:500; left:500; width:400; height:400;");
+// for IE, Firefox
+function fnLogin(pw) {
+	var rtnVal = window.showModalDialog("${pageContext.request.contextPath}/login.do", "abcd", "resizable:yes; center:on; dialogwidth:400px; dialogheight:400px;");
+	otherParameters[0] = pw;
+	if (rtnVal != undefined)
+		if (rtnVal.userAuth == "00")
+			window.location.reload();
+}
+
+// for Chrome
+function showModalDialogCallback(rtnVal) {
+	alert(otherParameters[0]);
 	if (rtnVal != undefined)
 		if (rtnVal.userAuth == "00")
 			window.location.reload();
@@ -65,7 +76,7 @@ function fnLogin() {
 		</ul>
 		<ul class="admin">
 			<c:if test="${empty sessionCheck.userId}">
-				<li><a href="#" onclick="fnLogin();">로그인</a></li>
+				<li><a href="#" onclick="fnLogin(1234);">로그인</a></li>
 			</c:if>
 			<c:if test="${not empty sessionCheck.userId}">
 				<li>${sessionCheck.userId}님이 로그인 하셨습니다</li>

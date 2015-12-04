@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <base target="_self" />
+<script type="text/javascript" src="<c:url value='/js/showModalDialogCallee.js' />"></script>
 <form name="lForm" method="post">
 	<input type="hidden" id="userAuth" value="${userAuth}">
 	<input type="hidden" id="userId" name="userId" value="${userId}">
@@ -31,6 +32,10 @@
 	<c:when test="${loginResult eq 'C'}">
 		<script>
 			window.onload = function() {
+				getDialogArguments();
+				var varParam = window.dialogArguments;
+				alert(varParam);
+				
 				var code = document.getElementById("userAuth").value;
 				if (code == "00") {
 					document.lForm.action = "<c:url value='boardList.do' />";
@@ -43,6 +48,7 @@
 				}
 				var userAuth = document.getElementById("userAuth");
 				var userId = document.getElementById("userId");
+				setReturnValue({ userAuth : userAuth.value, userId : userId.value });
 				window.returnValue = { userAuth : userAuth.value, userId : userId.value }; //자바스크립트 객체 리터럴
 				window.close();
 			}
