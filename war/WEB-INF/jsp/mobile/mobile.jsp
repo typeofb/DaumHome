@@ -111,9 +111,8 @@
 						<!-- Tab 2 끝 -->
 						<!-- Tab 3 시작 -->
 						<div class="swiper-slide">
-							<div class="content-slide">
-								<h2>Tab 3</h2>
-								<p>3번째 컨텐트</p>
+							<div class="content-slide" id="newsList">
+								<%@ include file="mobileTab3.jsp"%>
 							</div>
 						</div>
 						<!-- Tab 3 끝 -->
@@ -165,6 +164,19 @@ var tabsSwiper = new Swiper('.swiper-container', {
 	onSlideChangeStart : function() {
 		$(".tabs .active").removeClass('active');
 		$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+		
+		if ($("#newsList").find(':first-child').attr("deptId") != 418) {
+			$.ajax({
+				url : "mobileTab3.do",
+				data : { deptId : 418 },
+				type : "post",
+				cache : false,
+				dataType : "html",
+				success : function(data) {
+					$("#newsList").html(data);
+				}
+			});
+		}
 	}
 });
 $(".tabs a").on('touchstart mousedown', function(e) {
@@ -180,5 +192,19 @@ $(".BTgotoMain").click(function(e) {
 	e.preventDefault();
 	tabsSwiper.swipeTo(0);
 });
+
+function mobileList(obj) {
+	$.ajax({
+		url : "mobileList.do",
+		data : { deptId : $(obj).attr("deptId") },
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(data) {
+			var json = JSON.parse(data);
+			$("#newsList").html(json.newsList);
+		}
+	});
+}
 </script>
 </html>

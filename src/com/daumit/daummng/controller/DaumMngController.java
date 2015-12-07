@@ -265,6 +265,23 @@ public class DaumMngController {
 		return "mobile/mobile";
 	}
 	
+	@RequestMapping(value = "/mobileList")
+	public @ResponseBody ResponseEntity<Map<String, Object>> mobileList(@RequestParam Map<String, Object> param) {
+		log.info("console - mobileList");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deptId", param.get("deptId"));
+		map.put("newsList", "<ul class=\"newsList\"><li>홍길동</li><li>장길산</li></ul>");
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/mobileTab3")
+	public String mobileTab3() {
+		log.info("console - mobileTab3");
+		
+		return "mobile/mobileTab3";
+	}
+	
 	// 비 HTML
 	@RequestMapping(value = "/nonHtml")
 	public String nonHtml() {

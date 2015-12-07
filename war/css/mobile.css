@@ -216,3 +216,14 @@ body.open-menu {
 .swiper-active-switch {
 	background: #fff;
 }
+
+.newsList {
+	clear: both;
+	border-top: 1px solid #c3c3c3;
+}
+
+.newsList li {
+	padding: 10px 0 10px 10px;
+	overflow: hidden;
+	border-bottom: 1px solid #eeeeee;
+}
