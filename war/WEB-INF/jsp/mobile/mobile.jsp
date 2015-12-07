@@ -17,7 +17,7 @@
 		<div class="d-table">
 			<div class="d-row">
 				<div class="d-cell1">left sidebar</div>
-				<div class="d-cell2" id="bt_lasideClose"><a href="#" style="color: #fff;">X</a></div>
+				<div class="d-cell2" id="bt_lasideClose"><a href="javascript:;" style="color: #fff;">X</a></div>
 			</div>
 		</div>
 	</div>
@@ -25,23 +25,22 @@
 		<div class="d-table">
 			<div class="d-row">
 				<div class="d-cell1">right sidebar</div>
-				<div class="d-cell2" id="bt_rasideClose"><a href="#" style="color: #fff;">X</a></div>
+				<div class="d-cell2" id="bt_rasideClose"><a href="javascript:;" style="color: #fff;">X</a></div>
 			</div>
 		</div>
 	</div>
 	<div class="bg_modal"></div>
 	<div class="wrap" id="content-wrapper">
-		<!-- <a href="#content">컨텐트로 바로가기</a> -->
 		<div class="header">
 			<a href="${pageContext.request.contextPath}/mobile.do" class="BTgotoMain"
 				style="position: relative; left: 50%; margin-left: -115px;">매인</a>
-			<a href="#" id="bt_laside" style="float: left;">좌확장영역열기</a>
-			<a href="#" id="bt_raside" style="float: right;">우확장영역열기</a>
+			<a href="javascript:;" id="bt_laside" style="float: left;">좌확장영역열기</a>
+			<a href="javascript:;" id="bt_raside" style="float: right;">우확장영역열기</a>
 			<div class="tabs">
 				<a style="display: none;" class="BTgotoMain">Tab 0</a>
-				<a href="#">Tab 1</a>
-				<a href="#" style="margin: 0 17px;">Tab 2</a>
-				<a href="#">Tab 3</a>
+				<a href="javascript:;">Tab 1</a>
+				<a href="javascript:;" style="margin: 0 17px;">Tab 2</a>
+				<a href="javascript:;">Tab 3</a>
 			</div>
 		</div>
 		<div class="container">
@@ -131,41 +130,42 @@
 <script src="js/jquery.animate-enhanced.min.js"></script>
 <script src="js/slidemenu.js"></script>
 <script>
-var scLNB = new Swiper('.sc-lnb', {
+var scLNB = new Swiper(".sc-lnb", {
 	watchActiveIndex : true,
-	slidesPerView : 'auto',
+	slidesPerView : "auto",
 	onTouchMove : function() {
 		if (scLNB.activeIndex == 0) {
-			$(".sc-lnb-left").addClass('hc');
+			$(".sc-lnb-left").addClass("hc");
 		} else {
-			$(".sc-lnb-left").removeClass('hc');
+			$(".sc-lnb-left").removeClass("hc");
 		}
 		if (scLNB.activeIndex > scLNB.slides.length / 3) {
-			$(".sc-lnb-right").addClass('hc');
+			$(".sc-lnb-right").addClass("hc");
 		} else {
-			$(".sc-lnb-right").removeClass('hc');
+			$(".sc-lnb-right").removeClass("hc");
 		}
 	}
 });
 $(".sc-lnb-left").click(function(e) {
 	e.preventDefault();
 	scLNB.swipeTo(0);
-	$(".sc-lnb-left").addClass('hc');
-	$(".sc-lnb-right").removeClass('hc');
+	$(".sc-lnb-left").addClass("hc");
+	$(".sc-lnb-right").removeClass("hc");
 });
 $(".sc-lnb-right").click(function(e) {
 	e.preventDefault();
 	scLNB.swipeTo(9);
-	$(".sc-lnb-right").addClass('hc');
-	$(".sc-lnb-left").removeClass('hc');
+	$(".sc-lnb-right").addClass("hc");
+	$(".sc-lnb-left").removeClass("hc");
 });
-var tabsSwiper = new Swiper('.swiper-container', {
+
+var tabsSwiper = new Swiper(".swiper-container", {
 	speed : 500,
 	onSlideChangeStart : function() {
-		$(".tabs .active").removeClass('active');
-		$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+		$(".tabs .active").removeClass("active");
+		$(".tabs a").eq(tabsSwiper.activeIndex).addClass("active");
 		
-		if ($("#newsList").find(':first-child').attr("deptId") != 418) {
+		if ($("#newsList").find(":first-child").attr("deptId") != 418) {
 			$.ajax({
 				url : "mobileTab3.do",
 				data : { deptId : 418 },
@@ -179,15 +179,16 @@ var tabsSwiper = new Swiper('.swiper-container', {
 		}
 	}
 });
-$(".tabs a").on('touchstart mousedown', function(e) {
+$(".tabs a").on("touchstart mousedown", function(e) {
 	e.preventDefault();
-	$(".tabs .active").removeClass('active');
-	$(this).addClass('active');
+	$(".tabs .active").removeClass("active");
+	$(this).addClass("active");
 	tabsSwiper.swipeTo($(this).index());
 });
 $(".tabs a").click(function(e) {
 	e.preventDefault();
 });
+
 $(".BTgotoMain").click(function(e) {
 	e.preventDefault();
 	tabsSwiper.swipeTo(0);
