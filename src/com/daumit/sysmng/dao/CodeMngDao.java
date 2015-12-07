@@ -18,10 +18,10 @@ public class CodeMngDao {
 		sql = SqlConfig.getSqlMapInstance();
 	}
 	
-	public List<Map<String, Object>> selectCodeList(int targetPage) {
+	public List<Map<String, Object>> selectCodeList(Map<String, Object> paramMap) {
 		List<Map<String, Object>> result = null;
 		try {
-			result = sql.queryForList("CodeMng.selectCodeList", targetPage);
+			result = sql.queryForList("CodeMng.selectCodeList", paramMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

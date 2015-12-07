@@ -25,6 +25,7 @@ function dispEditArea(sMod, group, key, value) {
 function search() {
 	$.ajax({
 		url : "codeSearch.do",
+		data : $("form").serializeArray(),
 		type : "post",
 		cache : false,
 		dataType : "html",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
-	<select id="CodeMng.selectCodeList" parameterClass="java.lang.Integer" resultClass="java.util.HashMap">
+	<select id="CodeMng.selectCodeList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 		<![CDATA[
 		SELECT
 		    D.*
@@ -9,13 +9,13 @@
 		(
 		    SELECT
 		        C.*,
-		        TRUNCATE((ROWNUM - 1) / 10, 0) + 1 AS PAGE
+		        TRUNCATE((ROWNUM - 1) / #rowSize#, 0) + 1 AS PAGE
 		    FROM
 		    (
 		        SELECT
 		            B.*,
 		            (@RNUM := @RNUM + 1) AS ROWNUM,
-		            TRUNCATE((TOTAL_ROW_SIZE - 1) / 10, 0) + 1 AS TOTAL_PAGE_SIZE
+		            TRUNCATE((TOTAL_ROW_SIZE - 1) / #rowSize#, 0) + 1 AS TOTAL_PAGE_SIZE
 		        FROM
 		        (
 		            SELECT

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,22 +46,25 @@ public class CodeMngController extends MenuController {
 		log.info("console - code");
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("targetPage", 1);
 		mav.setViewName("sysMng/codeMng/code");
 		return mav;
 	}
 	
 	// 본부 검색
 	@RequestMapping(value = "codeSearch")
-	public ModelAndView codeSearch(@RequestParam(value="targetPage", required=false) String targetPageStr) {
+	public ModelAndView codeSearch(@RequestParam(value="targetPage", required=false) String targetPage) {
 		log.info("console - codeSearch");
 		
-		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
-		List<Map<String, Object>> list = codeMngService.selectCodeList(targetPage);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("targetPage", targetPage);
+		paramMap.put("rowSize", 10);
+		List<Map<String, Object>> list = codeMngService.selectCodeList(paramMap);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("targetPage", targetPage);
-		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, targetPage, 10));
+		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(targetPage), 10));
 		mav.setViewName("sysMng/codeMng/codeAjax");
 		return mav;
 	}
@@ -81,8 +85,7 @@ public class CodeMngController extends MenuController {
 	
 	// 본부 등록
 	@RequestMapping(value = "codeReg")
-	public ModelAndView codeReg(HttpServletResponse response,
-			@RequestParam Map<String, Object> paramMap) throws IOException {
+	public ModelAndView codeReg(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeReg");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -95,7 +98,8 @@ public class CodeMngController extends MenuController {
 			strMessage = "실패하였습니다.";
 		}
 		
-		List<Map<String, Object>> list = codeMngService.selectCodeList(Integer.valueOf(paramMap.get("targetPage").toString()));
+		paramMap.put("rowSize", 10);
+		List<Map<String, Object>> list = codeMngService.selectCodeList(paramMap);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -107,8 +111,7 @@ public class CodeMngController extends MenuController {
 	
 	// 본부 수정
 	@RequestMapping(value = "codeMod")
-	public ModelAndView codeMod(HttpServletResponse response,
-			@RequestParam Map<String, Object> paramMap) throws IOException {
+	public ModelAndView codeMod(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeMod");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -121,7 +124,8 @@ public class CodeMngController extends MenuController {
 			strMessage = "실패하였습니다.";
 		}
 		
-		List<Map<String, Object>> list = codeMngService.selectCodeList(Integer.valueOf(paramMap.get("targetPage").toString()));
+		paramMap.put("rowSize", 10);
+		List<Map<String, Object>> list = codeMngService.selectCodeList(paramMap);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -133,9 +137,7 @@ public class CodeMngController extends MenuController {
 	
 	// 본부 삭제
 	@RequestMapping(value = "codeDel")
-	public ModelAndView codeDel(HttpServletResponse response,
-			@RequestParam Map<String, Object> paramMap,
-			@RequestParam(value="targetPage", required=false) String targetPage) throws IOException {
+	public ModelAndView codeDel(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeDel");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -148,12 +150,13 @@ public class CodeMngController extends MenuController {
 			strMessage = "실패하였습니다.";
 		}
 		
-		List<Map<String, Object>> list = codeMngService.selectCodeList(Integer.valueOf(targetPage));
+		paramMap.put("rowSize", 10);
+		List<Map<String, Object>> list = codeMngService.selectCodeList(paramMap);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("strMessage", strMessage);
-		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(targetPage), 10));
+		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 10, Integer.valueOf(paramMap.get("targetPage").toString()), 10));
 		mav.setViewName("sysMng/codeMng/codeAjax");
 		return mav;
 	}

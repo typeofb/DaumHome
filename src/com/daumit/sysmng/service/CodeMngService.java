@@ -19,8 +19,8 @@ public class CodeMngService {
 		dao = new CodeMngDao();
 	}
 	
-	public List<Map<String, Object>> selectCodeList(int targetPage) {
-		List<Map<String, Object>> result = dao.selectCodeList(targetPage);
+	public List<Map<String, Object>> selectCodeList(Map<String, Object> paramMap) {
+		List<Map<String, Object>> result = dao.selectCodeList(paramMap);
 		return result;
 	}
 	
