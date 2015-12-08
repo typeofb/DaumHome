@@ -47,6 +47,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.common.Common;
 import com.common.dao.ResultSetData;
 import com.daumit.daummng.service.DaumMngService;
+import com.daumit.sysmng.service.CodeMngService;
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
@@ -65,6 +66,9 @@ public class DaumMngController {
 	
 	@Resource(name="DaumMngService")
 	private DaumMngService daumMngService;
+	
+	@Resource(name="CodeMngService")
+	private CodeMngService codeMngService;
 	
 	@RequestMapping(value = "/main")
 	public String main() {
@@ -266,13 +270,21 @@ public class DaumMngController {
 	}
 	
 	@RequestMapping(value = "/mobileList")
-	public @ResponseBody ResponseEntity<Map<String, Object>> mobileList(@RequestParam Map<String, Object> param) {
+	public ModelAndView mobileList(@RequestParam(value="targetPage", required=false) String targetPageStr) {
 		log.info("console - mobileList");
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("deptId", param.get("deptId"));
-		map.put("newsList", "<ul class=\"newsList\"><li>홍길동</li><li>장길산</li></ul>");
-		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.CREATED);
+		int targetPage = Integer.parseInt(Common.NVL(targetPageStr, "1"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("targetPage", targetPage);
+		paramMap.put("rowSize", 5);
+		List<Map<String, Object>> list = codeMngService.selectCodeList(paramMap);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("targetPage", targetPage);
+		mav.addObject("paging", Common.paging(Integer.valueOf(list.get(0).get("TOTAL_ROW_SIZE").toString()), 5, Integer.valueOf(targetPage), 10));
+		mav.setViewName("mobile/mobileAjax");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/mobileTab3")

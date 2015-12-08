@@ -124,6 +124,9 @@
 			<a href="${pageContext.request.contextPath}/main.do">PC버전보기</a>
 		</div>
 	</div>
+	<form>
+		<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
+	</form>
 </body>
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/idangerous.swiper-2.1.min.js"></script>
@@ -202,8 +205,21 @@ function mobileList(obj) {
 		cache : false,
 		dataType : "html",
 		success : function(data) {
-			var json = JSON.parse(data);
-			$("#newsList").html(json.newsList);
+			$("#newsList").html(data);
+		}
+	});
+}
+
+function goPage(targetPage) {
+	$("#targetPage").val(targetPage);
+	$.ajax({
+		url : "mobileList.do",
+		data : $("form").serializeArray(),
+		type : "post",
+		cache : false,
+		dataType : "html",
+		success : function(data) {
+			$("#newsList").html(data);
 		}
 	});
 }
