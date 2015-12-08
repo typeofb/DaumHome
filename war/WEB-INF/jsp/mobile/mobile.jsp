@@ -53,38 +53,38 @@
 								<div class="sc-lnb">
 									<div class="swiper-wrapper">
 										<div class="swiper-slide">
-											<div class="title">전체</div>
+											<div class="mainTitle">전체</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">세이브더칠드런</div>
+											<div class="mainTitle">세이브더칠드런</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">후원하기</div>
+											<div class="mainTitle">후원하기</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">캠페인</div>
+											<div class="mainTitle">캠페인</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 5</div>
+											<div class="mainTitle">메뉴 5</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 6</div>
+											<div class="mainTitle">메뉴 6</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 7</div>
+											<div class="mainTitle">메뉴 7</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 8</div>
+											<div class="mainTitle">메뉴 8</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 9</div>
+											<div class="mainTitle">메뉴 9</div>
 										</div>
 										<div class="swiper-slide">
-											<div class="title">메뉴 10</div>
+											<div class="mainTitle">메뉴 10</div>
 										</div>
 									</div>
-									<a class="sc-lnb-left" style="position: absolute; left: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px; z-index: 1000;"></a>
-									<a class="sc-lnb-right" style="position: absolute; right: 0; top: 0; background: #aaa; width: 30px; height: 100%; line-height: 45px;">></a>
+									<a class="sc-lnb-left"><</a>
+									<a class="sc-lnb-right">></a>
 								</div>
 								<div class="sc-lnb-pagination"></div>
 								<h2>Main</h2>
@@ -110,8 +110,9 @@
 						<!-- Tab 2 끝 -->
 						<!-- Tab 3 시작 -->
 						<div class="swiper-slide">
-							<div class="content-slide" id="newsList">
-								<%@ include file="mobileTab3.jsp"%>
+							<div class="content-slide">
+								<a href="javascript:;" onclick="javascript:mobileList(this);" deptId="418"><h2>Tab 3</h2></a>
+								<p>3번째 컨텐트</p>
 							</div>
 						</div>
 						<!-- Tab 3 끝 -->
@@ -168,18 +169,8 @@ var tabsSwiper = new Swiper(".swiper-container", {
 		$(".tabs .active").removeClass("active");
 		$(".tabs a").eq(tabsSwiper.activeIndex).addClass("active");
 		
-		if ($("#newsList").find(":first-child").attr("deptId") != 418) {
-			$.ajax({
-				url : "mobileTab3.do",
-				data : { deptId : 418 },
-				type : "post",
-				cache : false,
-				dataType : "html",
-				success : function(data) {
-					$("#newsList").html(data);
-				}
-			});
-		}
+		if ($("#content").html() != "")
+			$("#content").empty();
 	}
 });
 $(".tabs a").on("touchstart mousedown", function(e) {
@@ -205,7 +196,7 @@ function mobileList(obj) {
 		cache : false,
 		dataType : "html",
 		success : function(data) {
-			$("#newsList").html(data);
+			$("#content").html(data);
 		}
 	});
 }
@@ -219,7 +210,7 @@ function goPage(targetPage) {
 		cache : false,
 		dataType : "html",
 		success : function(data) {
-			$("#newsList").html(data);
+			$("#content").html(data);
 		}
 	});
 }

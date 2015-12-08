@@ -7,7 +7,11 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http pattern="/mobile.do" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/js/**" security="none" />
+	
+	<http pattern="/mobile*.do" security="none" />
 	
 	<http auto-config="true">
 		<intercept-url pattern="/**" access="ROLE_USER" />
