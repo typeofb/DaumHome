@@ -99,6 +99,7 @@ function showModalDialogCallback(rtnVal) {
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/nonHtml.do">비 HTML</a></li>
 					<li><a href="${pageContext.request.contextPath}/module/DI.do">Dependency Injection</a></li>
+					<li><a href="${pageContext.request.contextPath}/chat.do">채팅</a></li>
 				</ul>
 			</li>
 		</ul>

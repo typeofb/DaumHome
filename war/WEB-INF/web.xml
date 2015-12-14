@@ -56,6 +56,20 @@
 		<listener-class>com.components.codevalue.CodeValueSyncListener</listener-class>
 	</listener>
 
+	<!-- Chat -->
+	<listener>
+		<listener-class>com.components.chat.ChatStartListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>chat</servlet-name>
+		<servlet-class>com.components.chat.ChatClientServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>chat</servlet-name>
+		<url-pattern>/chatClient.do</url-pattern>
+	</servlet-mapping>
+
 	<!-- URL mapping -->
 	<!-- Processes application requests -->
 	<servlet>

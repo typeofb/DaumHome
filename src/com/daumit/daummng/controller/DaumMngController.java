@@ -422,4 +422,12 @@ public class DaumMngController {
 		
 		downloadCommon(response, path);
 	}
+	
+	// 채팅
+	@RequestMapping(value = "/chat")
+	public String chat() {
+		log.info("console - chat");
+		
+		return "chat";
+	}
 }

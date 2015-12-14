@@ -68,7 +68,7 @@
 	
 	<function>
 		<name>toURLEncode</name>
-		<function-class>hanwha.neo.commons.EPUtils</function-class>
+		<function-class>samsung.neo.commons.EPUtils</function-class>
 		<function-signature>java.lang.String toURLEncode(java.lang.String)</function-signature>
 	</function>
 </taglib>
