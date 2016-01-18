@@ -16,6 +16,8 @@
 <script type="text/javascript" src="<c:url value='/js/jquery.ui.datepicker.js' />"></script>
 <script type="text/javascript" src="daumeditor/js/editor_loader.js"></script>
 <script type="text/javascript" src="<c:url value='/js/showModalDialog.js' />"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery.blockUI.js' />"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 var timeout = 500;
 var closetimer = 0;

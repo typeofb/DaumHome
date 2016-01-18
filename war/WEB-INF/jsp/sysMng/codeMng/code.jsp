@@ -23,31 +23,33 @@ function dispEditArea(sMod, group, key, value) {
 }
 
 function search() {
-	$.ajax({
+	ep.ajax({
 		url : "codeSearch.do",
 		data : $("form").serializeArray(),
 		type : "post",
 		cache : false,
 		dataType : "html",
-		success : function(result) {
+		callback : function(result) {
 			$("#divResultArea").html(result);
 			dispEditArea("reg", "", "", "");
-		}
+		},
+		block : {message : "잠시만 기다려주세요."}
 	});
 }
 
 function goPage(targetPage) {
 	$("#targetPage").val(targetPage);
-	$.ajax({
+	ep.ajax({
 		url : "codeSearch.do",
 		data : $("form").serializeArray(),
 		type : "post",
 		cache : false,
 		dataType : "html",
-		success : function(result) {
+		callback : function(result) {
 			$("#divResultArea").html(result);
 			dispEditArea("reg", "", "", "");
-		}
+		},
+		block : {type : "image"}
 	});
 }
 

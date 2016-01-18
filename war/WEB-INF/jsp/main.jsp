@@ -9,7 +9,6 @@
 .file_upload_button { width: 50px; height: 20px; line-height: 15px; top: 0px; background-color: #f8f8f8; color: #555555; border: 1px solid #cccccc; }
 .file_list_select { width: 820px; height: 100px; margin-top: 7px; }
 </style>
-<script src="js/common.js"></script>
 <!-- jquery plugin -->
 <script src="js/jquery-popup.js"></script>
 <script type="text/javascript">
