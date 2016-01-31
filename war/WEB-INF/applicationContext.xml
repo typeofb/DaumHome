@@ -6,17 +6,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://210.96.202.111:3306/myver_dev?autoReconnect=true" />
 		<property name="username" value="myver" />
 		<property name="password" value="myver" />
 		<property name="validationQuery" value="SELECT 1 FROM DUAL" />
-	</bean>
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	</bean> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@172.16.223.173:1521:orcl" />
 		<property name="username" value="neo_ep" />
 		<property name="password" value="neo_ep_dba" />
-	</bean> -->
+	</bean>
 </beans>
