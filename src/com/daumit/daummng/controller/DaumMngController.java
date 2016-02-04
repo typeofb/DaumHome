@@ -430,4 +430,10 @@ public class DaumMngController {
 		
 		return "chat";
 	}
+	
+	// 인증 후 권한 없는 요청
+	@RequestMapping(value = "/accessDeny")
+	public void accessDeny() {
+		log.info("console - accessDeny");
+	}
 }

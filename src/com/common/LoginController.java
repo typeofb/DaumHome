@@ -2,6 +2,7 @@ package com.common;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.model.User;
+import com.common.security.EPUser;
 
 @Controller
 @SessionAttributes("sessionCheck")
@@ -72,5 +74,31 @@ public class LoginController {
 		request.removeAttribute("sessionCheck", WebRequest.SCOPE_SESSION);
 		mav.setViewName("redirect:main.do");
 		return mav;
+	}
+	
+	@RequestMapping(value = "login_main")
+	public ModelAndView login_main() {
+		log.info("login_main");
+		return new ModelAndView("login/login_main");
+	}
+	
+	@RequestMapping(value = "logout_main")
+	public ModelAndView logout_main() {
+		log.info("logout_main");
+		return new ModelAndView("login/logout_main");
+	}
+	
+	@RequestMapping(value = "login_success")
+	public ModelAndView login_success() {
+		log.info("login_success");
+		EPUser user = (EPUser) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		System.out.println(user);
+		return new ModelAndView("login/login_success");
+	}
+	
+	@RequestMapping(value = "login_duplicate")
+	public ModelAndView login_duplicate() {
+		log.info("login_duplicate");
+		return new ModelAndView("login/login_duplicate");
 	}
 }

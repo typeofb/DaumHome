@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@ page import="com.common.security.EPUser"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
@@ -85,6 +87,15 @@ function showModalDialogCallback(rtnVal) {
 				<li>|</li>
 				<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
 			</c:if>
+			<li>
+				<a href="j_spring_security_logout" style="color:red;font-weight:bold;">
+					<%
+						EPUser user = (EPUser) SecurityContextHolder.getContext().getAuthentication().getDetails();
+						String username = user.getUsername();
+					%>
+					<%=username%>님 시큐리티 로그아웃
+				</a>
+			</li>
 		</ul>
 	</div>
 	<div class="gnbBar">
@@ -103,6 +114,8 @@ function showModalDialogCallback(rtnVal) {
 					<li><a href="${pageContext.request.contextPath}/module/DI.do">Dependency Injection</a></li>
 					<li><a href="${pageContext.request.contextPath}/chat.do">채팅</a></li>
 				</ul>
+			</li>
+			<li><a href="<c:out value='${pageContext.request.contextPath}'/>/admin/main.do">관리자</a>
 			</li>
 		</ul>
 	</div>

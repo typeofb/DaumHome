@@ -12,18 +12,35 @@
 	<http pattern="/js/**" security="none" />
 	
 	<http pattern="/mobile*.do" security="none" />
+	<http pattern="/login_main.do" security="none" />
+	<http pattern="/logout_main.do" security="none" />
+	<http pattern="/login_duplicate.do" security="none" />
 	
-	<http auto-config="true">
+	<http auto-config="true" entry-point-ref="authenticationEntryPoint">
+		<access-denied-handler ref="accessDeniedHandler" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/**" access="ROLE_USER" />
-		<form-login default-target-url="/main.do"
+		<intercept-url pattern="/login_main.do" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/login_duplicate.do" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<form-login login-page="/login_main.do"
+			default-target-url="/main.do"
+			authentication-failure-url="/login_main.do"
 			always-use-default-target="true" />
+		<logout invalidate-session="true" success-handler-ref="logoutSuccessHandler" />
+		<session-management>
+			<concurrency-control max-sessions="1" expired-url="/login_duplicate.do" /><!-- 로그인 중복 처리, 작동 안됨, web.xml의 HttpSessionListener로 구현 예정 -->
+		</session-management>
 	</http>
+	<beans:bean id="authenticationEntryPoint" class="com.common.security.AuthenticationEntryPointImpl"><!-- 인증 전 요청 -->
+		<beans:property name="loginFormUrl" value="/login_main.do" />
+	</beans:bean>
+	<beans:bean id="accessDeniedHandler" class="com.common.security.AccessDeniedHandlerImpl" /><!-- 인증 후 권한 없는 요청 -->
+	<beans:bean id="logoutSuccessHandler" class="com.common.security.LogoutSuccessHandlerImpl" /><!-- 로그아웃 -->
 	
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="guest" password="guest" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider ref="authenticationProvider" />
+		<authentication-provider user-service-ref="userDetailsService" />
 	</authentication-manager>
+	<beans:bean id="authenticationProvider" class="com.common.security.AuthenticationProviderImpl" /><!-- 인증 Service -->
+	<beans:bean id="userDetailsService" class="com.common.security.UserDetailsServiceImpl" /><!-- 인증 DAO -->
 </beans:beans>
