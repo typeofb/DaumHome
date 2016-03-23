@@ -15,8 +15,8 @@
 	</bean> -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@172.16.223.173:1521:orcl" />
-		<property name="username" value="neo_ep" />
-		<property name="password" value="neo_ep_dba" />
+		<property name="url" value="jdbc:oracle:thin:@1.235.187.222:1521:Hanwhathales" />
+		<property name="username" value="thales" />
+		<property name="password" value="thales" />
 	</bean>
 </beans>
