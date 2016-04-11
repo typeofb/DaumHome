@@ -69,7 +69,7 @@ public class BoardMngController {
 		sc.addSearchKey("searchText");
 		sc.addSearchParam("searchText", selectItem, searchText, "string", "like");
 		sc.addSearchKey("beginDate");
-		sc.addSearchParam("beginDate", "JOIN_DATE", (beginDate + "~" + endDate), "date", "between");
+		sc.addSearchParam("beginDate", "WBDATE", (beginDate + "~" + endDate), "date", "between");
 		if (sortOrderBy == null || sortOrderBy.equals("")) {
 		} else if ("ASC".equalsIgnoreCase(sortOrderBy))
 			sc.addOrder(sortField, true);

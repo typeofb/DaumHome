@@ -18,38 +18,39 @@ public class BoardMngDao extends QuerySupport {
 //				  + " ORDER BY LAST_UPDATE_DTIME DESC"
 //				  + " LIMIT :targetPage, :rowSize";
 //		return queryForResultSet(sql, paramMap);
-		String sql = "SELECT USER_ID AS POST_ID, USER_NAME AS USR_NM, WORK_PLACE AS TITLE, FEMALE AS READ_CNT, JOIN_DATE AS REG_DT"
-				  + " FROM TB_ORG_USER"
+		String sql = "SELECT IDX AS POST_ID, USNAME AS USR_NM, WBTITLE AS TITLE, WBHIT AS READ_CNT, WBDATE AS REG_DT"
+				  + " FROM WBOARD_DATA"
 				  + " WHERE 1 = :where";
 		return queryForPage(sql, paramMap, sc);
 	}
 	
 	public int selectBoardCnt(Map<String, Object> paramMap) {
-		String sql = "SELECT COUNT(1) TOTAL_ROW_SIZE FROM USER";
+		String sql = "SELECT COUNT(1) TOTAL_ROW_SIZE FROM WBOARD_DATA";
 		return queryForInt(sql, paramMap);
 	}
 	
 	public Map<String, Object> selectBoardDetail(Map<String, Object> paramMap) {
-		String sql = "SELECT USER_ID AS POST_ID, BRAND_NAME AS TITLE, EMAIL_ADDRESS AS CONTENTS, LAST_UPDATE_DTIME AS REG_DT, ROLE AS READ_CNT, LAST_UPDATE_USER_ID AS USR_ID"
-				  + " FROM USER"
-				  + " WHERE USER_ID = :postId";
+		String sql = "SELECT IDX AS POST_ID, WBTITLE AS TITLE, WBTEXT AS CONTENTS, WBDATE AS REG_DT, WBHIT AS READ_CNT, USIDX AS USR_ID"
+				  + " FROM WBOARD_DATA"
+				  + " WHERE IDX = :postId";
 		return queryForMap(sql, paramMap);
 	}
 	
 	public int insertBoard(BoardMngDto paramMap) {
-		String sql = "INSERT INTO USER (USER_ID, USER_NAME, BRAND_NAME, EMAIL_ADDRESS, LAST_UPDATE_DTIME)"
-				  + " VALUES (:title, 'test', 'TEST', :contents, CURTIME())";
+		String sql = "INSERT INTO WBOARD_DATA (IDX, USNAME, WBTITLE, WBTEXT, WBDATE)"
+				  + " VALUES (TB_WBOARD_DATA_SEQ.NEXTVAL, 'test', :title, :contents, SYSDATE)";
 		return update(sql, paramMap);
 	}
 	
 	public int updateBoard(BoardMngDto paramMap) {
-		String sql = "UPDATE USER SET BRAND_NAME = :title, EMAIL_ADDRESS = :contents"
-				  + " WHERE USER_ID = :postId";
+		String sql = "UPDATE WBOARD_DATA SET WBTITLE = :title, WBTEXT = :contents"
+				  + " WHERE IDX = :postId";
 		return update(sql, paramMap);
 	}
 	
 	public int deleteBoard(BoardMngDto paramMap) {
-		String sql = "DELETE FROM USER WHERE USER_ID = :postId";
+		String sql = "UPDATE WBOARD_DATA SET WB_NOTICE = 'N', STATE = 'N'"
+				  + " WHERE IDX = :postId";
 		return update(sql, paramMap);
 	}
 }
