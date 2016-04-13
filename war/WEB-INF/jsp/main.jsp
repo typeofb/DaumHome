@@ -115,6 +115,7 @@
 			</tr>
 		</table>
 	</form>
+	<div><h:upload name="ojtFiles" /></div>
 </div>
 <%@ include file="footer.jsp"%>
 </body>

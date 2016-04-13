@@ -66,6 +66,21 @@
 		<example><![CDATA[h:headerSort]]></example>
 	</tag>
 	
+	<tag>
+		<description><![CDATA[파일업로드]]></description>
+		<name>upload</name>
+		<tag-class>com.common.FileUploadTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description><![CDATA[이름]]></description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<example><![CDATA[h:headerSort]]></example>
+	</tag>
+	
 	<function>
 		<name>toURLEncode</name>
 		<function-class>samsung.neo.commons.EPUtils</function-class>
