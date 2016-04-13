@@ -12,7 +12,7 @@
 	<tag>
 		<description><![CDATA[헤더 소트를 수행하기 위한 태그]]></description>
 		<name>headerSort</name>
-		<tag-class>com.common.TagHandler</tag-class>
+		<tag-class>com.common.tags.TagHandler</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[헤더 소트의 listData명]]></description>
@@ -69,7 +69,7 @@
 	<tag>
 		<description><![CDATA[파일업로드]]></description>
 		<name>upload</name>
-		<tag-class>com.common.FileUploadTag</tag-class>
+		<tag-class>com.common.tags.FileUploadTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<description><![CDATA[이름]]></description>

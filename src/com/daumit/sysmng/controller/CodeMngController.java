@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.common.Common;
-import com.common.MenuController;
+import com.common.etc.Common;
+import com.common.controller.MenuController;
 import com.common.model.User;
 import com.components.codevalue.CodeValueCache;
 import com.daumit.sysmng.service.CodeMngService;

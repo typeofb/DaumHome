@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.common.Common;
+import com.common.etc.Common;
 import com.common.dao.ResultSetData;
 import com.common.dao.SearchCondition;
 import com.daumit.sysmng.service.BoardMngService;
