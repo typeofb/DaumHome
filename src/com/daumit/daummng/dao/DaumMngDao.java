@@ -34,7 +34,7 @@ public class DaumMngDao extends QuerySupport {
 	public ResultSetData selectCopy(List<Object> list) {
 		String key = "idx";
 //		result = sql.queryForList("DaumMng.selectCopy", list);
-		String sql = "SELECT WRITER_ID, WRITER_NAME FROM ARTICLE WHERE 1 = :PARAM AND ARTICLE_SEQ IN (" + createInSql(key, list) + ")";
+		String sql = "SELECT WBTITLE, WBTEXT FROM WBOARD_DATA WHERE 1 = :PARAM AND IDX IN (" + createInSql(key, list) + ")";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("PARAM", 1);
 		assignInParam(key, list, paramMap);
@@ -43,22 +43,22 @@ public class DaumMngDao extends QuerySupport {
 	
 	public ResultSetData selectBBS() {
 //		result = sql.queryForList("DaumMng.selectBBS");
-		String sql = "SELECT BOARD_ID, BOARD_NAME FROM BOARD WHERE BOARD_NAME = :BOARD_NAME";
+		String sql = "SELECT WBTITLE, WBTEXT FROM WBOARD_DATA WHERE ID = :ID";
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("BOARD_NAME", "NOTICE");
+		paramMap.put("ID", "1");
 //		result = namedParameterJdbcTemplate.queryForList(sql, paramMap);
 		return queryForResultSet(sql, paramMap);
 	}
 	
 	public Map<String, Object> selectAuth(Map<String, Object> map) {
 //		result = (Map<String, Object>) sql.queryForObject("DaumMng.selectAuth", map);
-		String sql = "SELECT CODE, CODE_NAME FROM CODE WHERE USE_YN = :useYN AND SORT_ORDER = :sortOrder";
+		String sql = "SELECT WBTITLE, WBTEXT FROM WBOARD_DATA WHERE WBTYPE = :wbtype AND STATE = :state";
 		return queryForMap(sql, map);
 	}
 	
 	public int selectUser(String string) {
 //		result = (Integer) sql.queryForObject("DaumMng.selectUser", string);
-		String sql = "SELECT ROLE FROM USER";
+		String sql = "SELECT IDX FROM WBOARD_DATA WHERE IDX = '1'";
 		return queryForInt(sql, null);
 	}
 	

@@ -25,8 +25,8 @@ public class DaumMngServiceImpl implements DaumMngService {
 		System.out.println(result.getRow());
 		
 		while (result.next()) {
-			String role = result.getString("role");
-			System.out.println(role);
+			String wbtitle = result.getString("WBTITLE");
+			System.out.println(wbtitle);
 		}
 		
 		result.last();
