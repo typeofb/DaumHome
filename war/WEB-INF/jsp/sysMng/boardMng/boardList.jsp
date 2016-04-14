@@ -114,8 +114,8 @@ function headerSort(sortField, sortOrderBy) {
 				<td>&nbsp;&nbsp;검색어</td>
 				<td>
 					<select id="selectItem" name="selectItem">
-						<option value="work_place">제목</option>
-						<option value="user_name">작성자</option>
+						<option value="WBTITLE">제목</option>
+						<option value="USNAME">작성자</option>
 					</select>
 				</td>
 				<td>
