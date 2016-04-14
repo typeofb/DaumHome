@@ -117,6 +117,11 @@
 	</form>
 	<div><h:upload name="ojtFiles" /></div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	<h:init />
+});
+</script>
 <%@ include file="footer.jsp"%>
 </body>
 </html>

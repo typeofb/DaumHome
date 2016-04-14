@@ -10,9 +10,17 @@
 	<uri>http://eagleoffice.co.kr/tags/neo</uri>
 	
 	<tag>
+		<description><![CDATA[초기화]]></description>
+		<name>init</name>
+		<tag-class>com.common.tags.InitTag</tag-class>
+		<body-content>empty</body-content>
+		<example><![CDATA[h:init]]></example>
+	</tag>
+	
+	<tag>
 		<description><![CDATA[헤더 소트를 수행하기 위한 태그]]></description>
 		<name>headerSort</name>
-		<tag-class>com.common.tags.TagHandler</tag-class>
+		<tag-class>com.common.tags.HeaderSortTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[헤더 소트의 listData명]]></description>
@@ -78,7 +86,7 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<example><![CDATA[h:headerSort]]></example>
+		<example><![CDATA[h:upload]]></example>
 	</tag>
 	
 	<function>
