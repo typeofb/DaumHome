@@ -32,7 +32,7 @@ public class FileUploadTag extends TagBase {
 			
 //			setTagValue("initializedInnoFD", "Y", false);
 			
-			pageContext.setAttribute("fileUpload", this, PageContext.REQUEST_SCOPE);
+//			pageContext.setAttribute("fileUpload", this, PageContext.REQUEST_SCOPE);
 			
 			addScript("alert(\"InitTag\");");
 			
