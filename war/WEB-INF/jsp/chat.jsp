@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="layout/header.jsp"%>
 <script type="text/javascript">
 	var isWait = false;
 	function connect(msg) {
@@ -49,6 +49,6 @@
 	<span>메시지 : </span><input type="text" id="message" name="message" onkeypress="if (event.keyCode==13) send();" />
 	<input type="button" value="전송" onclick="send();" />
 </div>
-<%@ include file="footer.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 </body>
 </html>

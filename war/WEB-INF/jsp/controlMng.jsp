@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="layout/header.jsp"%>
 <script type="text/javascript">
 function control() {
 	document.cForm.action = "<c:url value='commandControl.do' />";
@@ -11,6 +11,6 @@ function control() {
 		<div><input type="button" value="예약제어" onclick="control();" /></div>
 	</form>
 </div>
-<%@ include file="footer.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 </body>
 </html>

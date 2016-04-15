@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="layout/header.jsp"%>
 <div class="container">
 	<!-- 에디터 시작 -->
 	<!--
@@ -583,6 +583,6 @@
 <div><button onclick='loadContent()'>SAMPLE - load contents to editor</button></div>
 <!-- End: Loading Contents -->
 
-<%@ include file="footer.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 </body>
 </html>

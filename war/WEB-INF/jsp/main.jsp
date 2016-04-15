@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="layout/header.jsp"%>
 <style type="text/css">
 .file_input_textbox { float: left; width: 220px; height: 19px; line-height: 19px; border: 1px solid #adafb5; resize: none; }
 .file_input_div { position: relative; width: 90px; height: 25px; overflow: hidden; }
@@ -122,6 +122,6 @@ $(document).ready(function() {
 	<h:init />
 });
 </script>
-<%@ include file="footer.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 </body>
 </html>

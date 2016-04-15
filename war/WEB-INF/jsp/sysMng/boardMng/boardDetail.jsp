@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../header.jsp"%>
+<%@ include file="../../layout/header.jsp"%>
 <script type="text/javascript">
 function boardDel() {
 	if(!confirm("삭제하시겠습니까?")) return;
@@ -84,6 +84,6 @@ function goList() {
 		</div>
 	</div>
 </div>
-<%@ include file="../../footer.jsp"%>
+<%@ include file="../../layout/footer.jsp"%>
 </body>
 </html>

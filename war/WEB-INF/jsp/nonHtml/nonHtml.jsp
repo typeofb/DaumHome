@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 <div class="container">
 	<ul>
 		<li>비 HTML
@@ -11,6 +11,6 @@
 		</li>
 	</ul>
 </div>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>
