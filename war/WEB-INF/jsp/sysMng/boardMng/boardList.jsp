@@ -99,8 +99,8 @@ function headerSort(sortField, sortOrderBy) {
 	</div>
 	<div class="tab_v1">
 		<ul>
-			<li class="on"><a href="#">게시판</a></li>
-			<li><a href="#">자료실</a></li>
+			<li class="on"><a href="javascript:;">게시판</a></li>
+			<li><a href="javascript:;">자료실</a></li>
 		</ul>
 	</div>
 	<form>

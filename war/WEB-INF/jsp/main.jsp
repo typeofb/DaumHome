@@ -86,7 +86,7 @@
 </script>
 <iframe name="my_iframe" style="display: none;"></iframe>
 <div class="container">
-	<div><a href="#" onclick="EP.showPopup('MULTI_DEPT', callback, '418', '');">jquery plugin modal test</a></div>
+	<div><a href="javascript:;" onclick="EP.showPopup('MULTI_DEPT', callback, '418', '');">jquery plugin modal test</a></div>
 	<form name="mForm" method="post" enctype="multipart/form-data" target="my_iframe">
 		<table>
 			<tr>

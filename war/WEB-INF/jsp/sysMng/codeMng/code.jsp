@@ -137,8 +137,8 @@ window.onload = function() {
 	</div>
 	<div class="tab_v1">
 		<ul>
-			<li class="on"><a href="#">본부</a></li>
-			<li><a href="#">지사</a></li>
+			<li class="on"><a href="javascript:;">본부</a></li>
+			<li><a href="javascript:;">지사</a></li>
 		</ul>
 	</div>
 	<div class="list_search_bg">
