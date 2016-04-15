@@ -20,7 +20,7 @@ public class BoardMngDao extends QuerySupport {
 //		return queryForResultSet(sql, paramMap);
 		String sql = "SELECT IDX AS POST_ID, USNAME AS USR_NM, WBTITLE AS TITLE, WBHIT AS READ_CNT, WBDATE AS REG_DT"
 				  + " FROM WBOARD_DATA"
-				  + " WHERE 1 = :where";
+				  + " WHERE STATE = :state";
 		return queryForPage(sql, paramMap, sc);
 	}
 	

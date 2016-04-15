@@ -11,9 +11,6 @@ function boardReg() {
 		success : function(result) {
 			var json = JSON.parse(result);
 			if (json.result == true) {
-				$("targetPage").val(json.targetPage);
-				$("beginDate").val(json.beginDate);
-				$("endDate").val(json.endDate);
 				alert("등록되었습니다.");
 				$("form").attr("method", "post");
 				$("form").attr("action", "boardList.do");
@@ -49,6 +46,11 @@ function goList() {
 			<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 			<input type="hidden" id="beginDate" name="beginDate" value="${beginDate}" />
 			<input type="hidden" id="endDate" name="endDate" value="${endDate}" />
+			<input type="hidden" id="selectItem" name="selectItem" value="${selectItem}" />
+			<input type="hidden" id="searchText" name="searchText" value="${searchText}" />
+			<input type="hidden" id="sortYn" name="sortYn" value="${sortYn}" />
+			<input type="hidden" id="sortField" name="sortField" value="${sortField}" />
+			<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${sortOrderBy}" />
 			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 				<colgroup>
 					<col width="50" />

@@ -126,13 +126,13 @@ function headerSort(sortField, sortOrderBy) {
 		</table>
 	</div>
 	<div class="list_table">
+		<input type="hidden" id="postId" name="postId" value="" />
 		<input type="hidden" id="rowSize" name="rowSize" value="${rowSize}" />
 		<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 		<input type="hidden" id="pageGroupSize" name="pageGroupSize" value="${pageGroupSize}" />
 		<input type="hidden" id="sortYn" name="sortYn" value="${sortYn}" />
 		<input type="hidden" id="sortField" name="sortField" value="${sortField}" />
 		<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${sortOrderBy}" />
-		<input type="hidden" id="postId" name="postId" value="" />
 		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 			<colgroup>
 				<col width="50" />

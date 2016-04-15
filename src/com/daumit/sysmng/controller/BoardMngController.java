@@ -63,7 +63,7 @@ public class BoardMngController {
 		int pageGroupSize = Integer.parseInt(Common.NVL(pageGroupSizeStr, "10"));
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("where", 1);
+		paramMap.put("state", "Y");
 		
 		SearchCondition sc = new SearchCondition();
 		sc.addSearchKey("searchText");
@@ -108,18 +108,20 @@ public class BoardMngController {
 	
 	// 게시판 상세보기
 	@RequestMapping(value = "boardDetail")
-	public ModelAndView boardDetail(@RequestParam(value="postId", required=true) String postId,
-			@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) {
+	public ModelAndView boardDetail(@RequestParam Map<String, String> params) {
 		log.info("console - boardDetail");
 		
-		Map<String, Object> map = boardMngService.selectBoardDetail(postId);
+		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", targetPage);
-		mav.addObject("beginDate", beginDate);
-		mav.addObject("endDate", endDate);
+		mav.addObject("targetPage", params.get("targetPage"));
+		mav.addObject("beginDate", params.get("beginDate"));
+		mav.addObject("endDate", params.get("endDate"));
+		mav.addObject("selectItem", params.get("selectItem"));
+		mav.addObject("searchText", params.get("searchText"));
+		mav.addObject("sortYn", params.get("sortYn"));
+		mav.addObject("sortField", params.get("sortField"));
+		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardDetail");
 		return mav;
@@ -127,35 +129,39 @@ public class BoardMngController {
 	
 	// 게시판 등록으로 이동
 	@RequestMapping(value = "goReg")
-	public ModelAndView goReg(@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) {
+	public ModelAndView goReg(@RequestParam Map<String, String> params) {
 		log.info("console - goReg");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", targetPage);
-		mav.addObject("beginDate", beginDate);
-		mav.addObject("endDate", endDate);
+		mav.addObject("targetPage", params.get("targetPage"));
+		mav.addObject("beginDate", params.get("beginDate"));
+		mav.addObject("endDate", params.get("endDate"));
+		mav.addObject("selectItem", params.get("selectItem"));
+		mav.addObject("searchText", params.get("searchText"));
+		mav.addObject("sortYn", params.get("sortYn"));
+		mav.addObject("sortField", params.get("sortField"));
+		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
 		mav.setViewName("sysMng/boardMng/boardReg");
 		return mav;
 	}
 	
 	// 게시판 등록
 	@RequestMapping(value = "boardReg")
-	public ModelAndView boardReg(HttpServletResponse response,
-			@RequestParam Map<String, Object> paramMap,
-			@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) throws IOException {
+	public ModelAndView boardReg(HttpServletResponse response, @RequestParam Map<String, Object> params) throws IOException {
 		log.info("console - boardReg");
 		
-		int result = boardMngService.insertBoard(paramMap);
+		int result = boardMngService.insertBoard(params);
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", targetPage);
-		jsonObj.put("beginDate", beginDate);
-		jsonObj.put("endDate", endDate);
+		jsonObj.put("targetPage", params.get("targetPage"));
+		jsonObj.put("beginDate", params.get("beginDate"));
+		jsonObj.put("endDate", params.get("endDate"));
+		jsonObj.put("selectItem", params.get("selectItem"));
+		jsonObj.put("searchText", params.get("searchText"));
+		jsonObj.put("sortYn", params.get("sortYn"));
+		jsonObj.put("sortField", params.get("sortField"));
+		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -165,18 +171,20 @@ public class BoardMngController {
 	
 	// 게시판 수정으로 이동
 	@RequestMapping(value = "goMod")
-	public ModelAndView goMod(@RequestParam(value="postId", required=true) String postId,
-			@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) {
+	public ModelAndView goMod(@RequestParam Map<String, String> params) {
 		log.info("console - goMod");
 		
-		Map<String, Object> map = boardMngService.selectBoardDetail(postId);
+		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", targetPage);
-		mav.addObject("beginDate", beginDate);
-		mav.addObject("endDate", endDate);
+		mav.addObject("targetPage", params.get("targetPage"));
+		mav.addObject("beginDate", params.get("beginDate"));
+		mav.addObject("endDate", params.get("endDate"));
+		mav.addObject("selectItem", params.get("selectItem"));
+		mav.addObject("searchText", params.get("searchText"));
+		mav.addObject("sortYn", params.get("sortYn"));
+		mav.addObject("sortField", params.get("sortField"));
+		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardMod");
 		return mav;
@@ -184,20 +192,21 @@ public class BoardMngController {
 	
 	// 게시판 수정
 	@RequestMapping(value = "boardMod")
-	public ModelAndView boardMod(HttpServletResponse response,
-			@RequestParam Map<String, Object> paramMap,
-			@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) throws IOException {
+	public ModelAndView boardMod(HttpServletResponse response, @RequestParam Map<String, Object> params) throws IOException {
 		log.info("console - boardMod");
 		
-		int result = boardMngService.updateBoard(paramMap);
+		int result = boardMngService.updateBoard(params);
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", targetPage);
-		jsonObj.put("beginDate", beginDate);
-		jsonObj.put("endDate", endDate);
+		jsonObj.put("targetPage", params.get("targetPage"));
+		jsonObj.put("beginDate", params.get("beginDate"));
+		jsonObj.put("endDate", params.get("endDate"));
+		jsonObj.put("selectItem", params.get("selectItem"));
+		jsonObj.put("searchText", params.get("searchText"));
+		jsonObj.put("sortYn", params.get("sortYn"));
+		jsonObj.put("sortField", params.get("sortField"));
+		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -207,20 +216,21 @@ public class BoardMngController {
 	
 	// 게시판 삭제
 	@RequestMapping(value = "boardDel")
-	public ModelAndView boardDel(HttpServletResponse response,
-			@RequestParam(value="postId", required=true) String postId,
-			@RequestParam(value="targetPage", required=false) String targetPage,
-			@RequestParam(value="beginDate", required=false) String beginDate,
-			@RequestParam(value="endDate", required=false) String endDate) throws IOException {
+	public ModelAndView boardDel(HttpServletResponse response, @RequestParam Map<String, String> params) throws IOException {
 		log.info("console - boardDel");
 		
-		int result = boardMngService.deleteBoard(postId);
+		int result = boardMngService.deleteBoard(params.get("postId"));
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", targetPage);
-		jsonObj.put("beginDate", beginDate);
-		jsonObj.put("endDate", endDate);
+		jsonObj.put("targetPage", params.get("targetPage"));
+		jsonObj.put("beginDate", params.get("beginDate"));
+		jsonObj.put("endDate", params.get("endDate"));
+		jsonObj.put("selectItem", params.get("selectItem"));
+		jsonObj.put("searchText", params.get("searchText"));
+		jsonObj.put("sortYn", params.get("sortYn"));
+		jsonObj.put("sortField", params.get("sortField"));
+		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
