@@ -114,14 +114,7 @@ public class BoardMngController {
 		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", params.get("targetPage"));
-		mav.addObject("beginDate", params.get("beginDate"));
-		mav.addObject("endDate", params.get("endDate"));
-		mav.addObject("selectItem", params.get("selectItem"));
-		mav.addObject("searchText", params.get("searchText"));
-		mav.addObject("sortYn", params.get("sortYn"));
-		mav.addObject("sortField", params.get("sortField"));
-		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
+		mav.addObject("params", params);
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardDetail");
 		return mav;
@@ -133,14 +126,7 @@ public class BoardMngController {
 		log.info("console - goReg");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", params.get("targetPage"));
-		mav.addObject("beginDate", params.get("beginDate"));
-		mav.addObject("endDate", params.get("endDate"));
-		mav.addObject("selectItem", params.get("selectItem"));
-		mav.addObject("searchText", params.get("searchText"));
-		mav.addObject("sortYn", params.get("sortYn"));
-		mav.addObject("sortField", params.get("sortField"));
-		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
+		mav.addObject("params", params);
 		mav.setViewName("sysMng/boardMng/boardReg");
 		return mav;
 	}
@@ -154,14 +140,6 @@ public class BoardMngController {
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", params.get("targetPage"));
-		jsonObj.put("beginDate", params.get("beginDate"));
-		jsonObj.put("endDate", params.get("endDate"));
-		jsonObj.put("selectItem", params.get("selectItem"));
-		jsonObj.put("searchText", params.get("searchText"));
-		jsonObj.put("sortYn", params.get("sortYn"));
-		jsonObj.put("sortField", params.get("sortField"));
-		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -177,14 +155,7 @@ public class BoardMngController {
 		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("targetPage", params.get("targetPage"));
-		mav.addObject("beginDate", params.get("beginDate"));
-		mav.addObject("endDate", params.get("endDate"));
-		mav.addObject("selectItem", params.get("selectItem"));
-		mav.addObject("searchText", params.get("searchText"));
-		mav.addObject("sortYn", params.get("sortYn"));
-		mav.addObject("sortField", params.get("sortField"));
-		mav.addObject("sortOrderBy", params.get("sortOrderBy"));
+		mav.addObject("params", params);
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardMod");
 		return mav;
@@ -199,14 +170,6 @@ public class BoardMngController {
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", params.get("targetPage"));
-		jsonObj.put("beginDate", params.get("beginDate"));
-		jsonObj.put("endDate", params.get("endDate"));
-		jsonObj.put("selectItem", params.get("selectItem"));
-		jsonObj.put("searchText", params.get("searchText"));
-		jsonObj.put("sortYn", params.get("sortYn"));
-		jsonObj.put("sortField", params.get("sortField"));
-		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -223,14 +186,6 @@ public class BoardMngController {
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		jsonObj.put("targetPage", params.get("targetPage"));
-		jsonObj.put("beginDate", params.get("beginDate"));
-		jsonObj.put("endDate", params.get("endDate"));
-		jsonObj.put("selectItem", params.get("selectItem"));
-		jsonObj.put("searchText", params.get("searchText"));
-		jsonObj.put("sortYn", params.get("sortYn"));
-		jsonObj.put("sortField", params.get("sortField"));
-		jsonObj.put("sortOrderBy", params.get("sortOrderBy"));
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

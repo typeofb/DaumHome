@@ -44,14 +44,14 @@ function goList() {
 	<div class="list_table">
 		<form>
 			<input type="hidden" id="postId" name="postId" value="${map.POST_ID}" />
-			<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
-			<input type="hidden" id="beginDate" name="beginDate" value="${beginDate}" />
-			<input type="hidden" id="endDate" name="endDate" value="${endDate}" />
-			<input type="hidden" id="selectItem" name="selectItem" value="${selectItem}" />
-			<input type="hidden" id="searchText" name="searchText" value="${searchText}" />
-			<input type="hidden" id="sortYn" name="sortYn" value="${sortYn}" />
-			<input type="hidden" id="sortField" name="sortField" value="${sortField}" />
-			<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${sortOrderBy}" />
+			<input type="hidden" id="targetPage" name="targetPage" value="${params.targetPage}" />
+			<input type="hidden" id="beginDate" name="beginDate" value="${params.beginDate}" />
+			<input type="hidden" id="endDate" name="endDate" value="${params.endDate}" />
+			<input type="hidden" id="selectItem" name="selectItem" value="${params.selectItem}" />
+			<input type="hidden" id="searchText" name="searchText" value="${params.searchText}" />
+			<input type="hidden" id="sortYn" name="sortYn" value="${params.sortYn}" />
+			<input type="hidden" id="sortField" name="sortField" value="${params.sortField}" />
+			<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${params.sortOrderBy}" />
 			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 				<colgroup>
 					<col width="50" />

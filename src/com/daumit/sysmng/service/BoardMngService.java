@@ -23,10 +23,10 @@ public class BoardMngService {
 		return result;
 	}
 	
-	public int selectBoardCnt(Map<String, Object> paramMap) {
-		int result = dao.selectBoardCnt(paramMap);
-		return result;
-	}
+//	public int selectBoardCnt(Map<String, Object> paramMap) {
+//		int result = dao.selectBoardCnt(paramMap);
+//		return result;
+//	}
 	
 	@SuppressWarnings("serial")
 	public Map<String, Object> selectBoardDetail(final String postId) {

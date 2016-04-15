@@ -24,10 +24,12 @@ public class BoardMngDao extends QuerySupport {
 		return queryForPage(sql, paramMap, sc);
 	}
 	
-	public int selectBoardCnt(Map<String, Object> paramMap) {
-		String sql = "SELECT COUNT(1) TOTAL_ROW_SIZE FROM WBOARD_DATA";
-		return queryForInt(sql, paramMap);
-	}
+//	public int selectBoardCnt(Map<String, Object> paramMap) {
+//		String sql = "SELECT COUNT(1) TOTAL_ROW_SIZE"
+//				  + " FROM WBOARD_DATA"
+//				  + " WHERE STATE = :state";
+//		return queryForInt(sql, paramMap);
+//	}
 	
 	public Map<String, Object> selectBoardDetail(Map<String, Object> paramMap) {
 		String sql = "SELECT IDX AS POST_ID, WBTITLE AS TITLE, WBTEXT AS CONTENTS, WBDATE AS REG_DT, WBHIT AS READ_CNT, USIDX AS USR_ID"
@@ -37,8 +39,8 @@ public class BoardMngDao extends QuerySupport {
 	}
 	
 	public int insertBoard(BoardMngDto paramMap) {
-		String sql = "INSERT INTO WBOARD_DATA (IDX, USNAME, WBTITLE, WBTEXT, WBDATE)"
-				  + " VALUES (TB_WBOARD_DATA_SEQ.NEXTVAL, 'test', :title, :contents, SYSDATE)";
+		String sql = "INSERT INTO WBOARD_DATA (IDX, USNAME, WBTITLE, WBTEXT, WBDATE, STATE)"
+				  + " VALUES (TB_WBOARD_DATA_SEQ.NEXTVAL, 'test', :title, :contents, SYSDATE, 'Y')";
 		return update(sql, paramMap);
 	}
 	
