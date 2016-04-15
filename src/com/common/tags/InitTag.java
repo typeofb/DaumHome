@@ -12,8 +12,8 @@ public class InitTag extends TagBase {
 	private static final long serialVersionUID = 1L;
 	
 	public int doStartTag() throws JspException {
-		StringBuffer sb = (StringBuffer) getTagValue("JS", false);
 		JspWriter out = pageContext.getOut();
+		StringBuffer sb = (StringBuffer) getTagValue("JS", false);
 		try {
 			if (sb != null)
 				out.print(sb.toString());

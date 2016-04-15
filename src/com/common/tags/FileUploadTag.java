@@ -25,7 +25,7 @@ public class FileUploadTag extends TagBase {
 		JspWriter out = pageContext.getOut();
 		StringBuffer source = new StringBuffer();
 		try {
-			source.append(ServletUtils.include("globalError.jsp", pageContext));
+			source.append(ServletUtils.include("errorPages/globalError.jsp", pageContext));
 			source.append("<script language=\"javascript\">\n");
 			source.append("alert(\"FileUploadTag\");\n");
 			source.append("</script>\n");
