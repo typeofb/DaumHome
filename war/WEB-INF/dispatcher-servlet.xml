@@ -63,8 +63,8 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="Exception">globalError</prop>
-				<prop key="org.springframework.web.HttpSessionRequiredException">sessionError</prop>
+				<prop key="Exception">errorPages/globalError</prop>
+				<prop key="org.springframework.web.HttpSessionRequiredException">errorPages/sessionError</prop>
 			</props>
 		</property>
 	</bean>

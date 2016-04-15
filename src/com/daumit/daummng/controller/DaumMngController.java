@@ -433,7 +433,9 @@ public class DaumMngController {
 	
 	// 인증 후 권한 없는 요청
 	@RequestMapping(value = "/accessDeny")
-	public void accessDeny() {
+	public String accessDeny() {
 		log.info("console - accessDeny");
+		
+		return "errorPages/accessDeny";
 	}
 }
