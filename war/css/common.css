@@ -109,8 +109,8 @@ textarea {
 }
 
 .container {
-	width: auto;
-	height: 500px;
+	width: 100%;
+	min-height: 100%;
 	padding-left: 10px;
 	clear: both;
 	margin: 0 auto;
@@ -333,5 +333,8 @@ textarea {
 }
 
 .bottomBar {
+	clear: both;
+	height: 50px;
+	width: 100%;
 	text-align: center;
 }
