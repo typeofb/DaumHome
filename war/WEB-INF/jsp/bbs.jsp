@@ -584,5 +584,3 @@
 <!-- End: Loading Contents -->
 
 <%@ include file="layout/footer.jsp"%>
-</body>
-</html>

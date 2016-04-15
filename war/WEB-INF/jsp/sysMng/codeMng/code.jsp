@@ -181,5 +181,3 @@ window.onload = function() {
 	</div>
 </div>
 <%@ include file="../../layout/footer.jsp"%>
-</body>
-</html>

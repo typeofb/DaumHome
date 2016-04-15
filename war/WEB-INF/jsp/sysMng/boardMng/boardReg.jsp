@@ -72,5 +72,3 @@ function goList() {
 	</div>
 </div>
 <%@ include file="../../layout/footer.jsp"%>
-</body>
-</html>

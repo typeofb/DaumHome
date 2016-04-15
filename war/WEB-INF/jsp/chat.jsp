@@ -50,5 +50,3 @@
 	<input type="button" value="전송" onclick="send();" />
 </div>
 <%@ include file="layout/footer.jsp"%>
-</body>
-</html>

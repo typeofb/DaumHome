@@ -2,3 +2,5 @@
 	<div class="bottomBar">
 		<p>COPYRIGHTⓒ2016 By Shin Hyeon-ho. ALL RIGHTS RESEVED.</p>
 	</div>
+</body>
+</html>

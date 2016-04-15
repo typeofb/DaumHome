@@ -171,5 +171,3 @@ function headerSort(sortField, sortOrderBy) {
 	</form>
 </div>
 <%@ include file="../../layout/footer.jsp"%>
-</body>
-</html>
