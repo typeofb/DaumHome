@@ -27,14 +27,14 @@ public class FileUploadTag extends TagBase {
 		try {
 			source.append(ServletUtils.include("errorPages/globalError.jsp", pageContext));
 			source.append("<script language=\"javascript\">\n");
-			source.append("alert(\"FileUploadTag\");\n");
+			source.append("document.write(\"FileUploadTag\");\n");
 			source.append("</script>\n");
 			
 //			setTagValue("initializedInnoFD", "Y", false);
 			
 //			pageContext.setAttribute("fileUpload", this, PageContext.REQUEST_SCOPE);
 			
-			addScript("alert(\"InitTag\");");
+			addScript("$(\"#mainPageUpload\").after(\"InitTag\");");
 			
 			out.print(source);
 		} catch (Exception e) {

@@ -115,7 +115,7 @@
 			</tr>
 		</table>
 	</form>
-	<div><h:upload name="ojtFiles" /></div>
+	<div id="mainPageUpload"><h:upload name="ojtFiles" /></div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
