@@ -109,7 +109,7 @@ textarea {
 }
 
 .container {
-	width: 100%;
+	width: auto;
 	min-height: 100%;
 	padding-left: 10px;
 	clear: both;
