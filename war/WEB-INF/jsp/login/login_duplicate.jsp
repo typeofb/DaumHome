@@ -6,5 +6,6 @@
 </head>
 <body>
 	<h2>로그인 중복</h2>
+	<a href="login_main.do">로그인</a>
 </body>
 </html>

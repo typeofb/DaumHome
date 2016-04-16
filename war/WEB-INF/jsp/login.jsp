@@ -7,15 +7,6 @@
 <title>다음정보기술</title>
 <script type="text/javascript" src="<c:url value='/js/jquery-1.9.1.min.js' />"></script>
 <script type="text/javascript">
-function login() {
-	document.loginForm.action = "loginCheck.do";
-	document.loginForm.submit();
-}
-
-function cancel() {
-	self.close();
-}
-
 function getCookie(cookieName) {
 	cookieName = cookieName + '=';
 	var cookieData = document.cookie;
@@ -74,13 +65,13 @@ $(document).ready(function() {
 </head>
 
 <body>
-<form name="loginForm" method="post">
+<form name="loginForm" method="post" action="loginCheck.do">
 	<div>
 		<ul>
 			<li><input type="text" name="userId" />아이디</li>
 			<li><input type="password" name="userPw" />비밀번호</li>
-			<li><a href="javascript:;" onclick="login();">로그인</a></li>
-			<li><a href="javascript:;" onclick="cancel();">취소</a></li>
+			<li><input type="submit" value="로그인"></li>
+			<li><a href="javascript:;" onclick="self.close()">취소</a></li>
 			<li>계정요청</li>
 			<li><input type="checkbox" id="idSaveCheck">아이디 저장</li>
 		</ul>

@@ -32,9 +32,9 @@
 	<c:when test="${loginResult eq 'C'}">
 		<script>
 			window.onload = function() {
-				getDialogArguments();
-				var varParam = window.dialogArguments;
-				alert(varParam);
+				getDialogArguments(); // showModalDialogCallee.js // for Chrome
+				var varParam = window.dialogArguments; // IE일 때 IE 내장 window.dialogArguments, Chrome일 때 showModalDialogCallee.js
+				alert("loginCheck - window.onload() : " + varParam);
 				
 				var code = document.getElementById("userAuth").value;
 				if (code == "00") {
@@ -48,8 +48,8 @@
 				}
 				var userAuth = document.getElementById("userAuth");
 				var userId = document.getElementById("userId");
-				setReturnValue({ userAuth : userAuth.value, userId : userId.value });
-				window.returnValue = { userAuth : userAuth.value, userId : userId.value }; //자바스크립트 객체 리터럴
+				setReturnValue({ userAuth : userAuth.value, userId : userId.value }); // showModalDialogCallee.js // for Chrome
+				window.returnValue = { userAuth : userAuth.value, userId : userId.value }; // 자바스크립트 객체 리터럴, // for IE, Firefox
 				window.close();
 			}
 		</script>

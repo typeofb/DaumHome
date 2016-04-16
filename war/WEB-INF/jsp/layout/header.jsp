@@ -48,21 +48,25 @@ function hiddenNav() {
 	$(".snbNav").hide();
 }
 
-// for IE, Firefox
 function fnLogin(pw) {
+	// IE일 때 IE 내장 window.showModalDialog(), Chrome일 때 showModalDialog.js
 	var rtnVal = window.showModalDialog("${pageContext.request.contextPath}/login.do", "abcd", "resizable:yes; center:on; dialogwidth:400px; dialogheight:400px;");
-	otherParameters[0] = pw;
-	if (rtnVal != undefined)
-		if (rtnVal.userAuth == "00")
+	// IE일 때 자식창 닫힌 후, Chrome일 때 자식창 열린 후
+	otherParameters[0] = pw; // for Chrome
+	alert("header - fnLogin() : " + otherParameters[0]); // for Chrome
+	if (rtnVal != undefined) // for IE, Firefox
+		if (rtnVal.userAuth == "00") {
 			window.location.reload();
+		}
 }
 
 // for Chrome
 function showModalDialogCallback(rtnVal) {
-	alert(otherParameters[0]);
+	alert("header - showModalDialogCallback() : " + otherParameters[0]);
 	if (rtnVal != undefined)
-		if (rtnVal.userAuth == "00")
+		if (rtnVal.userAuth == "00") {
 			window.location.reload();
+		}
 }
 </script>
 </head>
