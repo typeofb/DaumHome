@@ -34,27 +34,18 @@ public class BoardMngService {
 		return result;
 	}
 	
-	public int insertBoard(Map<String, Object> paramMap) {
-		BoardMngDto dto = new BoardMngDto();
-		dto.setTitle(paramMap.get("title").toString());
-		dto.setContents(paramMap.get("contents").toString());
-		int result = dao.insertBoard(dto);
+	public int insertBoard(BoardMngDto boardMngDto) {
+		int result = dao.insertBoard(boardMngDto);
 		return result;
 	}
 	
-	public int updateBoard(Map<String, Object> paramMap) {
-		BoardMngDto dto = new BoardMngDto();
-		dto.setPostId(paramMap.get("postId").toString());
-		dto.setTitle(paramMap.get("title").toString());
-		dto.setContents(paramMap.get("contents").toString());
-		int result = dao.updateBoard(dto);
+	public int updateBoard(BoardMngDto boardMngDto) {
+		int result = dao.updateBoard(boardMngDto);
 		return result;
 	}
 	
-	public int deleteBoard(String postId) {
-		BoardMngDto dto = new BoardMngDto();
-		dto.setPostId(postId);
-		int result = dao.deleteBoard(dto);
+	public int deleteBoard(BoardMngDto boardMngDto) {
+		int result = dao.deleteBoard(boardMngDto);
 		return result;
 	}
 }
