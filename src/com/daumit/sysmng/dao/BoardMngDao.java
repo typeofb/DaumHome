@@ -38,21 +38,21 @@ public class BoardMngDao extends QuerySupport {
 		return queryForMap(sql, paramMap);
 	}
 	
-	public int insertBoard(BoardMngDto paramMap) {
+	public int insertBoard(BoardMngDto boardMngDto) {
 		String sql = "INSERT INTO WBOARD_DATA (IDX, USNAME, WBTITLE, WBTEXT, WBDATE, STATE)"
 				  + " VALUES (TB_WBOARD_DATA_SEQ.NEXTVAL, 'test', :title, :contents, SYSDATE, 'Y')";
-		return update(sql, paramMap);
+		return update(sql, boardMngDto);
 	}
 	
-	public int updateBoard(BoardMngDto paramMap) {
+	public int updateBoard(BoardMngDto boardMngDto) {
 		String sql = "UPDATE WBOARD_DATA SET WBTITLE = :title, WBTEXT = :contents"
 				  + " WHERE IDX = :postId";
-		return update(sql, paramMap);
+		return update(sql, boardMngDto);
 	}
 	
-	public int deleteBoard(BoardMngDto paramMap) {
+	public int deleteBoard(BoardMngDto boardMngDto) {
 		String sql = "UPDATE WBOARD_DATA SET WB_NOTICE = 'N', STATE = 'N'"
 				  + " WHERE IDX = :postId";
-		return update(sql, paramMap);
+		return update(sql, boardMngDto);
 	}
 }
