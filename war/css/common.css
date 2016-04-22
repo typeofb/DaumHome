@@ -108,12 +108,8 @@ textarea {
 	background: #0c4da2;
 }
 
-.container {
-	width: auto;
-	min-height: 100%;
-	padding-left: 10px;
-	clear: both;
-	margin: 0 auto;
+.contentsArea {
+	padding-top: 5px;
 }
 
 .location {

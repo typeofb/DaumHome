@@ -86,36 +86,39 @@
 </script>
 <iframe name="my_iframe" style="display: none;"></iframe>
 <div class="container">
-	<div><a href="javascript:;" onclick="EP.showPopup('MULTI_DEPT', callback, '418', '');">jquery plugin modal test</a></div>
-	<form name="mForm" method="post" enctype="multipart/form-data" target="my_iframe">
-		<table>
-			<tr>
-				<td>
-					<input type="text" id="fileName" readonly="readonly" class="file_input_textbox" />
-					<div class="file_input_div">
-						<input type="button" value="찾아보기..." class="file_input_button" />
-						<input type="file" id="attachFiles_1" name="attachFiles_1" onchange="javascript:document.getElementById('fileName').value=this.value" class="file_input_hidden" />
-					</div>
-				</td>
-				<td>
-					<input type="button" value="추가" onclick="javascript:addFile();" class="file_add_button" />
-					<input type="button" value="삭제" onclick="javascript:delFile();" class="file_add_button" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<select id="fileList" name="fileList" multiple="multiple" size="10" class="file_list_select"></select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="button" value="업로드" onclick="javascript:upload()" class="file_upload_button" />
-					<input type="button" value="취소" onclick="javascript:cancel();" class="file_upload_button" />
-				</td>
-			</tr>
-		</table>
-	</form>
-	<div id="mainPageUpload"><h:upload name="ojtFiles" /></div>
+	<%@ include file="layout/lnbArea.jsp"%>
+	<div class="contentsArea">
+		<div><a href="javascript:;" onclick="EP.showPopup('MULTI_DEPT', callback, '418', '');">jquery plugin modal test</a></div>
+		<form name="mForm" method="post" enctype="multipart/form-data" target="my_iframe">
+			<table>
+				<tr>
+					<td>
+						<input type="text" id="fileName" readonly="readonly" class="file_input_textbox" />
+						<div class="file_input_div">
+							<input type="button" value="찾아보기..." class="file_input_button" />
+							<input type="file" id="attachFiles_1" name="attachFiles_1" onchange="javascript:document.getElementById('fileName').value=this.value" class="file_input_hidden" />
+						</div>
+					</td>
+					<td>
+						<input type="button" value="추가" onclick="javascript:addFile();" class="file_add_button" />
+						<input type="button" value="삭제" onclick="javascript:delFile();" class="file_add_button" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<select id="fileList" name="fileList" multiple="multiple" size="10" class="file_list_select"></select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" value="업로드" onclick="javascript:upload()" class="file_upload_button" />
+						<input type="button" value="취소" onclick="javascript:cancel();" class="file_upload_button" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div id="mainPageUpload"><h:upload name="ojtFiles" /></div>
+	</div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {

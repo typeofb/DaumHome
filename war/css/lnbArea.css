@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+
+.lnbArea {
+	margin-right: 5px;
+	float: left;
+	width: 160px;
+	height: 100%;
+	border-right-color: #4591d7;
+	border-left-color: #4591d7;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+}
+
+.lnbArea .ct01 {
+	height: 18px;
+	padding-top: 7px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	position: relative;
+	background-image: url("../images/bg_tdbar04.gif");
+	background-attachment: scroll;
+	background-repeat: repeat-x;
+	background-position-x: 0%;
+	background-position-y: 0%;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+	border-bottom-color: #c6cbd4;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+.lnbArea .ct01 .vam2 {
+	vertical-align: -2px;
+}
+
+.lnbArea .ct01 .magR3 {
+	margin-right: 3px;
+}
+
+.lnbArea .ct01 a {
+	color: #373737;
+	line-height: normal;
+	font-family: "gulim";
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	font-size-adjust: none;
+	font-stretch: normal;
+}
+
+.lnbArea .ct01 a:hover {
+	font: bold 12px 'gulim';
+	color: #FD5D05;
+}
+
+.lnbArea .ct02 {
+	margin-top: 7px;
+	margin-right: 0px;
+	margin-bottom: 6px;
+	margin-left: 14px;
+	position: relative;
+}
+
+.lnbArea .ct02 li {
+	padding-top: 3px;
+	padding-right: 0px;
+	padding-bottom: 3px;
+	padding-left: 0px;
+}
+
+.lnbArea .ct02 li a {
+	color: #373737;
+	line-height: normal;
+	padding-left: 12px;
+	font-family: "gulim";
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	font-size-adjust: none;
+	font-stretch: normal;
+	background-image: url("../images/icon_arw18.gif");
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position-x: 0px;
+	background-position-y: 2px;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+
+.lnbArea .ct02 li a:hover {
+	font: bold 12px 'gulim';
+	color: #FD5D05;
+}

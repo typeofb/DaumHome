@@ -12,6 +12,7 @@
 <title>다음정보기술</title>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css' />" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css' />" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/lnbArea.css' />" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/jquery.ui.all.css' />" />
 <link rel="stylesheet" type="text/css" href="daumeditor/css/editor.css" />
 <script type="text/javascript" src="<c:url value='/js/jquery-1.9.1.min.js' />"></script>
