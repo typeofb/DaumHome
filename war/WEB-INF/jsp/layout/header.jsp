@@ -14,14 +14,14 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/header.css' />" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/lnbArea.css' />" />
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/jquery.ui.all.css' />" />
-<link rel="stylesheet" type="text/css" href="daumeditor/css/editor.css" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/daumeditor/css/editor.css' />" />
 <script type="text/javascript" src="<c:url value='/js/jquery-1.9.1.min.js' />"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery.ui.core.js' />"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery.ui.datepicker.js' />"></script>
-<script type="text/javascript" src="daumeditor/js/editor_loader.js"></script>
+<script type="text/javascript" src="<c:url value='/daumeditor/js/editor_loader.js' />"></script>
 <script type="text/javascript" src="<c:url value='/js/showModalDialog.js' />"></script>
 <script type="text/javascript" src="<c:url value='/js/jquery.blockUI.js' />"></script>
-<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="<c:url value='/js/common.js' />"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 });
@@ -225,7 +225,7 @@ function showModalDialogCallback(rtnVal) {
 					<a href="${pageContext.request.contextPath}/controlMng.do">제어관리</a>
 					<a href="<c:out value='${pageContext.request.contextPath}'/>/bbs.do">다음에디터</a>
 					<a href="${pageContext.request.contextPath}/nonHtml.do">비 HTML</a>
-					<a href="${pageContext.request.contextPath}/module/DI.do">Dependency Injection</a>
+					<a href="${pageContext.request.contextPath}/DI.do">Dependency Injection</a>
 					<a href="${pageContext.request.contextPath}/chat.do">채팅</a>
 				</li>
 				<li class="sm_r"></li>

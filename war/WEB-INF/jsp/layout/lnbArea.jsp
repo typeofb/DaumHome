@@ -26,7 +26,7 @@ function selectMenuItem(id, attr) {
 			location.href = "<c:url value='nonHtml.do' />";
 			break;
 		case "blog04":
-			location.href = "<c:url value='module/DI.do' />";
+			location.href = "<c:url value='DI.do' />";
 			break;
 		case "wp01":
 			location.href = "<c:url value='chat.do' />";
@@ -42,7 +42,7 @@ function selectMenuItem(id, attr) {
 </script>
 	<div class="lnbArea">
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />게시판</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />게시판</a>
 		</div>
 		<ul class="ct02" id="bbsToggle">
 			<li><a id="bbs01" href="javascript:selectMenuItem('bbs01', this);" onfocus="this.blur();">게시글</a></li>
@@ -50,7 +50,7 @@ function selectMenuItem(id, attr) {
 			<li><a id="bbs03" href="javascript:selectMenuItem('bbs03', this);" onfocus="this.blur();">모아보기</a></li>
 		</ul>
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />블로그</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />블로그</a>
 		</div>
 		<ul class="ct02" id="blogToggle">
 			<li><a id="blog01" href="javascript:selectMenuItem('blog01', this);" onfocus="this.blur();">포스트</a></li>
@@ -59,19 +59,19 @@ function selectMenuItem(id, attr) {
 			<li><a id="blog04" href="javascript:selectMenuItem('blog04', this);" onfocus="this.blur();">Q&amp;A</a></li>
 		</ul>
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />워크플레이스</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />워크플레이스</a>
 		</div>
 		<ul class="ct02" id="wpToggle">
 			<li><a id="wp01" href="javascript:selectMenuItem('wp01', this);" onfocus="this.blur();">게시글</a></li>
 			<li><a id="wp02" href="javascript:selectMenuItem('wp02', this);" onfocus="this.blur();">댓글</a></li>
 		</ul>
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />진행중 설문</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />진행중 설문</a>
 		</div>
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />지난 설문</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />지난 설문</a>
 		</div>
 		<div class="ct01">
-			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />설문 요청</a>
+			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />설문 요청</a>
 		</div>
 	</div>

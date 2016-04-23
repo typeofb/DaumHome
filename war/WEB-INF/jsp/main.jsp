@@ -10,7 +10,7 @@
 .file_list_select { width: 820px; height: 100px; margin-top: 7px; }
 </style>
 <!-- jquery plugin -->
-<script src="js/jquery-popup.js"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-popup.js' />"></script>
 <script type="text/javascript">
 	function callback(data) {
 		if (data != undefined)
