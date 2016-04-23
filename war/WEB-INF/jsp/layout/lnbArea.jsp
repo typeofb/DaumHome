@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".lnbArea .ct01 a").click(function(){
+		$(this).closest("div").next("ul").toggle();
+	});
+});
+</script>
 	<div class="lnbArea">
 		<div class="ct01">
 			<a href="javascript:void(0);" onfocus="this.blur();"><img src="images/btn_sm01.gif" class="vam2 magR3" />게시판</a>

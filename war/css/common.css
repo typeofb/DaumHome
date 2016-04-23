@@ -109,6 +109,7 @@ textarea {
 }
 
 .contentsArea {
+	float: left;
 	padding-top: 5px;
 }
 
