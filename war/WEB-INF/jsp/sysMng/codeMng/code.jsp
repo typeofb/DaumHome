@@ -124,60 +124,63 @@ window.onload = function() {
 </script>
 
 <div class="container">
-	<div class="location">
-		<h2>코드관리</h2>
-		<ul>
-			<li>
-				<span><img src="<c:url value='/images/icon_home.gif' />" /></span>
-				<span>기능들</span>
-				<span><img src="<c:url value='/images/icon_arrow.png' />" /></span>
-				<span class="bold">코드관리</span>
-			</li>
-		</ul>
-	</div>
-	<div class="tab_v1">
-		<ul>
-			<li class="on"><a href="javascript:;">본부</a></li>
-			<li><a href="javascript:;">지사</a></li>
-		</ul>
-	</div>
-	<div class="list_search_bg">
-	<div>${menu}</div>
-		<form>
-			<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
-			<table class="list_search" cellpadding="0" cellspacing="0">
+	<%@ include file="../../layout/lnbArea.jsp"%>
+	<div class="contentsArea">
+		<div class="location">
+			<h2>코드관리</h2>
+			<ul>
+				<li>
+					<span><img src="<c:url value='/images/icon_home.gif' />" /></span>
+					<span>기능들</span>
+					<span><img src="<c:url value='/images/icon_arrow.png' />" /></span>
+					<span class="bold">코드관리</span>
+				</li>
+			</ul>
+		</div>
+		<div class="tab_v1">
+			<ul>
+				<li class="on"><a href="javascript:;">본부</a></li>
+				<li><a href="javascript:;">지사</a></li>
+			</ul>
+		</div>
+		<div class="list_search_bg">
+		<div>${menu}</div>
+			<form>
+				<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
+				<table class="list_search" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>그룹</td>
+						<td><input id="codeGroupId" name="codeGroupId" /></td>
+						<td>키</td>
+						<td><input id="code" name="code" /></td>
+						<td>값</td>
+						<td><input id="codeName" name="codeName" /></td>
+						<td id="btnView"><a href="javascript:codeView();" class="btnT"><span>보기</span></a></td>
+						<td id="btnReg"><a href="javascript:codeReg();" class="btnT"><span>등록</span></a></td>
+						<td id="btnMod"><a href="javascript:codeMod();" class="btnT"><span>수정</span></a></td>
+						<td id="btnDel"><a href="javascript:codeDel();" class="btnT"><span>삭제</span></a></td>
+						<td id="btnCan"><a href="javascript:codeCan();" class="btnT"><span>취소</span></a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="list_table" id="divResultArea">
+			<table class="table5" width="100%" cellpadding="0" cellspacing="0">
+				<colgroup>
+					<col width="25%" />
+					<col width="25%" />
+					<col width="25%" />
+					<col width="25%" />
+				</colgroup>
 				<tr>
-					<td>그룹</td>
-					<td><input id="codeGroupId" name="codeGroupId" /></td>
-					<td>키</td>
-					<td><input id="code" name="code" /></td>
-					<td>값</td>
-					<td><input id="codeName" name="codeName" /></td>
-					<td id="btnView"><a href="javascript:codeView();" class="btnT"><span>보기</span></a></td>
-					<td id="btnReg"><a href="javascript:codeReg();" class="btnT"><span>등록</span></a></td>
-					<td id="btnMod"><a href="javascript:codeMod();" class="btnT"><span>수정</span></a></td>
-					<td id="btnDel"><a href="javascript:codeDel();" class="btnT"><span>삭제</span></a></td>
-					<td id="btnCan"><a href="javascript:codeCan();" class="btnT"><span>취소</span></a></td>
+					<th>그룹</th>
+					<th>키</th>
+					<th>값</th>
+					<th>수정일자</th>
 				</tr>
+				<tr><td colspan="4">검색된 결과가 없습니다.</td></tr>
 			</table>
-		</form>
-	</div>
-	<div class="list_table" id="divResultArea">
-		<table class="table5" width="100%" cellpadding="0" cellspacing="0">
-			<colgroup>
-				<col width="25%" />
-				<col width="25%" />
-				<col width="25%" />
-				<col width="25%" />
-			</colgroup>
-			<tr>
-				<th>그룹</th>
-				<th>키</th>
-				<th>값</th>
-				<th>수정일자</th>
-			</tr>
-			<tr><td colspan="4">검색된 결과가 없습니다.</td></tr>
-		</table>
+		</div>
 	</div>
 </div>
 <%@ include file="../../layout/footer.jsp"%>

@@ -43,10 +43,13 @@
 </script>
 
 <div class="container">
-	<div>◎ 채팅</div>
-	<div><textarea id="messageBox" style="width: 250px; height: 300px;" readonly></textarea></div>
-	<span>대화명 : </span><input type="text" id="userName" name="userName" value="아무개" />
-	<span>메시지 : </span><input type="text" id="message" name="message" onkeypress="if (event.keyCode==13) send();" />
-	<input type="button" value="전송" onclick="send();" />
+	<%@ include file="layout/lnbArea.jsp"%>
+	<div class="contentsArea">
+		<div>◎ 채팅</div>
+		<div><textarea id="messageBox" style="width: 250px; height: 300px;" readonly></textarea></div>
+		<span>대화명 : </span><input type="text" id="userName" name="userName" value="아무개" />
+		<span>메시지 : </span><input type="text" id="message" name="message" onkeypress="if (event.keyCode==13) send();" />
+		<input type="button" value="전송" onclick="send();" />
+	</div>
 </div>
 <%@ include file="layout/footer.jsp"%>
