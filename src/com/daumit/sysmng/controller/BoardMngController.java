@@ -1,27 +1,24 @@
 package com.daumit.sysmng.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.common.etc.Common;
 import com.common.dao.ResultSetData;
 import com.common.dao.SearchCondition;
+import com.common.etc.Common;
 import com.daumit.sysmng.dto.BoardMngDto;
 import com.daumit.sysmng.service.BoardMngService;
 
@@ -135,13 +132,12 @@ public class BoardMngController {
 	
 	// 게시판 등록
 	@RequestMapping(value = "boardReg")
-	@ResponseBody
-	public JSONObject boardReg(BoardMngDto boardMngDto) throws IOException {
+	public @ResponseBody HashMap<String, Object> boardReg(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardReg");
 		
 		int result = boardMngService.insertBoard(boardMngDto);
 		
-		JSONObject jsonObj = new JSONObject();
+		HashMap<String, Object> jsonObj = new HashMap<String, Object>();
 		jsonObj.put("result", result);
 		return jsonObj;
 	}
@@ -162,26 +158,24 @@ public class BoardMngController {
 	
 	// 게시판 수정
 	@RequestMapping(value = "boardMod")
-	@ResponseBody
-	public JSONObject boardMod(BoardMngDto boardMngDto) throws IOException {
+	public @ResponseBody HashMap<String, Object> boardMod(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardMod");
 		
 		int result = boardMngService.updateBoard(boardMngDto);
 		
-		JSONObject jsonObj = new JSONObject();
+		HashMap<String, Object> jsonObj = new HashMap<String, Object>();
 		jsonObj.put("result", result);
 		return jsonObj;
 	}
 	
 	// 게시판 삭제
 	@RequestMapping(value = "boardDel")
-	@ResponseBody
-	public JSONObject boardDel(BoardMngDto boardMngDto) throws IOException {
+	public @ResponseBody HashMap<String, Object> boardDel(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardDel");
 		
 		int result = boardMngService.deleteBoard(boardMngDto);
 		
-		JSONObject jsonObj = new JSONObject();
+		HashMap<String, Object> jsonObj = new HashMap<String, Object>();
 		jsonObj.put("result", result);
 		return jsonObj;
 	}
