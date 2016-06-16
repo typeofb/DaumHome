@@ -13,9 +13,7 @@ function boardDel() {
 			var json = JSON.parse(result);
 			if (json.result == true) {
 				alert("삭제되었습니다.");
-				$("form").attr("method", "post");
-				$("form").attr("action", "boardList.do");
-				$("form").submit();
+				location.href = "boardList.do" + location.search;
 			} else {
 				alert("실패하였습니다.");
 			}
@@ -24,15 +22,11 @@ function boardDel() {
 }
 
 function goMod() {
-	$("form").attr("method", "post");
-	$("form").attr("action", "goMod.do");
-	$("form").submit();
+	location.href = "goMod.do" + location.search;
 }
 
 function goList() {
-	$("form").attr("method", "post");
-	$("form").attr("action", "boardList.do");
-	$("form").submit();
+	location.href = "boardList.do" + location.search;
 }
 </script>
 
@@ -53,14 +47,6 @@ function goList() {
 		<div class="list_table">
 			<form>
 				<input type="hidden" id="postId" name="postId" value="${map.POST_ID}" />
-				<input type="hidden" id="targetPage" name="targetPage" value="${params.targetPage}" />
-				<input type="hidden" id="beginDate" name="beginDate" value="${params.beginDate}" />
-				<input type="hidden" id="endDate" name="endDate" value="${params.endDate}" />
-				<input type="hidden" id="selectItem" name="selectItem" value="${params.selectItem}" />
-				<input type="hidden" id="searchText" name="searchText" value="${params.searchText}" />
-				<input type="hidden" id="sortYn" name="sortYn" value="${params.sortYn}" />
-				<input type="hidden" id="sortField" name="sortField" value="${params.sortField}" />
-				<input type="hidden" id="sortOrderBy" name="sortOrderBy" value="${params.sortOrderBy}" />
 				<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 					<colgroup>
 						<col width="50" />

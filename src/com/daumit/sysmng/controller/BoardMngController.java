@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,7 @@ public class BoardMngController {
 	private BoardMngService boardMngService;
 	
 	// 게시판
-	@RequestMapping(value = "boardList")
+	@RequestMapping(value="boardList", method=RequestMethod.GET)
 	public ModelAndView boardList(@RequestParam(value="rowSize", required=false) String rowSizeStr,
 			@RequestParam(value="targetPage", required=false) String targetPageStr,
 			@RequestParam(value="pageGroupSize", required=false) String pageGroupSizeStr,
@@ -106,32 +107,30 @@ public class BoardMngController {
 	}
 	
 	// 게시판 상세보기
-	@RequestMapping(value = "boardDetail")
+	@RequestMapping(value="boardDetail", method=RequestMethod.GET)
 	public ModelAndView boardDetail(@RequestParam Map<String, String> params) {
 		log.info("console - boardDetail");
 		
 		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("params", params);
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardDetail");
 		return mav;
 	}
 	
 	// 게시판 등록으로 이동
-	@RequestMapping(value = "goReg")
+	@RequestMapping(value="goReg", method=RequestMethod.GET)
 	public ModelAndView goReg(@RequestParam Map<String, String> params) {
 		log.info("console - goReg");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("params", params);
 		mav.setViewName("sysMng/boardMng/boardReg");
 		return mav;
 	}
 	
 	// 게시판 등록
-	@RequestMapping(value = "boardReg")
+	@RequestMapping(value="boardReg", method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> boardReg(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardReg");
 		
@@ -143,21 +142,20 @@ public class BoardMngController {
 	}
 	
 	// 게시판 수정으로 이동
-	@RequestMapping(value = "goMod")
+	@RequestMapping(value="goMod", method=RequestMethod.GET)
 	public ModelAndView goMod(@RequestParam Map<String, String> params) {
 		log.info("console - goMod");
 		
 		Map<String, Object> map = boardMngService.selectBoardDetail(params.get("postId"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("params", params);
 		mav.addObject("map", map);
 		mav.setViewName("sysMng/boardMng/boardMod");
 		return mav;
 	}
 	
 	// 게시판 수정
-	@RequestMapping(value = "boardMod")
+	@RequestMapping(value="boardMod", method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> boardMod(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardMod");
 		
@@ -169,7 +167,7 @@ public class BoardMngController {
 	}
 	
 	// 게시판 삭제
-	@RequestMapping(value = "boardDel")
+	@RequestMapping(value="boardDel", method=RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> boardDel(BoardMngDto boardMngDto) throws IOException {
 		log.info("console - boardDel");
 		
