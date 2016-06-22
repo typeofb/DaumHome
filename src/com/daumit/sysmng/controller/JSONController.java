@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.daumit.sysmng.dto.BoardMngDto;
 
 @Controller
-public class TagController {
+public class JSONController {
 	
 	private Log log = null;
 	
-	public TagController() {
+	public JSONController() {
 		log = LogFactory.getLog(getClass());
 	}
 	
-	@RequestMapping(value="tag")
-	public void tag(ModelMap modelMap) {
-		log.info("console - tag");
+	@RequestMapping(value="json")
+	public void json(ModelMap modelMap) {
+		log.info("console - json");
 		
 		List<BoardMngDto> list = new ArrayList<BoardMngDto>();
 		BoardMngDto dto = new BoardMngDto();

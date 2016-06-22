@@ -17,7 +17,7 @@ function selectMenuItem(id, attr) {
 			location.href = "<c:url value='iBatis.do' />";
 			break;
 		case "bbs04":
-			location.href = "<c:url value='tag.do' />";
+			location.href = "<c:url value='json.do' />";
 			break;
 		case "blog01":
 			location.href = "<c:url value='controlMng.do' />";

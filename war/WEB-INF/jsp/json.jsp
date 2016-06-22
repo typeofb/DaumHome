@@ -3,9 +3,6 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.HashMap"%>
 <%@ include file="layout/header.jsp"%>
-<script type="text/javascript">
-	
-</script>
 <div class="container">
 	<%@ include file="layout/lnbArea.jsp"%>
 	<div class="contentsArea">
