@@ -16,6 +16,9 @@ function selectMenuItem(id, attr) {
 		case "bbs03":
 			location.href = "<c:url value='iBatis.do' />";
 			break;
+		case "bbs04":
+			location.href = "<c:url value='tag.do' />";
+			break;
 		case "blog01":
 			location.href = "<c:url value='controlMng.do' />";
 			break;
@@ -48,6 +51,7 @@ function selectMenuItem(id, attr) {
 			<li><a id="bbs01" href="javascript:selectMenuItem('bbs01', this);" onfocus="this.blur();">게시판</a></li>
 			<li><a id="bbs02" href="javascript:selectMenuItem('bbs02', this);" onfocus="this.blur();">코드관리</a></li>
 			<li><a id="bbs03" href="javascript:selectMenuItem('bbs03', this);" onfocus="this.blur();">아이바티스 연습</a></li>
+			<li><a id="bbs04" href="javascript:selectMenuItem('bbs04', this);" onfocus="this.blur();">JSON 태그 연습</a></li>
 		</ul>
 		<div class="ct01">
 			<a href="javaScript:void(0);" onfocus="this.blur();"><img src="<c:url value='images/btn_sm01.gif' />" class="vam2 magR3" />블로그</a>
