@@ -24,7 +24,9 @@
 				out.println("<br>");
 			%>
 		</c:forEach>
-		<a href='<c:url value="/message/write" />'>쪽지보내기</a>
+		<a href='<c:url value="/message/write" />'>쪽지보내기</a><br>
+		<h:json value="${result[0].contents}" />
+		<h:json value="{\"fakeNm\":\"/mobile/file/download/0/1466387904304\",\"realNm\":\"Penguins.jpg\"}" />
 	</div>
 </div>
 <%@ include file="layout/footer.jsp"%>

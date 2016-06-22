@@ -89,6 +89,21 @@
 		<example><![CDATA[h:upload]]></example>
 	</tag>
 	
+	<tag>
+		<description><![CDATA[JSON Object 출력을 위한 태그]]></description>
+		<name>json</name>
+		<tag-class>com.common.tags.JSONTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description><![CDATA[JSON object[JSTL]]]></description>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<example><![CDATA[h:json]]></example>
+	</tag>
+	
 	<function>
 		<name>toURLEncode</name>
 		<function-class>samsung.neo.commons.EPUtils</function-class>
