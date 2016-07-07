@@ -22,10 +22,10 @@ function dispEditArea(sMod, group, key, value) {
 	}
 }
 
-function search() {
+function search(targetPage) {
 	ep.ajax({
 		url : "codeSearch.do",
-		data : $("form").serializeArray(),
+		data : {"targetPage":targetPage},
 		type : "post",
 		cache : false,
 		dataType : "html",
@@ -38,10 +38,10 @@ function search() {
 }
 
 function goPage(targetPage) {
-	$("#targetPage").val(targetPage);
+	window.location.hash = "#" + targetPage;
 	ep.ajax({
 		url : "codeSearch.do",
-		data : $("form").serializeArray(),
+		data : "targetPage=" + targetPage,
 		type : "post",
 		cache : false,
 		dataType : "html",
@@ -119,7 +119,28 @@ function codeSel(group, key, value) {
 }
 
 window.onload = function() {
-	search();
+	// 다른 링크에서 이 링크로 뒤로가기
+	if (window.location.hash) {
+		search(window.location.hash.replace("#", ""));
+	} else {
+		window.location.hash = "#" + 1;
+		search(1);
+	}
+	
+	// 페이지 버튼 뒤로가기
+	if ("onhashchange" in window) { // event supported
+		window.onhashchange = function() {
+			search(window.location.hash.replace("#", ""));
+		}
+	} else { // IE7 이하 버전
+		var storedHash = window.location.hash;
+		window.setInterval(function() { // 0.5초 간격으로 hash값 체크
+			if (window.location.hash != storedHash) {
+				storedHash = window.location.hash;
+				search(storedHash.replace("#", ""));
+			}
+		}, 500);
+	}
 }
 </script>
 
@@ -144,7 +165,7 @@ window.onload = function() {
 			</ul>
 		</div>
 		<div class="list_search_bg">
-		<div>${menu}</div>
+			<div>${menu}</div>
 			<form>
 				<input type="hidden" id="targetPage" name="targetPage" value="${targetPage}" />
 				<table class="list_search" cellpadding="0" cellspacing="0">
