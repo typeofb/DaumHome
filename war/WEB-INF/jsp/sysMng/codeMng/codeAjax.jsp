@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div>${menu}</div>
+	<div>${menu}</div>
 	<table class="table5" width="100%" cellpadding="0" cellspacing="0">
 		<colgroup>
 			<col width="25%" />
@@ -45,6 +45,6 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-<div class="pagination">${paging}</div>
+	<div class="pagination">${paging}</div>
 </body>
 </html>
