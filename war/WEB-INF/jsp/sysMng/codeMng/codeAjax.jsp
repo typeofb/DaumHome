@@ -35,11 +35,11 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="x" items="${list}">
-					<tr onclick="codeSel('${x.CODE_GROUP_ID}', '${x.CODE}', '${x.CODE_NAME}');" style="cursor: pointer;">
-						<th class="th_line">${x.CODE_GROUP_ID}</th>
-						<td>${x.CODE}</td>
-						<td>${x.CODE_NAME}</td>
-						<td>${x.LAST_UPDATE_DTIME}</td>
+					<tr onclick="codeSel('${x.no}', '${x.title}', '${x.depart}');" style="cursor: pointer;">
+						<th class="th_line">${x.no}</th>
+						<td>${x.title}</td>
+						<td>${x.depart}</td>
+						<td>${x.input_date}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

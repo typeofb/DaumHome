@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap>
-	<!--<select id="CodeMng.selectCodeList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+	<select id="CodeMng.selectCodeList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
 		<![CDATA[
 		SELECT
 		    D.*
@@ -19,48 +19,44 @@
 		        FROM
 		        (
 		            SELECT
-		                A.CODE_GROUP_ID,
-		                A.CODE,
-		                A.CODE_NAME,
-		                A.LAST_UPDATE_DTIME,
-		                (SELECT COUNT(*) FROM CODE WHERE USE_YN = 'Y') AS TOTAL_ROW_SIZE
-		            FROM CODE A
-		            WHERE A.USE_YN = 'Y'
-		            ORDER BY A.CODE_GROUP_ID
+		                A.title,
+		                A.dupmd5,
+		                A.depart,
+		                A.organ,
+		                A.auth_yn,
+		                A.no,
+		                A.link,
+		                A.input_date,
+		                A.url,
+		                (SELECT COUNT(*) FROM minwon) AS TOTAL_ROW_SIZE
+		            FROM minwon A
+		            ORDER BY A.no DESC
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
 		) D
 		WHERE PAGE = #targetPage#
 		]]>
-	</select>-->
-	<select id="CodeMng.selectCodeList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
-		<![CDATA[
-		SELECT title, dupmd5, depart, organ, auth_yn, no, link, input_date, url FROM minwon
-		]]>
 	</select>
 	
 	<insert id="CodeMng.insertCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO CODE (CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME, USE_YN)
-		VALUES (#codeGroupId#, #code#, #codeName#, #lastUpdateDtime#, 'Y')
+		INSERT INTO minwon (no, title, depart, input_date)
+		VALUES ((SELECT MAX(no) + 1 FROM minwon m), #code#, #codeName#, now());
 		]]>
 	</insert>
 	
 	<update id="CodeMng.updateCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE CODE
-		SET CODE_GROUP_ID = #codeGroupId#, CODE = #code#, CODE_NAME = #codeName#, LAST_UPDATE_DTIME = #lastUpdateDtime#
-		WHERE CODE_GROUP_ID = #codeGroupId#
-		AND CODE = #code#
+		UPDATE minwon
+		SET title = #code#, depart = #codeName#, input_date = now()
+		WHERE no = #codeGroupId#
 		]]>
 	</update>
 	
 	<delete id="CodeMng.deleteCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE CODE
-		SET USE_YN = 'N', LAST_UPDATE_DTIME = #lastUpdateDtime#
-		WHERE CODE_GROUP_ID = #codeGroupId#
-		AND CODE = #code#
+		DELETE FROM minwon
+		WHERE no = #codeGroupId#
 		]]>
 	</delete>
 </sqlMap>

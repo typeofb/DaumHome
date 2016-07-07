@@ -2,8 +2,6 @@ package com.daumit.sysmng.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,8 +86,6 @@ public class CodeMngController extends MenuController {
 	public ModelAndView codeReg(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeReg");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		paramMap.put("lastUpdateDtime", sdf.format(new Date(System.currentTimeMillis())));
 		boolean result = codeMngService.insertCode(paramMap);
 		String strMessage = null;
 		if (result) {
@@ -114,8 +110,6 @@ public class CodeMngController extends MenuController {
 	public ModelAndView codeMod(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeMod");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		paramMap.put("lastUpdateDtime", sdf.format(new Date(System.currentTimeMillis())));
 		boolean result = codeMngService.updateCode(paramMap);
 		String strMessage = null;
 		if (result) {
@@ -140,8 +134,6 @@ public class CodeMngController extends MenuController {
 	public ModelAndView codeDel(@RequestParam Map<String, Object> paramMap) throws IOException {
 		log.info("console - codeDel");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		paramMap.put("lastUpdateDtime", sdf.format(new Date(System.currentTimeMillis())));
 		boolean result = codeMngService.deleteCode(paramMap);
 		String strMessage = null;
 		if (result) {
