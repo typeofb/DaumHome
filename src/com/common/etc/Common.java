@@ -27,8 +27,13 @@ public class Common {
 	public static String paging(int totalRowSize, int rowSize, int targetPage, int pageGroupSize) {
 		StringBuffer returnValue = new StringBuffer();
 
-		String preImg = "<img src='/DaumHome/images/Icon_BoardPage_Prev.gif' alt='이전' border='0' />";
-		String postImg = "<img src='/DaumHome/images/Icon_BoardPage_Next.gif' alt='다음' border='0' />";
+		if (totalRowSize == 0)
+			return returnValue.toString();
+
+		String prevMoreImg = "<img src='/DaumHome/images/icon_prev_more.gif' alt='이전' border='0' />";
+		String prevImg = "<img src='/DaumHome/images/icon_prev.gif' alt='이전' border='0' />";
+		String nextImg = "<img src='/DaumHome/images/icon_next.gif' alt='다음' border='0' />";
+		String nextMoreImg = "<img src='/DaumHome/images/icon_next_more.gif' alt='다음' border='0' />";
 
 		int totalPageSize = (totalRowSize / rowSize);
 		if ((totalRowSize % rowSize) > 0)
@@ -39,29 +44,30 @@ public class Common {
 		if (endPage > totalPageSize)
 			endPage = totalPageSize;
 
-		if (totalPageSize == 0)
-			targetPage = 0;
-
 		if (targetPage > pageGroupSize) {
 			int prePage = ((targetPage / pageGroupSize) - 1) * pageGroupSize + 1;
-			returnValue.append("<a href=\"javascript:goPage('" + prePage + "')\">" + preImg + "</a>");
+			returnValue.append("<a href=\"javascript:goPage('1');\">" + prevMoreImg + "</a>");
+			returnValue.append("<a href=\"javascript:goPage('" + prePage + "');\">" + prevImg + "</a>");
 		} else {
-			returnValue.append(preImg);
+			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevMoreImg + "</a>");
+			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevImg + "</a>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
 			if (i == targetPage) {
 				returnValue.append("<a><strong>" + i + "</strong></a>");
 			} else {
-				returnValue.append("<a href=\"javascript:goPage('" + i + "')\"><span>" + i + "</span></a>");
+				returnValue.append("<a href=\"javascript:goPage('" + i + "');\"><span>" + i + "</span></a>");
 			}
 		}
 
 		if (endPage < totalPageSize) {
 			int nextPage = endPage + 1;
-			returnValue.append("<a href=\"javascript:goPage('" + nextPage + "')\">" + postImg + "</a>");
+			returnValue.append("<a href=\"javascript:goPage('" + nextPage + "');\">" + nextImg + "</a>");
+			returnValue.append("<a href=\"javascript:goPage('" + totalPageSize + "');\">" + nextMoreImg + "</a>");
 		} else {
-			returnValue.append(postImg);
+			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextImg + "</a>");
+			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextMoreImg + "</a>");
 		}
 
 		return returnValue.toString();
