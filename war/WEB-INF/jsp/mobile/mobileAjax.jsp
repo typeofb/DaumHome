@@ -23,10 +23,10 @@
 			<c:otherwise>
 				<c:forEach var="x" items="${list}">
 		<li>
-			<span class="vertical_line">${x.CODE_GROUP_ID}</span>
-			<span class="vertical_line">${x.CODE}</span>
-			<span class="vertical_line">${x.CODE_NAME}</span>
-			<span class="vertical_line">${x.LAST_UPDATE_DTIME}</span>
+			<span class="vertical_line">${x.no}</span>
+			<span class="vertical_line">${x.title}</span>
+			<span class="vertical_line">${x.depart}</span>
+			<span class="vertical_line">${x.input_date}</span>
 		</li>
 				</c:forEach>
 			</c:otherwise>
