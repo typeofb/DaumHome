@@ -39,6 +39,7 @@ function search(targetPage) {
 
 function goPage(targetPage) {
 	window.location.hash = "#" + targetPage;
+	/*
 	ep.ajax({
 		url : "codeSearch.do",
 		data : "targetPage=" + targetPage,
@@ -51,6 +52,7 @@ function goPage(targetPage) {
 		},
 		block : {type : "image"}
 	});
+	*/
 }
 
 function codeView() {
