@@ -48,10 +48,11 @@ public class Common {
 			int prePage = ((targetPage / pageGroupSize) - 1) * pageGroupSize + 1;
 			returnValue.append("<a href=\"javascript:goPage('1');\">" + prevMoreImg + "</a>");
 			returnValue.append("<a href=\"javascript:goPage('" + prePage + "');\">" + prevImg + "</a>");
-		} else {
-			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevMoreImg + "</a>");
-			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevImg + "</a>");
 		}
+//		else {
+//			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevMoreImg + "</a>");
+//			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + prevImg + "</a>");
+//		}
 
 		for (int i = startPage; i <= endPage; i++) {
 			if (i == targetPage) {
@@ -65,10 +66,11 @@ public class Common {
 			int nextPage = endPage + 1;
 			returnValue.append("<a href=\"javascript:goPage('" + nextPage + "');\">" + nextImg + "</a>");
 			returnValue.append("<a href=\"javascript:goPage('" + totalPageSize + "');\">" + nextMoreImg + "</a>");
-		} else {
-			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextImg + "</a>");
-			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextMoreImg + "</a>");
 		}
+//		else {
+//			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextImg + "</a>");
+//			returnValue.append("<a href=\"javascript:;\" style=\"cursor:default\">" + nextMoreImg + "</a>");
+//		}
 
 		return returnValue.toString();
 	}
