@@ -124,7 +124,8 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 		ResultSetData returnValue = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://210.96.202.111:3306/myver_dev?autoReconnect=true", "myver", "myver");
+//			Connection conn = DriverManager.getConnection("jdbc:mysql://210.96.202.111:3306/myver_dev?autoReconnect=true", "myver", "myver");
+			Connection conn = DriverManager.getConnection(null, null, null);
 			PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			ResultSet rset = pstmt.executeQuery();
 			int rowCnt = 0;
