@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,8 @@ import com.common.dao.ResultSetData;
 
 public class CodeValueSynchronizer implements java.lang.Runnable {
 
-	private long lastModDate = 0;
-	private long lastDelDate = 0;
+	private Date lastModDate = null;
+	private Date lastDelDate = null;
 	private Thread thread = null;
 	private boolean stopSignal = false;
 	
@@ -55,39 +56,42 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 	}
 	
 	private void execute() {
-		if (lastModDate == 0) {
+		if (lastModDate == null) {
 			// 처음 로딩 시점
-			ResultSetData codeList = this.sqlExecute("SELECT CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME"
+			ResultSetData codeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
-					+ " WHERE USE_YN = 'Y'"
-					+ " ORDER BY LAST_UPDATE_DTIME DESC",
-					"CODE_GROUP_ID,CODE,CODE_NAME,LAST_UPDATE_DTIME");
+					+ " WHERE USE_FLAG = 'Y'"
+					+ " ORDER BY LAST_UPDATE_DATE DESC",
+				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			populate(codeList);
 			lastDelDate = lastModDate;
 			
-			ResultSetData deletedCodeList = this.sqlExecute("SELECT CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME"
+			ResultSetData deletedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
-					+ " WHERE USE_YN = 'N' AND LAST_UPDATE_DTIME > '" + lastDelDate + "'"
-					+ " ORDER BY LAST_UPDATE_DTIME DESC",
-					"CODE_GROUP_ID,CODE,CODE_NAME,LAST_UPDATE_DTIME");
+					+ " WHERE USE_FLAG = 'N'"
+					+ " AND LAST_UPDATE_DATE > '" + lastDelDate + "'"
+					+ " ORDER BY LAST_UPDATE_DATE DESC",
+				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			if (deletedCodeList != null && deletedCodeList.size() > 0) {
 				Map<String, String> resultMap = (Map<String, String>) deletedCodeList.get(0);
-				long modDate = Long.parseLong(resultMap.get("LAST_UPDATE_DTIME"));
+				Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
 				lastDelDate = modDate;
 			}
 		} else {
-			ResultSetData deletedCodeList = this.sqlExecute("SELECT CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME"
+			ResultSetData deletedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
-					+ " WHERE USE_YN = 'N' AND LAST_UPDATE_DTIME > '" + lastDelDate + "'"
-					+ " ORDER BY LAST_UPDATE_DTIME DESC",
-					"CODE_GROUP_ID,CODE,CODE_NAME,LAST_UPDATE_DTIME");
+					+ " WHERE USE_FLAG = 'N'"
+					+ " AND LAST_UPDATE_DATE > '" + lastDelDate + "'"
+					+ " ORDER BY LAST_UPDATE_DATE DESC",
+				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			clear(deletedCodeList);
 			
-			ResultSetData addedOrModifiedCodeList = this.sqlExecute("SELECT CODE_GROUP_ID, CODE, CODE_NAME, LAST_UPDATE_DTIME"
+			ResultSetData addedOrModifiedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
-					+ " WHERE USE_YN = 'Y' AND LAST_UPDATE_DTIME > '" + lastModDate + "'"
-					+ " ORDER BY LAST_UPDATE_DTIME DESC",
-					"CODE_GROUP_ID,CODE,CODE_NAME,LAST_UPDATE_DTIME");
+					+ " WHERE USE_FLAG = 'Y'"
+					+ " AND LAST_UPDATE_DATE > '" + lastModDate + "'"
+					+ " ORDER BY LAST_UPDATE_DATE DESC",
+				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			populate(addedOrModifiedCodeList);
 		}
 	}
@@ -95,37 +99,38 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 	private void populate(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
 			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
-			String codeGroupId = resultMap.get("CODE_GROUP_ID");
+			String groupCode = resultMap.get("GROUP_CODE");
 			String key = resultMap.get("CODE");
 			String value = resultMap.get("CODE_NAME");
-			System.out.println("##################### [CodeValueSynchronizer.put] key:" + key + ", value:" + value + ", codeGroupId:" + codeGroupId);
-			long modDate = Long.parseLong(resultMap.get("LAST_UPDATE_DTIME"));
+			System.out.println("##################### [CodeValueSynchronizer.put] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
+			Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
 			if (i == 0)
 				lastModDate = modDate;
-			CodeValueCache.addOrModify(key, value, codeGroupId);
+			CodeValueCache.addOrModify(key, value, groupCode);
 		}
 	}
 	
 	private void clear(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
 			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
-			String codeGroupId = resultMap.get("CODE_GROUP_ID");
+			String groupCode = resultMap.get("GROUP_CODE");
 			String key = resultMap.get("CODE");
 			String value = resultMap.get("CODE_NAME");
-			System.out.println("##################### [CodeValueSynchronizer.del] key:" + key + ", value:" + value + ", codeGroupId:" + codeGroupId);
-			long modDate = Long.parseLong(resultMap.get("LAST_UPDATE_DTIME"));
+			System.out.println("##################### [CodeValueSynchronizer.del] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
+			Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
 			if (i == 0)
 				lastDelDate = modDate;
-			CodeValueCache.remove(key, codeGroupId);
+			CodeValueCache.remove(key, groupCode);
 		}
 	}
 	
 	private ResultSetData sqlExecute(String sql, String returnColumn) {
 		ResultSetData returnValue = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+//			Class.forName("com.mysql.jdbc.Driver");
 //			Connection conn = DriverManager.getConnection("jdbc:mysql://210.96.202.111:3306/myver_dev?autoReconnect=true", "myver", "myver");
-			Connection conn = DriverManager.getConnection(null, null, null);
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "hr", "hr");
 			PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			ResultSet rset = pstmt.executeQuery();
 			int rowCnt = 0;
