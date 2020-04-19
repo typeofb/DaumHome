@@ -90,7 +90,7 @@
 	</servlet-mapping>
 
 	<!-- Quartz Scheduler -->
-	<!-- <servlet>
+	<servlet>
 		<servlet-name>JSStartServlet</servlet-name>
 		<servlet-class>com.components.jobsch.JSStartServlet</servlet-class>
 		<init-param>
@@ -98,7 +98,7 @@
 			<param-value>local</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-	</servlet> -->
+	</servlet>
 
 	<jsp-config>
 		<taglib>
