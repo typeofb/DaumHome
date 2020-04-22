@@ -73,8 +73,7 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 					+ " ORDER BY LAST_UPDATE_DATE DESC",
 				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			if (deletedCodeList != null && deletedCodeList.size() > 0) {
-				Map<String, String> resultMap = (Map<String, String>) deletedCodeList.get(0);
-				Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
+				Date modDate = ((Code) codeList.get(0)).getLastUpdateDate();
 				lastDelDate = modDate;
 			}
 		} else {
@@ -98,28 +97,28 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 	
 	private void populate(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
-			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
-			String groupCode = resultMap.get("GROUP_CODE");
-			String key = resultMap.get("CODE");
-			String value = resultMap.get("CODE_NAME");
+			String groupCode = ((Code) codeList.get(i)).getGroupCode();
+			String key = ((Code) codeList.get(i)).getCode();
+			String value = ((Code) codeList.get(i)).getCodeName();
 			System.out.println("##################### [CodeValueSynchronizer.put] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
-			Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
-			if (i == 0)
+			Date modDate = ((Code) codeList.get(i)).getLastUpdateDate();
+			if (i == 0) {
 				lastModDate = modDate;
+			}
 			CodeValueCache.addOrModify(key, value, groupCode);
 		}
 	}
 	
 	private void clear(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
-			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
-			String groupCode = resultMap.get("GROUP_CODE");
-			String key = resultMap.get("CODE");
-			String value = resultMap.get("CODE_NAME");
+			String groupCode = ((Code) codeList.get(i)).getGroupCode();
+			String key = ((Code) codeList.get(i)).getCode();
+			String value = ((Code) codeList.get(i)).getCodeName();
 			System.out.println("##################### [CodeValueSynchronizer.del] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
-			Date modDate = java.sql.Date.valueOf(resultMap.get("LAST_UPDATE_DATE"));
-			if (i == 0)
+			Date modDate = ((Code) codeList.get(i)).getLastUpdateDate();
+			if (i == 0) {
 				lastDelDate = modDate;
+			}
 			CodeValueCache.remove(key, groupCode);
 		}
 	}
@@ -130,7 +129,7 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 //			Class.forName("com.mysql.jdbc.Driver");
 //			Connection conn = DriverManager.getConnection("jdbc:mysql://210.96.202.111:3306/myver_dev?autoReconnect=true", "myver", "myver");
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "hr", "hr");
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "hr", "1234");
 			PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			ResultSet rset = pstmt.executeQuery();
 			int rowCnt = 0;
