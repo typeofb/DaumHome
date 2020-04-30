@@ -19,18 +19,13 @@
 		        FROM
 		        (
 		            SELECT
-		                A.title,
-		                A.dupmd5,
-		                A.depart,
-		                A.organ,
-		                A.auth_yn,
-		                A.no,
-		                A.link,
-		                A.input_date,
-		                A.url,
-		                (SELECT COUNT(*) FROM minwon) AS TOTAL_ROW_SIZE
-		            FROM minwon A
-		            ORDER BY A.no DESC
+		                A.id,
+		                A.category,
+		                A.name,
+		                A.updatedAt,
+		                (SELECT COUNT(*) FROM stocks) AS TOTAL_ROW_SIZE
+		            FROM stocks A
+		            ORDER BY A.id DESC
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
 		) D
@@ -40,23 +35,23 @@
 	
 	<insert id="CodeMng.insertCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO minwon (no, title, depart, input_date)
-		VALUES ((SELECT MAX(no) + 1 FROM minwon m), #code#, #codeName#, now());
+		INSERT INTO stocks (category, name, price, cnt, img, createdAt, updatedAt)
+		VALUES (#code#, #codeName#, 0, 0, '', now(), now());
 		]]>
 	</insert>
 	
 	<update id="CodeMng.updateCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE minwon
-		SET title = #code#, depart = #codeName#, input_date = now()
-		WHERE no = #codeGroupId#
+		UPDATE stocks
+		SET category = #code#, name = #codeName#, updatedAt = now()
+		WHERE id = #codeGroupId#
 		]]>
 	</update>
 	
 	<delete id="CodeMng.deleteCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		DELETE FROM minwon
-		WHERE no = #codeGroupId#
+		DELETE FROM stocks
+		WHERE id = #codeGroupId#
 		]]>
 	</delete>
 </sqlMap>

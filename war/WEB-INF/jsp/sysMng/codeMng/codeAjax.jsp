@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>코드관리</title>
+<category>코드관리</category>
 <c:if test="${not empty strMessage}">
 	<script type="text/javascript">
 		alert("${strMessage}");
@@ -35,11 +35,11 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="x" items="${list}">
-					<tr onclick="codeSel('${x.no}', '${x.title}', '${x.depart}');" style="cursor: pointer;">
-						<th class="th_line">${x.no}</th>
-						<td>${x.title}</td>
-						<td>${x.depart}</td>
-						<td>${x.input_date}</td>
+					<tr onclick="codeSel('${x.id}', '${x.category}', '${x.name}');" style="cursor: pointer;">
+						<th class="th_line">${x.id}</th>
+						<td>${x.category}</td>
+						<td>${x.name}</td>
+						<td>${x.updatedAt}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
