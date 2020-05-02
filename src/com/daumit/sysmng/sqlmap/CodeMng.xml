@@ -9,28 +9,29 @@
 		(
 		    SELECT
 		        C.*,
-		        TRUNCATE((ROWNUM - 1) / #rowSize#, 0) + 1 AS PAGE
+		        TRUNCATE((ROWNUM - 1) / #rowSize#, 0) + 1 AS PAGE,
+		        TRUNCATE((TOTAL_ROW_SIZE - 1) / #rowSize#, 0) + 1 AS TOTAL_PAGE_SIZE
 		    FROM
 		    (
 		        SELECT
 		            B.*,
 		            (@RNUM := @RNUM + 1) AS ROWNUM,
-		            TRUNCATE((TOTAL_ROW_SIZE - 1) / #rowSize#, 0) + 1 AS TOTAL_PAGE_SIZE
+		            FOUND_ROWS() AS TOTAL_ROW_SIZE
 		        FROM
 		        (
 		            SELECT
 		                A.id,
 		                A.category,
 		                A.name,
-		                A.updatedAt,
-		                (SELECT COUNT(*) FROM stocks WHERE 1 = 1 ORDER BY id DESC) AS TOTAL_ROW_SIZE
+		                A.updatedAt
 		            FROM stocks A
-		            WHERE 1 = 1
-		            ORDER BY A.id DESC
+		            WHERE 1 = 1         /* 검색 조건 */
+		            ORDER BY A.id DESC  /* 정렬 조건 */
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
 		) D
 		WHERE PAGE = #targetPage#
+		ORDER BY D.id DESC              /* 정렬 조건 */
 		]]>
 	</select>
 	
