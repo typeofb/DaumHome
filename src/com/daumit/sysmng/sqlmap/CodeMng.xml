@@ -23,8 +23,9 @@
 		                A.category,
 		                A.name,
 		                A.updatedAt,
-		                (SELECT COUNT(*) FROM stocks) AS TOTAL_ROW_SIZE
+		                (SELECT COUNT(*) FROM stocks WHERE 1 = 1 ORDER BY id DESC) AS TOTAL_ROW_SIZE
 		            FROM stocks A
+		            WHERE 1 = 1
 		            ORDER BY A.id DESC
 		        ) B, (SELECT @RNUM := 0) R
 		    ) C
