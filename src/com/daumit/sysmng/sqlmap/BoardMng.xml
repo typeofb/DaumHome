@@ -15,11 +15,13 @@
 		]]>
 	</select>
 	
+	<!--
 	<select id="BoardMng.selectBoardCnt" parameterClass="java.util.HashMap" resultClass="java.lang.Integer">
 		<![CDATA[
 		SELECT COUNT(1) TOTAL_ROW_SIZE FROM USER
 		]]>
 	</select>
+	-->
 	
 	<select id="BoardMng.selectBoardDetail" parameterClass="java.lang.String" resultClass="java.util.HashMap">
 		<![CDATA[
