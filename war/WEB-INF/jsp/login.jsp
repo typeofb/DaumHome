@@ -68,9 +68,9 @@ $(document).ready(function() {
 <form name="loginForm" method="post" action="loginCheck.do">
 	<div>
 		<ul>
-			<li><input type="text" name="userId" />아이디</li>
-			<li><input type="password" name="userPw" />비밀번호</li>
-			<li><input type="submit" value="로그인"></li>
+			<li><input type="text" name="userId" value="typeofb" />아이디</li>
+			<li><input type="password" name="userPw" value="1234" />비밀번호</li>
+			<li><input type="submit" value="로그인" /></li>
 			<li><a href="javascript:;" onclick="self.close()">취소</a></li>
 			<li>계정요청</li>
 			<li><input type="checkbox" id="idSaveCheck">아이디 저장</li>
