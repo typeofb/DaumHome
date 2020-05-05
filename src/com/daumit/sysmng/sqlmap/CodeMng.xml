@@ -24,7 +24,7 @@
 		                A.category,
 		                A.name,
 		                A.updatedAt
-		            FROM stocks A
+		            FROM stock A
 		            WHERE 1 = 1         /* 검색 조건 */
 		            ORDER BY A.id DESC  /* 정렬 조건 */
 		        ) B, (SELECT @RNUM := 0) R
@@ -37,14 +37,14 @@
 	
 	<insert id="CodeMng.insertCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		INSERT INTO stocks (category, name, price, cnt, img, createdAt, updatedAt)
+		INSERT INTO stock (category, name, price, cnt, img, createdAt, updatedAt)
 		VALUES (#code#, #codeName#, 0, 0, '', now(), now());
 		]]>
 	</insert>
 	
 	<update id="CodeMng.updateCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		UPDATE stocks
+		UPDATE stock
 		SET category = #code#, name = #codeName#, updatedAt = now()
 		WHERE id = #codeGroupId#
 		]]>
@@ -52,7 +52,7 @@
 	
 	<delete id="CodeMng.deleteCode" parameterClass="java.util.HashMap">
 		<![CDATA[
-		DELETE FROM stocks
+		DELETE FROM stock
 		WHERE id = #codeGroupId#
 		]]>
 	</delete>

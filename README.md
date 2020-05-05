@@ -4,7 +4,7 @@
 게시판 (oracle THALES)
 applicationContext.xml
 
-코드관리 (mysql stocks)
+코드관리 (mysql stock)
 SqlMapConfig.properties
 
 서블릿 (oracle HR 공통서비스 DDL)
