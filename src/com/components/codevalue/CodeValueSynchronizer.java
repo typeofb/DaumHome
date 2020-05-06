@@ -4,14 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import com.common.dao.ResultSetData;
 
 public class CodeValueSynchronizer implements java.lang.Runnable {
 
+	private SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.ENGLISH);
 	private Date lastModDate = null;
 	private Date lastDelDate = null;
 	private Thread thread = null;
@@ -63,62 +67,82 @@ public class CodeValueSynchronizer implements java.lang.Runnable {
 					+ " WHERE USE_FLAG = 'Y'"
 					+ " ORDER BY LAST_UPDATE_DATE DESC",
 				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
-			populate(codeList);
-			lastDelDate = lastModDate;
+			if (codeList != null && codeList.size() > 0) {
+				populate(codeList);
+				lastDelDate = lastModDate;
+			}
 			
 			ResultSetData deletedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
 					+ " WHERE USE_FLAG = 'N'"
-					+ " AND LAST_UPDATE_DATE > '" + lastDelDate + "'"
+					+ " AND LAST_UPDATE_DATE > TO_DATE('" + formatter.format(lastDelDate) + "', 'MM/dd/yyyy HH24:mi:ss')"
 					+ " ORDER BY LAST_UPDATE_DATE DESC",
 				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
 			if (deletedCodeList != null && deletedCodeList.size() > 0) {
-				Date modDate = ((Code) codeList.get(0)).getLastUpdateDate();
+				Map<String, String> resultMap = (Map<String, String>) deletedCodeList.get(0);
+				Date modDate = null;
+				try {
+					modDate = formatter.parse(String.valueOf(resultMap.get("LAST_UPDATE_DATE")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				lastDelDate = modDate;
 			}
 		} else {
 			ResultSetData deletedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
 					+ " WHERE USE_FLAG = 'N'"
-					+ " AND LAST_UPDATE_DATE > '" + lastDelDate + "'"
+					+ " AND LAST_UPDATE_DATE > TO_DATE('" + formatter.format(lastDelDate) + "', 'MM/dd/yyyy HH24:mi:ss')"
 					+ " ORDER BY LAST_UPDATE_DATE DESC",
 				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
-			clear(deletedCodeList);
+			if (deletedCodeList != null && deletedCodeList.size() > 0)
+				clear(deletedCodeList);
 			
 			ResultSetData addedOrModifiedCodeList = this.sqlExecute("SELECT GROUP_CODE, CODE, CODE_NAME, LAST_UPDATE_DATE"
 					+ " FROM CODE"
 					+ " WHERE USE_FLAG = 'Y'"
-					+ " AND LAST_UPDATE_DATE > '" + lastModDate + "'"
+					+ " AND LAST_UPDATE_DATE > TO_DATE('" + formatter.format(lastModDate) + "', 'MM/dd/yyyy HH24:mi:ss')"
 					+ " ORDER BY LAST_UPDATE_DATE DESC",
 				"GROUP_CODE,CODE,CODE_NAME,LAST_UPDATE_DATE");
-			populate(addedOrModifiedCodeList);
+			if (addedOrModifiedCodeList != null && addedOrModifiedCodeList.size() > 0)
+				populate(addedOrModifiedCodeList);
 		}
 	}
 	
 	private void populate(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
-			String groupCode = ((Code) codeList.get(i)).getGroupCode();
-			String key = ((Code) codeList.get(i)).getCode();
-			String value = ((Code) codeList.get(i)).getCodeName();
+			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
+			String groupCode = resultMap.get("GROUP_CODE");
+			String key = resultMap.get("CODE");
+			String value = resultMap.get("CODE_NAME");
 			System.out.println("##################### [CodeValueSynchronizer.put] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
-			Date modDate = ((Code) codeList.get(i)).getLastUpdateDate();
-			if (i == 0) {
-				lastModDate = modDate;
+			Date modDate = null;
+			try {
+				modDate = formatter.parse(String.valueOf(resultMap.get("LAST_UPDATE_DATE")));
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
+			if (i == 0)
+				lastModDate = modDate;
 			CodeValueCache.addOrModify(key, value, groupCode);
 		}
 	}
 	
 	private void clear(ResultSetData codeList) {
 		for (int i = 0; i < codeList.size(); i++) {
-			String groupCode = ((Code) codeList.get(i)).getGroupCode();
-			String key = ((Code) codeList.get(i)).getCode();
-			String value = ((Code) codeList.get(i)).getCodeName();
+			Map<String, String> resultMap = (Map<String, String>) codeList.get(i);
+			String groupCode = resultMap.get("GROUP_CODE");
+			String key = resultMap.get("CODE");
+			String value = resultMap.get("CODE_NAME");
 			System.out.println("##################### [CodeValueSynchronizer.del] key:" + key + ", value:" + value + ", groupCode:" + groupCode);
-			Date modDate = ((Code) codeList.get(i)).getLastUpdateDate();
-			if (i == 0) {
-				lastDelDate = modDate;
+			Date modDate = null;
+			try {
+				modDate = formatter.parse(String.valueOf(resultMap.get("LAST_UPDATE_DATE")));
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
+			if (i == 0)
+				lastDelDate = modDate;
 			CodeValueCache.remove(key, groupCode);
 		}
 	}
